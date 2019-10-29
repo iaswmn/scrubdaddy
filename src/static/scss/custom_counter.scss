@@ -1,0 +1,64 @@
+@import 'mixins';
+$button_width: 31px;
+$button_color: #82bd36;
+
+.custom-counter {
+  display: inline-block;
+  width: 140px;
+
+  .custom-counter-wrapper {
+    @include flexbox;
+    @include align-items(stretch);
+    @include flex-flow(row nowrap);
+    @include justify-content(flex-start);
+  }
+
+  .custom-counter-button {
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    cursor: pointer;
+    background-color: $button_color;
+    @include flex(0 0 $button_width);
+    @include unselectable;
+
+    &:before {
+      position: absolute;
+      z-index: 2;
+      top: 50%;
+      left: 50%;
+      content: '';
+      @include font-size(20px, 20px);
+      @include transform(translate(-50%, -50%));
+    }
+
+    &.decr {
+      @include border_radius(4px 0 0 4px);
+
+      &:before {
+        top: 46%;
+        content: '–';
+      }
+    }
+
+    &.incr {
+      @include border_radius(0 4px 4px 0);
+
+      &:before {
+        content: '+';
+      }
+    }
+  }
+
+  input {
+    width: 100%;
+    text-align: center;
+
+    &.custom-counter-input {
+      border-right: none;
+      border-left: none;
+      @include flex(1 1 0);
+      @include border_radius(0);
+    }
+  }
+}

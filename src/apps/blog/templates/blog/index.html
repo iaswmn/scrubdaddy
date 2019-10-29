@@ -1,0 +1,72 @@
+{% extends 'std_page/index.html' %}
+
+{% load pipeline_plus %}
+{% load attachable_blocks %}
+{% load paginator %}
+{% load text %}
+{% load i18n %}
+
+{% block static_head %}
+  {{ block.super }}
+  {% stylesheet 'blog' %}
+{% endblock static_head %}
+
+{% block static_js %}
+  {{ block.super }}
+  {% javascript 'blog' %}
+{% endblock static_js %}
+
+{% block tabs %}
+    {% include 'support/_tabs.html' %}
+{% endblock tabs %}
+
+
+{% block page_data %}
+  <div id="blog" class="block">
+    <div class="grid">
+      {% if tags %}
+        <ul id="tags">
+          {% for tag in tags %}
+            <li class="tag {% if current_tag.pk == tag.pk %}active{% endif %}">
+              <a href="{{ tag.get_absolute_url }}">{{ tag.title }}</a>
+            </li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+    <div id="posts">
+      <div class="grid">
+        <div class="flex-container four-in-row">
+          {% for post in posts %}
+            <a href="{{ post.get_absolute_url }}" class="item-w280 post" typeof="BlogPosting">
+              {% if post.preview %}
+                <img srcset="{{ post.preview.normal.srcset }}, {{ post.preview.mobile.srcset }}"
+                     src="{{ post.preview.normal.url }}"
+                     width="{{ post.preview.normal.target_width }}"
+                     height="{{ post.preview.normal.target_height }}"
+                     property="url"
+                     sizes="100vw">
+              {% endif %}
+              <div class="bottom-side">
+                {% if post.preview %}
+                  <h2 class="title title-h5" property="headline">
+                    {{ post.header }}
+                  </h2>
+                {% endif %}
+                {% if post.note %}
+                  <div class="description_small">
+                    {{ post.note|typograf|safe }}
+                  </div>
+                {% endif %}
+              </div>
+              <div class="link">
+                <div class="read-more">Read more</div>
+              </div>
+            </a>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+  {% render_attached_blocks page_data %}
+{% endblock page_data %}

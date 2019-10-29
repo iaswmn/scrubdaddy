@@ -1,0 +1,10 @@
+.page-video {
+  font-size: 14px;
+  padding: 5px;
+  color: #404040;
+  background: khaki;
+}
+
+.page-video iframe {
+  max-width: 90%;
+}

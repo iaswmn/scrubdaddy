@@ -1,0 +1,139 @@
+@import 'mixins';
+
+#tags {
+  margin: 20px 0;
+  @include flexbox;
+  @include align-items(flex-start);
+  @include justify-content(center);
+  @include media-interval(0, $media600) {
+    @include align-items(center);
+    @include flex-direction(column);
+  }
+
+  .tag {
+    font-weight: 900;
+    display: inline-block;
+    margin: 10px 0 10px 0;
+    padding: 7px 20px;
+    text-transform: uppercase;
+    color: $darkish-blue;
+    border: 2px solid $darkish-blue;
+    border-radius: 15px;
+    @include font-size(14px, 14px);
+    @include transition(background .3s);
+
+    @include media_interval($media600, 0) {
+      &:not(:first-child) {
+        margin-left: 10px;
+      }
+    }
+
+    &:hover {
+      background: rgba(0, 50, 160, .15);
+    }
+
+    &.active {
+      color: $white;
+      background: $darkish-blue;
+    }
+  }
+}
+
+#posts {
+  .flex-container {
+    margin-top: 30px;
+    @include flexbox;
+    @include flex-wrap(wrap);
+
+    /*Need to refactor in one piece of shit instead two pieces of shit*/
+    .post {
+      overflow: hidden;
+      //max-width: 280px;
+      min-height: 430px;
+      margin-bottom: 20px;
+      background: $white;
+      @include transition(transform .3s);
+      @include transform(scale(1));
+      @include media-interval($media768, 0) {
+        &:hover {
+          z-index: 4;
+          @include box-shadow(0 10px 20px 0 rgba(20, 47, 105, .5));
+          @include transform(scale(1.2));
+
+          .read-more {
+            opacity: 1;
+          }
+        }
+      }
+      @include media-interval(0, $media768) {
+        min-height: 280px;
+      }
+
+      .read-more {
+        font-weight: 700;
+        margin-left: 20px;
+        opacity: 0;
+        color: $darkish-blue;
+        @include transition(opacity .3s);
+        @include font-size(16px, 25px);
+      }
+
+      .top-side {
+        position: relative;
+        min-height: 177px;
+
+        img {
+          position: absolute;
+          z-index: 3;
+          top: 0;
+          left: 0;
+          width: 100.5%;
+          height: 100.5%;
+        }
+      }
+
+      .treinding-title {
+        font-weight: 900;
+        margin-bottom: 15px;
+        @include font-size(19px, 28px);
+      }
+
+      .bottom-side {
+        position: relative;
+        z-index: 1;
+        overflow: hidden;
+        margin: 0 20px 5px 10px;
+      }
+
+      &::before {
+        position: absolute;
+        z-index: 6;
+        width: 100.5%;
+        height: 100.5%;
+        content: '';
+        opacity: 0;
+        background: rgba(255, 255, 255, .2);
+        @include transition(opacity .3s);
+      }
+
+      &.active {
+        &::before {
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  .title {
+    margin: 10px 0;
+  }
+
+  .preview {
+    display: inline-block;
+    margin-bottom: 20px;
+  }
+}
+
+#paginator {
+  margin-top: 60px;
+}

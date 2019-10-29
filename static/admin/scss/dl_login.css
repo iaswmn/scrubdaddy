@@ -1,0 +1,213 @@
+@charset "UTF-8";
+/*
+  $list: a, b, d, e, f;
+  $new-list: insert-nth($list, 3, c);     // a, b, c, d, e, f
+*/
+/*
+  $list: a, b, r, a, c a, d a, b, r, a;
+  $new-list: replace($list, a, u);       // u, b, r, u, c a, d a, b, r, u;
+*/
+/*
+  $list: a, b, z, d, e, f;
+  $new-list: replace-nth($list,   3, c); // a, b, c, d, e, f
+  $new-list: replace-nth($list,  -2, c); // a, b, c, d, z, f
+*/
+/*
+  $list: a, b z, c, z, d, z, e, f;
+  $new-list: remove($list, z);       // a, b z, c, d, e, f;
+*/
+/*
+  $list: a, b, z, c, d, e, f;
+  $new-list: remove-nth($list,   3); // a, b, c, d, e, f
+  $new-list: remove-nth($list,  -2); // a, b, z, c, d, f
+*/
+/*
+  $list: a, b, c, d, e, f;
+  $new-list: slice($list, 3, 5);   // c, d, e
+  $new-list: slice($list, 4, 4);   // d
+*/
+/*
+  $list: a, b, c d e, f, g, h;
+  $new-list: reverse($list);       // h, g, f, c d e, b, a
+  $new-list: reverse($list, true); // h, g, f, e d c, b, a
+*/
+/*
+    Добавляет константу к каждому значению карты.
+
+    Пример:
+      $map: (
+        (1024px, 0): 100px,
+        (768px, 1024px): 80px,
+        (0, 768px): 60px,
+      )
+
+      > map_add($map, 10px)
+      (
+        (1024px, 0): 110px,
+        (768px, 1024px): 90px,
+        (0, 768px): 70px,
+      )
+ */
+/*
+    Получение ключа карты $map media-интервалов,
+    в который входит искомый интервал $media.
+    Если искомый интервал находится на границе
+    двух или более интервалов карты, генерируется ошибка.
+
+    Пример:
+      $map: (
+        (1024px, 0): 100px,
+        (768px, 1024px): 80px,
+        (0, 768px): 60px,
+      )
+
+      > media_map_key($map, (1200px, 0))
+      (1024px, 0)
+ */
+/*
+    Получение среза media-карты.
+
+    Пример:
+      $map: (
+        (1024px, 0): 100px,
+        (768px, 1024px): 80px,
+        (0, 768px): 60px,
+      )
+
+      > media_map_slice($map, (640px, 1200px))
+      (
+        (1024px, 1200px): 100px,
+        (768px, 1024px): 80px,
+        (640px, 768px): 60px,
+      )
+ */
+/*
+  Многоколоночная верстка через flexbox.
+
+  Пример:
+    .list {
+      @include flexbox;
+      @include flex-flow(row wrap);
+
+      .item {
+        @include flex-columns(2, 10px, 10px);
+      }
+    }
+*/
+/*
+  Пример:
+    input {
+      color: #808080;
+      ...
+      @include placeholder {
+        color: red;
+      }
+    }
+*/
+.login {
+  min-width: 0;
+  background: url(/static/admin/img/bg.jpg) no-repeat center;
+  background-size: cover;
+  -ms-behavior: url(/static/polyfills/backgroundsize.min.htc); }
+  .login #content-main {
+    top: 45%;
+    left: 50%;
+    width: auto;
+    max-width: 80%;
+    margin: 0;
+    padding: 28px 100px 60px;
+    background-color: #f2f2f2;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%); }
+    @media all and (min-width: 768px) and (max-width: 1023px) {
+      .login #content-main {
+        padding: 28px 60px 50px; } }
+    @media all and (min-width: 480px) and (max-width: 767px) {
+      .login #content-main {
+        padding: 20px 50px 40px; } }
+    @media all and (max-width: 479px) {
+      .login #content-main {
+        padding: 16px 20px 20px; } }
+    .login #content-main h1 {
+      max-width: 280px;
+      margin-bottom: 26px;
+      padding: 0;
+      text-align: center;
+      color: #2c3035;
+      background: none;
+      text-shadow: none;
+      font-size: 24px;
+      font-size: 1.5rem;
+      line-height: 1.16667; }
+      @media all and (max-width: 767px) {
+        .login #content-main h1 {
+          margin-bottom: 20px; } }
+      @media all and (max-width: 479px) {
+        .login #content-main h1 {
+          font-size: 20px;
+          font-size: 1.25rem; } }
+      .login #content-main h1 i {
+        display: none; }
+    .login #content-main form {
+      margin: 0; }
+      .login #content-main form label {
+        display: none; }
+      .login #content-main form .control-group {
+        margin-bottom: 10px; }
+      .login #content-main form input[type=text],
+      .login #content-main form input[type=password] {
+        width: 280px;
+        max-width: 100%;
+        height: auto;
+        margin: 0;
+        padding: 10px 20px;
+        text-align: center;
+        color: black;
+        border: none;
+        background: #d9d9d9;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
+        font-size: 16px;
+        font-size: 1rem;
+        line-height: 1; }
+        @media all and (max-width: 479px) {
+          .login #content-main form input[type=text],
+          .login #content-main form input[type=password] {
+            padding: 6px 12px 8px; } }
+    .login #content-main .submit-row {
+      margin: 20px 0 0;
+      padding: 0;
+      border: 0;
+      background: none;
+      -webkit-box-shadow: none;
+      -moz-box-shadow: none;
+      box-shadow: none; }
+      .login #content-main .submit-row .btn {
+        width: 280px;
+        max-width: 100%;
+        padding: 10px 20px;
+        color: #fff;
+        border: 0;
+        background: #3991c9;
+        text-shadow: none;
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
+        font-size: 16px;
+        font-size: 1rem;
+        line-height: 1; }
+        @media all and (max-width: 479px) {
+          .login #content-main .submit-row .btn {
+            padding: 6px 12px 8px; } }
+        .login #content-main .submit-row .btn:hover {
+          background: #4d9cce; }

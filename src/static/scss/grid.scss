@@ -1,0 +1,12 @@
+@import 'mixins';
+
+.grid {
+  display: block;
+  width: 100%;
+  max-width: $grid_max_width;
+  margin: 0 auto;
+  @include clearfix;
+  @include border-box;
+  @include background-clip(content-box);
+  @include media_map((padding-left, padding-right), $grid_paddings);
+}

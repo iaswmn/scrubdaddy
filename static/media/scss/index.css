@@ -1,0 +1,209 @@
+@charset "UTF-8";
+/*
+  $list: a, b, d, e, f;
+  $new-list: insert-nth($list, 3, c);     // a, b, c, d, e, f
+*/
+/*
+  $list: a, b, r, a, c a, d a, b, r, a;
+  $new-list: replace($list, a, u);       // u, b, r, u, c a, d a, b, r, u;
+*/
+/*
+  $list: a, b, z, d, e, f;
+  $new-list: replace-nth($list,   3, c); // a, b, c, d, e, f
+  $new-list: replace-nth($list,  -2, c); // a, b, c, d, z, f
+*/
+/*
+  $list: a, b z, c, z, d, z, e, f;
+  $new-list: remove($list, z);       // a, b z, c, d, e, f;
+*/
+/*
+  $list: a, b, z, c, d, e, f;
+  $new-list: remove-nth($list,   3); // a, b, c, d, e, f
+  $new-list: remove-nth($list,  -2); // a, b, z, c, d, f
+*/
+/*
+  $list: a, b, c, d, e, f;
+  $new-list: slice($list, 3, 5);   // c, d, e
+  $new-list: slice($list, 4, 4);   // d
+*/
+/*
+  $list: a, b, c d e, f, g, h;
+  $new-list: reverse($list);       // h, g, f, c d e, b, a
+  $new-list: reverse($list, true); // h, g, f, e d c, b, a
+*/
+/*
+    Добавляет константу к каждому значению карты.
+
+    Пример:
+      $map: (
+        (1024px, 0): 100px,
+        (768px, 1024px): 80px,
+        (0, 768px): 60px,
+      )
+
+      > map_add($map, 10px)
+      (
+        (1024px, 0): 110px,
+        (768px, 1024px): 90px,
+        (0, 768px): 70px,
+      )
+ */
+/*
+    Получение ключа карты $map media-интервалов,
+    в который входит искомый интервал $media.
+    Если искомый интервал находится на границе
+    двух или более интервалов карты, генерируется ошибка.
+
+    Пример:
+      $map: (
+        (1024px, 0): 100px,
+        (768px, 1024px): 80px,
+        (0, 768px): 60px,
+      )
+
+      > media_map_key($map, (1200px, 0))
+      (1024px, 0)
+ */
+/*
+    Получение среза media-карты.
+
+    Пример:
+      $map: (
+        (1024px, 0): 100px,
+        (768px, 1024px): 80px,
+        (0, 768px): 60px,
+      )
+
+      > media_map_slice($map, (640px, 1200px))
+      (
+        (1024px, 1200px): 100px,
+        (768px, 1024px): 80px,
+        (640px, 768px): 60px,
+      )
+ */
+/*
+  Многоколоночная верстка через flexbox.
+
+  Пример:
+    .list {
+      @include flexbox;
+      @include flex-flow(row wrap);
+
+      .item {
+        @include flex-columns(2, 10px, 10px);
+      }
+    }
+*/
+/*
+  Пример:
+    input {
+      color: #808080;
+      ...
+      @include placeholder {
+        color: red;
+      }
+    }
+*/
+.media {
+  padding: 80px 0; }
+  .media .tabs {
+    margin-bottom: 50px;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -webkit-box-justify-content: center;
+    -moz-box-justify-content: center;
+    -webkit-justify-content: center;
+    -ms-justify-content: center;
+    justify-content: center; }
+    @media all and (max-width: 599px) {
+      .media .tabs {
+        -webkit-box-orient: vertical;
+        -webkit-box-flex-direction: column;
+        -moz-box-flex-direction: column;
+        -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        -webkit-box-align: center;
+        -webkit-box-align-items: center;
+        -moz-box-align-items: center;
+        -webkit-align-items: center;
+        -ms-align-items: center;
+        align-items: center; } }
+    .media .tabs .btn-tab {
+      font-weight: 900;
+      margin: 10px 20px 10px 0;
+      padding: 7px 20px;
+      cursor: pointer;
+      text-transform: uppercase;
+      color: #0032a0;
+      border: 2px solid #0032a0;
+      border-radius: 15px;
+      font-size: 14px;
+      font-size: 0.875rem;
+      line-height: 1;
+      -webkit-transition: background 0.3s;
+      -moz-transition: background 0.3s;
+      -ms-transition: background 0.3s;
+      -o-transition: background 0.3s;
+      transition: background 0.3s; }
+      @media all and (max-width: 599px) {
+        .media .tabs .btn-tab {
+          margin: 10px 0; } }
+      .media .tabs .btn-tab:hover {
+        background: rgba(0, 50, 160, 0.15); }
+      .media .tabs .btn-tab.active {
+        color: #fff;
+        background: #0032a0; }
+  .media .all {
+    display: block; }
+  .media .video,
+  .media .audio,
+  .media .article {
+    display: none; }
+  .media .flex-container {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-flex-wrap: wrap;
+    -moz-box-flex-wrap: wrap;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap; }
+    .media .flex-container .item {
+      margin-bottom: 50px; }
+      @media all and (max-width: 479px) {
+        .media .flex-container .item {
+          width: 100%;
+          margin-right: 0;
+          margin-bottom: 25px; } }
+      .media .flex-container .item .bottom {
+        margin-top: 10px;
+        display: -webkit-box;
+        display: -moz-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex; }
+        .media .flex-container .item .bottom .icon {
+          position: relative; }
+          .media .flex-container .item .bottom .icon::before {
+            position: absolute;
+            left: 0;
+            width: 32px;
+            height: 32px;
+            content: '';
+            background: url(/static/img/sprite.svg) no-repeat;
+            background-position: 0% 86.86567%;
+            background-size: 843.75% 1146.875%; }
+        .media .flex-container .item .bottom .title-h5 {
+          padding-top: 5px;
+          padding-left: 40px; }
+      .media .flex-container .item.AU .icon::before {
+        background-position: 27.31092% 87.16418%; }
+      .media .flex-container .item.AR .icon::before {
+        background-position: 13.86555% 87.16418%; }

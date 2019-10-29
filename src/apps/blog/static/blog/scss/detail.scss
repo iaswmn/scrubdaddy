@@ -1,0 +1,113 @@
+@import 'mixins';
+
+#blog-post {
+  @include media_interval(0, $media768) {
+    padding-top: 90px;
+  }
+
+  .breadcrumbs {
+    text-align: center;
+
+    .breadcrumb-item {
+      color: rgba(0, 50, 160, .5);
+
+      &.active {
+        color: rgba(0, 50, 160, .6);
+      }
+    }
+  }
+
+  .title-h1 {
+    margin: 35px auto 20px auto;
+    text-align: center;
+    text-transform: uppercase;
+
+    @include media_interval($media768, 0) {
+      max-width: 700px;
+    }
+    @include media_interval($media600, $media768) {
+      max-width: 500px;
+    }
+  }
+
+  .preview {
+    margin-bottom: 20px;
+  }
+
+  .follow {
+    $icon_size: 48px;
+
+    display: block;
+    margin: 50px 0;
+    padding: 35px 0;
+    background-image: linear-gradient(to right, #ffde5a, #fa5248 32%, #c135b0 70%, #4768c9);
+    @include flexbox;
+    @include justify-content(center);
+    @include align-items(center);
+
+    .icon {
+      margin-right: 18px;
+
+      &:before {
+        display: block;
+        width: $icon_size;
+        height: $icon_size;
+        content: '';
+        background: $sprite_url no-repeat;
+        background-position: rel-background-position($icon_size, $icon_size, -1px, -196px);
+        background-size: rel-background-size($icon_size, $icon_size);
+      }
+    }
+
+    .title-italic-h4 {
+      color: $white;
+    }
+  }
+
+  .post-footer {
+    @include flexbox;
+    @include justify-content(space-between);
+    @include align-items(center);
+
+    @include media_interval(0, $media768) {
+      @include flex-direction(column);
+    }
+  }
+
+  .social-buttons {
+    text-align: right;
+  }
+
+  .author {
+    @include no_fontsize;
+
+    @include media_interval(0, $media768) {
+      margin-bottom: 20px;
+    }
+
+    .name {
+      display: inline-block;
+      vertical-align: middle;
+      color: rgba(0, 0, 0, .5);
+      @include font-size(14px, 26px);
+    }
+
+    .photo {
+      display: inline-block;
+      margin-right: 10px;
+      vertical-align: middle;
+      @include border_radius(50%);
+    }
+  }
+}
+
+#posts {
+  margin-top: 120px;
+  @include media-interval(0, $media1024) {
+    margin-top: 40px;
+  }
+
+  .title-h1 {
+    text-transform: none!important;
+  }
+}

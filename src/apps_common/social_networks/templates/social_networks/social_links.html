@@ -1,0 +1,44 @@
+<div class="social-links {{ classes }}">
+  {% if links.social_facebook %}
+    <a href="{{ links.social_facebook }}" target="_blank" class="fb"></a>
+  {% endif %}
+
+  {% if country != 'IL' %}
+    {% if links.social_twitter %}
+      <a href="{{ links.social_twitter }}" target="_blank" class="tw"></a>
+    {% endif %}
+  {% endif %}
+
+  {% if links.social_instagram %}
+    <a href="{{ links.social_instagram }}" target="_blank" class="in"></a>
+  {% endif %}
+
+  {% if country != 'IL' %}
+    {% if links.social_pinterest %}
+      <a href="{{ links.social_pinterest }}" target="_blank" class="pi"></a>
+    {% endif %}
+  {% endif %}
+
+  {% if country != 'IL' %}
+    {% if links.social_linkedin %}
+      <a href="{{ links.social_linkedin }}" target="_blank" class="li"></a>
+    {% endif %}
+  {% endif %}
+
+  {% if country != 'IL' %}
+    {% if links.social_youtube %}
+      <a href="{{ links.social_youtube }}" target="_blank" class="yt"></a>
+    {% endif %}
+  {% endif %}
+
+  {% if country != 'IL' %}
+    {% if links.social_google_plus %}
+      <a href="{{ links.social_google_plus }}" target="_blank" class="gp"></a>
+    {% endif %}
+  {% endif %}
+  {% if country != 'IL' %}
+    {% if links.social_yelp %}
+      <a href="{{ links.social_yelp }}" target="_blank" class="ye"></a>
+    {% endif %}
+  {% endif %}
+</div>

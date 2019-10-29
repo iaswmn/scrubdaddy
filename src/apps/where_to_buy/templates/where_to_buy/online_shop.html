@@ -1,0 +1,40 @@
+{% extends 'std_page/index.html' %}
+{% load staticfiles %}
+
+{% load attachable_blocks %}
+{% load pipeline_plus %}
+{% load away %}
+
+
+{% block static_head %}
+  {{ block.super }}
+  {% stylesheet 'where_to_buy' %}
+{% endblock static_head %}
+
+{% block static_js %}
+  {{ block.super }}
+  {% javascript 'where_to_buy' %}
+{% endblock static_js %}
+
+{% block tabs %}
+  {% include 'where_to_buy/_tabs.html' %}
+{% endblock tabs %}
+
+{% block page_data %}
+
+
+  <div class="shop-block">
+    <div class="grid">
+
+      <div class="shop-link">
+        <img src="{% static 'img/5_icon.png' %}" alt="">
+
+        <h2 class="title-italic-h3">Smile Shop collection</h2>
+
+        <a class="btn medium blue moema" href="{{ site_config.shop_link }}" target="_blank">ENTER</a>
+      </div>
+    </div>
+  </div>
+
+  {% render_attached_blocks page_data %}
+{% endblock page_data %}

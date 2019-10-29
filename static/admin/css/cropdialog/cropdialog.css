@@ -1,0 +1,19 @@
+#crop-dialog {
+  font-size: 0;
+  position: relative;
+  overflow: hidden;
+  min-height: 150px;
+  padding: 8px 5px 2px;
+}
+
+#crop-dialog img {
+  max-width: none;
+}
+
+#crop-dialog.preload {
+  background: url('img/loading.gif') no-repeat 50% 50%;
+}
+
+#crop-dialog .jcrop-holder {
+  background: black url('img/transparent-background.png') repeat;
+}

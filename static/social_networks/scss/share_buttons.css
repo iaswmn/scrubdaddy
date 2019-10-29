@@ -1,0 +1,181 @@
+@charset "UTF-8";
+/*
+  $list: a, b, d, e, f;
+  $new-list: insert-nth($list, 3, c);     // a, b, c, d, e, f
+*/
+/*
+  $list: a, b, r, a, c a, d a, b, r, a;
+  $new-list: replace($list, a, u);       // u, b, r, u, c a, d a, b, r, u;
+*/
+/*
+  $list: a, b, z, d, e, f;
+  $new-list: replace-nth($list,   3, c); // a, b, c, d, e, f
+  $new-list: replace-nth($list,  -2, c); // a, b, c, d, z, f
+*/
+/*
+  $list: a, b z, c, z, d, z, e, f;
+  $new-list: remove($list, z);       // a, b z, c, d, e, f;
+*/
+/*
+  $list: a, b, z, c, d, e, f;
+  $new-list: remove-nth($list,   3); // a, b, c, d, e, f
+  $new-list: remove-nth($list,  -2); // a, b, z, c, d, f
+*/
+/*
+  $list: a, b, c, d, e, f;
+  $new-list: slice($list, 3, 5);   // c, d, e
+  $new-list: slice($list, 4, 4);   // d
+*/
+/*
+  $list: a, b, c d e, f, g, h;
+  $new-list: reverse($list);       // h, g, f, c d e, b, a
+  $new-list: reverse($list, true); // h, g, f, e d c, b, a
+*/
+/*
+    Добавляет константу к каждому значению карты.
+
+    Пример:
+      $map: (
+        (1024px, 0): 100px,
+        (768px, 1024px): 80px,
+        (0, 768px): 60px,
+      )
+
+      > map_add($map, 10px)
+      (
+        (1024px, 0): 110px,
+        (768px, 1024px): 90px,
+        (0, 768px): 70px,
+      )
+ */
+/*
+    Получение ключа карты $map media-интервалов,
+    в который входит искомый интервал $media.
+    Если искомый интервал находится на границе
+    двух или более интервалов карты, генерируется ошибка.
+
+    Пример:
+      $map: (
+        (1024px, 0): 100px,
+        (768px, 1024px): 80px,
+        (0, 768px): 60px,
+      )
+
+      > media_map_key($map, (1200px, 0))
+      (1024px, 0)
+ */
+/*
+    Получение среза media-карты.
+
+    Пример:
+      $map: (
+        (1024px, 0): 100px,
+        (768px, 1024px): 80px,
+        (0, 768px): 60px,
+      )
+
+      > media_map_slice($map, (640px, 1200px))
+      (
+        (1024px, 1200px): 100px,
+        (768px, 1024px): 80px,
+        (640px, 768px): 60px,
+      )
+ */
+/*
+  Многоколоночная верстка через flexbox.
+
+  Пример:
+    .list {
+      @include flexbox;
+      @include flex-flow(row wrap);
+
+      .item {
+        @include flex-columns(2, 10px, 10px);
+      }
+    }
+*/
+/*
+  Пример:
+    input {
+      color: #808080;
+      ...
+      @include placeholder {
+        color: red;
+      }
+    }
+*/
+.social-button {
+  vertical-align: top;
+  display: inline-block;
+  padding: 6px 12px;
+  margin-right: 5px;
+  cursor: pointer;
+  line-height: 0;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px; }
+  @media all and (max-width: 1023px) {
+    .social-button {
+      padding: 6px; } }
+  .social-button:last-child {
+    margin-right: 0; }
+  .social-button:before {
+    margin-right: 7px;
+    vertical-align: middle;
+    width: 20px;
+    height: 20px;
+    content: '';
+    display: inline-block;
+    background: url(/static/img/sprite.svg) no-repeat;
+    background-size: 1350% 1835%; }
+    @media all and (max-width: 1023px) {
+      .social-button:before {
+        margin: 0; } }
+  .social-button:after {
+    vertical-align: middle;
+    color: #fff;
+    font-weight: bold;
+    font-size: 14px;
+    font-size: 0.875rem;
+    line-height: 1; }
+    @media all and (max-width: 1023px) {
+      .social-button:after {
+        display: none; } }
+  .social-button.social-fb:before {
+    background-position: 0% 100%; }
+  .social-button.social-tw:before {
+    background-position: 8% 100%; }
+  .social-button.social-gp:before {
+    background-position: 24% 100%; }
+  .social-button.social-li:before {
+    background-position: 16% 100%; }
+  .social-button.social-pn:before {
+    background-position: 32% 100%; }
+  .social-button.social-email:before {
+    background-position: 40% 100%; }
+  .social-button.social-fb:after {
+    content: 'Share'; }
+  .social-button.social-tw:after {
+    content: 'Tweet'; }
+  .social-button.social-gp:after {
+    content: 'Share'; }
+  .social-button.social-li:after {
+    content: 'Share'; }
+  .social-button.social-pn:after {
+    content: 'Pin'; }
+  .social-button.social-vk:after {
+    content: 'Share'; }
+  .social-button.social-email:after {
+    content: 'Send'; }
+  .social-button.social-fb {
+    background-color: #4065b4; }
+  .social-button.social-tw {
+    background-color: #55acee; }
+  .social-button.social-gp {
+    background-color: #eb5e4c; }
+  .social-button.social-li {
+    background-color: #238cc8; }
+  .social-button.social-pn {
+    background-color: #cc2127; }
+  .social-button.social-email {
+    background-color: #717171; }

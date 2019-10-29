@@ -1,0 +1,22 @@
+{% load text %}
+
+{% if product_categories %}
+  <div class="products_main">
+    <div class="flex-container">
+      {% for item in product_categories %}
+        <a class="item" href="
+                {% if item.products.count == 1 %}
+                    {{ item.products.first.get_absolute_url }}
+                {% else %}
+                    {{ item.get_absolute_url }}
+                {% endif %}
+                ">
+          <div class="content">
+            <img src="{{ item.preview.url }}" alt="{{ item.preview_alt }}">
+            <h2 class="title-italic-h4 white">{{ item.title|linebreaksbr|typograf|safe }}</h2>
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+{% endif %}

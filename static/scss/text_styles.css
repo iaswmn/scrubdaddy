@@ -1,0 +1,423 @@
+@charset "UTF-8";
+/*
+  $list: a, b, d, e, f;
+  $new-list: insert-nth($list, 3, c);     // a, b, c, d, e, f
+*/
+/*
+  $list: a, b, r, a, c a, d a, b, r, a;
+  $new-list: replace($list, a, u);       // u, b, r, u, c a, d a, b, r, u;
+*/
+/*
+  $list: a, b, z, d, e, f;
+  $new-list: replace-nth($list,   3, c); // a, b, c, d, e, f
+  $new-list: replace-nth($list,  -2, c); // a, b, c, d, z, f
+*/
+/*
+  $list: a, b z, c, z, d, z, e, f;
+  $new-list: remove($list, z);       // a, b z, c, d, e, f;
+*/
+/*
+  $list: a, b, z, c, d, e, f;
+  $new-list: remove-nth($list,   3); // a, b, c, d, e, f
+  $new-list: remove-nth($list,  -2); // a, b, z, c, d, f
+*/
+/*
+  $list: a, b, c, d, e, f;
+  $new-list: slice($list, 3, 5);   // c, d, e
+  $new-list: slice($list, 4, 4);   // d
+*/
+/*
+  $list: a, b, c d e, f, g, h;
+  $new-list: reverse($list);       // h, g, f, c d e, b, a
+  $new-list: reverse($list, true); // h, g, f, e d c, b, a
+*/
+/*
+    Добавляет константу к каждому значению карты.
+
+    Пример:
+      $map: (
+        (1024px, 0): 100px,
+        (768px, 1024px): 80px,
+        (0, 768px): 60px,
+      )
+
+      > map_add($map, 10px)
+      (
+        (1024px, 0): 110px,
+        (768px, 1024px): 90px,
+        (0, 768px): 70px,
+      )
+ */
+/*
+    Получение ключа карты $map media-интервалов,
+    в который входит искомый интервал $media.
+    Если искомый интервал находится на границе
+    двух или более интервалов карты, генерируется ошибка.
+
+    Пример:
+      $map: (
+        (1024px, 0): 100px,
+        (768px, 1024px): 80px,
+        (0, 768px): 60px,
+      )
+
+      > media_map_key($map, (1200px, 0))
+      (1024px, 0)
+ */
+/*
+    Получение среза media-карты.
+
+    Пример:
+      $map: (
+        (1024px, 0): 100px,
+        (768px, 1024px): 80px,
+        (0, 768px): 60px,
+      )
+
+      > media_map_slice($map, (640px, 1200px))
+      (
+        (1024px, 1200px): 100px,
+        (768px, 1024px): 80px,
+        (640px, 768px): 60px,
+      )
+ */
+/*
+  Многоколоночная верстка через flexbox.
+
+  Пример:
+    .list {
+      @include flexbox;
+      @include flex-flow(row wrap);
+
+      .item {
+        @include flex-columns(2, 10px, 10px);
+      }
+    }
+*/
+/*
+  Пример:
+    input {
+      color: #808080;
+      ...
+      @include placeholder {
+        color: red;
+      }
+    }
+*/
+.text-styles {
+  font-size: 18px;
+  font-size: 1.125rem;
+  line-height: 1.77778; }
+  .text-styles.text-styles-sm {
+    font-size: 16px;
+    font-size: 1rem; }
+  .text-styles.w780 {
+    max-width: 780px;
+    margin: 0 auto; }
+    .text-styles.w780.center {
+      text-align: center; }
+  .text-styles > *:first-child {
+    margin-top: 0; }
+  .text-styles > *:last-child {
+    margin-bottom: 0; }
+  .text-styles p {
+    margin-bottom: 1em;
+    color: #333; }
+  .text-styles a {
+    color: #551a8b; }
+    .text-styles a:not([class]):hover {
+      filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=75);
+      opacity: 0.75; }
+  .text-styles iframe {
+    margin-bottom: 10px; }
+  .text-styles h2,
+  .text-styles h3 {
+    font-weight: bold;
+    line-height: 1.2;
+    margin: 1.1em 0 .5em; }
+  .text-styles h2 {
+    font-weight: 500;
+    letter-spacing: 1px;
+    color: #0032a0;
+    font-family: 'KumizFY';
+    font-style: italic;
+    font-size: 36px;
+    font-size: 2.25rem;
+    line-height: 1.19444; }
+    .text-styles h2.advantages-title {
+      color: #fff200;
+      text-shadow: #0032a0 0 3px 1px;
+      font-size: 36px;
+      font-size: 2.25rem;
+      line-height: 0.83333;
+      font-family: 'KumizFY';
+      font-style: italic; }
+    .text-styles-sm .text-styles h2 {
+      font-size: 28px;
+      font-size: 1.75rem; }
+  .text-styles h3 {
+    color: #0032a0;
+    font-size: 24px;
+    font-size: 1.5rem;
+    line-height: 1.33333;
+    font-family: 'KumizFY';
+    font-style: italic; }
+    .text-styles-sm .text-styles h3 {
+      font-size: 22px;
+      font-size: 1.375rem; }
+  .text-styles ul,
+  .text-styles ol {
+    margin: 1.6em 0; }
+    .text-styles ul li,
+    .text-styles ol li {
+      position: relative;
+      z-index: 1;
+      margin-bottom: .5em; }
+      .text-styles ul li:last-child,
+      .text-styles ol li:last-child {
+        margin-bottom: 0; }
+      .text-styles ul li p,
+      .text-styles ol li p {
+        margin: 0;
+        padding: 0; }
+  .text-styles ul > li {
+    padding-left: 1.6em; }
+    .text-styles ul > li:before {
+      position: absolute;
+      top: -.1em;
+      left: .6em;
+      content: '●';
+      -webkit-transform-origin: 50% 55%;
+      -moz-transform-origin: 50% 55%;
+      -ms-transform-origin: 50% 55%;
+      -o-transform-origin: 50% 55%;
+      transform-origin: 50% 55%;
+      -webkit-transform: scale(0.6) translateZ(0);
+      -moz-transform: scale(0.6) translateZ(0);
+      -ms-transform: scale(0.6) translateZ(0);
+      -o-transform: scale(0.6) translateZ(0);
+      transform: scale(0.6) translateZ(0); }
+  .text-styles ul ul > li:before {
+    top: 0;
+    content: '—';
+    -webkit-transform: none;
+    -moz-transform: none;
+    -ms-transform: none;
+    -o-transform: none;
+    transform: none; }
+  .text-styles ol {
+    padding-left: 1.6em;
+    list-style: decimal; }
+  .text-styles table {
+    width: 100%;
+    margin: 1.6em 0; }
+    @media all and (max-width: 1023px) {
+      .text-styles table {
+        display: block;
+        overflow-x: auto; } }
+    .text-styles table th,
+    .text-styles table td {
+      width: 1%;
+      min-width: 90px;
+      padding: 16px;
+      border-bottom: 2px solid #bababa;
+      font-size: 14px;
+      font-size: 0.875rem;
+      line-height: 1.28571; }
+      @media all and (max-width: 1023px) {
+        .text-styles table th,
+        .text-styles table td {
+          padding: 12px 10px; } }
+    .text-styles table th {
+      font-weight: bold; }
+    .text-styles table td p {
+      margin-bottom: .8em; }
+    .text-styles table td > *:first-child {
+      margin-top: 0; }
+    .text-styles table td > *:last-child {
+      margin-bottom: 0; }
+  .text-styles .page-images,
+  .text-styles .page-video,
+  .text-styles .page-files {
+    margin: 1.6em 0; }
+  .text-styles .page-images img {
+    width: 100%; }
+  .js
+.text-styles .page-images > img:nth-of-type(n+2) {
+    display: none; }
+  .text-styles .object-description,
+  .text-styles .item-description {
+    display: block;
+    margin-top: 7px;
+    color: #808080;
+    font-size: 12px;
+    font-size: 0.75rem;
+    line-height: 1.5; }
+  .text-styles .slider-root {
+    font-size: inherit;
+    margin: 1.6em 0; }
+    @media all and (max-width: 1023px) {
+      .text-styles .slider-root {
+        margin: 1.1em 0; } }
+    .text-styles .slider-root .slider-list-wrapper {
+      font-size: 0; }
+    .text-styles .slider-root .page-images {
+      margin: 0; }
+    .text-styles .slider-root .slider-item {
+      cursor: pointer; }
+    .text-styles .slider-root .slider-arrow {
+      height: 0;
+      padding-top: 56.25%; }
+  .text-styles .page-video {
+    position: relative;
+    text-align: left; }
+    .text-styles .page-video .fluid-width-video-wrapper {
+      display: inline-block;
+      vertical-align: top;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden; }
+    .text-styles .page-video.instagram {
+      max-width: 650px;
+      margin-right: auto;
+      margin-left: auto; }
+      .text-styles .page-video.instagram iframe {
+        width: 100%;
+        border: 1px solid #e6e6e6;
+        -webkit-border-radius: 4px;
+        -moz-border-radius: 4px;
+        border-radius: 4px; }
+    .text-styles .page-video iframe {
+      margin: 0; }
+  .text-styles .page-file {
+    margin-bottom: .5em; }
+    .text-styles .page-file:last-of-type {
+      margin-bottom: 0; }
+    .text-styles .page-file a {
+      position: relative;
+      z-index: 1;
+      display: inline-block;
+      max-width: 100%;
+      min-height: 32px; }
+      .text-styles .page-file a:after {
+        content: '';
+        display: inline-block;
+        height: 100%;
+        min-height: inherit;
+        vertical-align: middle; }
+      .text-styles .page-file a:before {
+        position: absolute;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        width: 24px;
+        height: 32px;
+        content: '';
+        background: url(/static/img/sprite.svg) no-repeat 98.37398% 0%;
+        background-size: 1125% 1146.875%; }
+    .text-styles .page-file span {
+      display: inline-block;
+      padding-left: 36px;
+      vertical-align: middle;
+      word-break: break-word;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box; }
+  .text-styles .page-table {
+    overflow-x: auto;
+    margin: 1.6em 0; }
+    .text-styles .page-table > table {
+      margin: 0; }
+      @media all and (max-width: 1023px) {
+        .text-styles .page-table > table {
+          display: table;
+          overflow-x: visible; } }
+  @media all and (min-width: 900px) {
+    .text-styles .columns {
+      margin: 1.6em 0;
+      display: -webkit-box;
+      display: -moz-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex; } }
+  @media all and (min-width: 900px) {
+    .text-styles .columns .column {
+      min-height: 1em; }
+      .text-styles .columns .column > *:first-child {
+        margin-top: 0; }
+      .text-styles .columns .column > *:last-child {
+        margin-bottom: 0; } }
+  @media all and (min-width: 1200px) {
+    .text-styles .columns .column {
+      -webkit-box-flex: 1;
+      -moz-box-flex: 1 0 33.83333%;
+      -webkit-flex: 1 0 33.83333%;
+      -ms-flex: 1 0 33.83333%;
+      flex: 1 0 33.83333%;
+      max-width: calc(50% - 25px);
+      margin-right: 50px; }
+      .text-styles .columns .column:nth-of-type(2n) {
+        margin-right: 0; } }
+  @media all and (min-width: 900px) and (max-width: 1199px) {
+    .text-styles .columns .column {
+      -webkit-box-flex: 1;
+      -moz-box-flex: 1 0 33.83333%;
+      -webkit-flex: 1 0 33.83333%;
+      -ms-flex: 1 0 33.83333%;
+      flex: 1 0 33.83333%;
+      max-width: calc(50% - 20px);
+      margin-right: 40px; }
+      .text-styles .columns .column:nth-of-type(2n) {
+        margin-right: 0; } }
+  @media all and (min-width: 1200px) {
+    .text-styles .two-columns {
+      -webkit-perspective: 1px;
+      -webkit-column-count: 2;
+      -moz-column-count: 2;
+      column-count: 2;
+      -webkit-column-gap: 50px;
+      -moz-column-gap: 50px;
+      column-gap: 50px; } }
+  @media all and (min-width: 768px) and (max-width: 1199px) {
+    .text-styles .two-columns {
+      -webkit-perspective: 1px;
+      -webkit-column-count: 2;
+      -moz-column-count: 2;
+      column-count: 2;
+      -webkit-column-gap: 40px;
+      -moz-column-gap: 40px;
+      column-gap: 40px; } }
+  .text-styles .two-columns > p {
+    margin-bottom: 0;
+    padding-bottom: 1em; }
+  .text-styles .two-columns > h2,
+  .text-styles .two-columns > h3,
+  .text-styles .two-columns > h4 {
+    margin-bottom: 0;
+    padding-bottom: .5em; }
+  .text-styles .two-columns > ul,
+  .text-styles .two-columns > ol {
+    margin-bottom: 0;
+    padding-bottom: 1.1em; }
+  @media all and (min-width: 768px) {
+    .text-styles .two-columns > li {
+      padding-bottom: .2em; }
+      .text-styles .two-columns > li:last-child {
+        padding-bottom: 0; } }
+  .text-styles .two-columns > * {
+    -webkit-column-break-inside: avoid;
+    page-break-inside: avoid; }
+    @media all and (min-width: 768px) {
+      .text-styles .two-columns > *:last-child {
+        margin-bottom: 0;
+        padding-bottom: 0; } }
+  .text-styles .two-columns:last-child > *:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0; }
+  .text-styles .no-margin {
+    margin-bottom: 0; }
+    .text-styles .no-margin + * {
+      margin-top: 0; }
+  .text-styles hr {
+    height: 1px;
+    margin: 25px 0;
+    background-color: #d8d8d8; }

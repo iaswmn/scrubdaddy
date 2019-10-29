@@ -1,0 +1,207 @@
+@import 'mixins';
+$page-content-wrapper-padding-map: (
+    ($media900 - 100, 0): 5em 7.5em,
+    (800px, $media900 - 100): 2.5em 4.75em,
+    (0, 800px): 1.25em 2em,
+);
+$page-content-wrapper-maxWidth-map: (
+    (800px, 0): 820px,
+    ($media600, 800px): 620px,
+    (0, $media600): 360px,
+);
+
+#wrapper {
+  background-image: radial-gradient(circle at 29% 49%, #3789ff, #0042b7);
+}
+
+#header-cell  header {
+  background: none;
+}
+
+.page-content-wrapper {
+  margin: 2.8125em auto 6.25em auto;
+  border-radius: 4px;
+  background: white;
+  @include font-size(16px);
+  @include border-box;
+  @include media_map(padding, $page-content-wrapper-padding-map);
+  @include media_map(max-width, $page-content-wrapper-maxWidth-map);
+
+  @include media_interval($media400, $media768) {
+    margin: 4.8125em auto 3.25em auto;
+  }
+  @include media_interval(0 $media400) {
+    margin: 2.8125em auto 2.8125em auto;
+  }
+}
+
+.form-wrapper {
+  margin-top: 3.25em;
+
+  @include media_interval(0, $media600) {
+    margin-top: 1.75em;
+  }
+}
+
+.row {
+  position: relative;
+  overflow: hidden;
+
+  @include media_interval($media600, 0) {
+    @include flexbox;
+  }
+
+  &:not(:first-of-type) {
+    @include media_interval($media600, 0) {
+      margin-top: 2em;
+    }
+  }
+
+  &.two-items > *:last-child {
+    @include media_interval($media600, 0) {
+      position: relative;
+      margin-left: auto;
+    }
+  }
+}
+
+.mobile-margin {
+  @include media_interval(0, $media600) {
+    margin-top: 25px;
+  }
+}
+
+.help-text {
+  font-weight: 500;
+  margin-top: .3571em;
+  @include font-size(14px, 18px);
+}
+
+.time-fields-outer-box {
+  max-width: 260px;
+
+  & .time-fields {
+    @include flexbox;
+
+    & .field:first-child {
+      max-width: 140px;
+    }
+
+    & .field:last-child {
+      max-width: 100px;
+      margin-left: auto;
+    }
+  }
+}
+
+.field-phone {
+  margin-left: auto;
+  right: 0;
+}
+
+/*JS Animation styles*/
+
+.show-hide-fields {
+  @include media_interval($media1024, 0) {
+    @include transform(translateY(200px));
+    @include opacity(0);
+    @include transition((opacity .3s ease .20s), (transform .3s));
+  }
+  @include media_interval(0, $media1024) {
+    display: none;
+  }
+
+  &.js-active {
+    @include media_interval($media1024, 0) {
+      @include opacity(1);
+      @include transform(translateY(0));
+    }
+    @include media_interval(0, $media1024) {
+      display: block;
+    }
+  }
+
+  &.js-move-up {
+    @include transform(translateY(-400px));
+  }
+}
+
+/**********************/
+
+.field-comments {
+  width: 100%;
+}
+
+.upload-field {
+  margin-top: 2em;
+
+  & .button-holder {
+    margin-top: .625em;
+  }
+
+  & .btn.small {
+    @include media_interval(0, $media768) {
+      width: 180px;
+      padding: 8px 20px;
+    }
+  }
+}
+
+.button-block {
+  margin-top: 4em;
+  text-align: center;
+
+  @include media_interval(0, $media600) {
+    margin-top: 2.5em;
+  }
+}
+
+/*Upload field styles*/
+
+.upload-field {
+  .record {
+    @include flexbox;
+    @include align-items(center);
+  }
+
+  & .cancel-btn {
+    position: relative;
+    width: 21px;
+    height: 21px;
+
+    &:hover {
+      cursor: pointer;
+      @include transition(opacity .2s ease);
+      @include opacity(.7);
+    }
+
+    &::after,
+    &::before {
+      position: absolute;
+      top: calc(50% - 10px);
+      left: calc(50% - 2px);
+      width: 4px;
+      height: 20px;
+      content: '';
+      background: $darkish-blue;
+    }
+
+    &::before {
+      @include transform(rotate(-45deg));
+    }
+
+    &::after {
+      @include transform(rotate(45deg));
+    }
+  }
+
+  & .name {
+    margin-left: 5px;
+    color: $darkish-blue;
+  }
+}
+
+
+.field.required .label-holder label:after {
+  content: '';
+}

@@ -1,0 +1,78 @@
+{% extends 'layout.html' %}
+
+{% load attachable_blocks %}
+{% load pipeline_plus %}
+{% load breadcrumbs %}
+{% load away %}
+{% load text %}
+
+{% block static_head %}
+  {{ block.super }}
+  {% stylesheet 'product' %}
+{% endblock static_head %}
+
+{% block static_js %}
+  {{ block.super }}
+  {% javascript 'product' %}
+{% endblock static_js %}
+
+
+{% block content %}
+  <div class="detail-product">
+    <div class="grid">
+      <div>
+        {% breadcrumbs %}
+      </div>
+      <div class="item-wrapper top-detail-wrapper">
+        <div class="top-detail">
+          <img src="{{ product.background.normal.url }}" alt="" srcset="{{ product.background.url }} 1x, {{ product.background.url }} 2x">
+        </div>
+        <div class="right">
+          <div class="contain">
+            <div class="title-h1">{{ product.title }}</div>
+            <div class="title-italic-h4 white-title">
+              {{ product.description }}
+            </div>
+            {% if product.show_button %}
+              <a href="{{ product.link }}" class="btn small yellow moema">shop me</a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+    {% render_attached_blocks product %}
+    <div class="shop-block">
+      <a href="{{ product.link }}" class="btn medium-240 blue moema">shop me</a>
+    </div>
+    {% if product.text %}
+      <div class="grid">
+        <div class="note">{% away product.text|typograf %}</div>
+      </div>
+    {% endif %}
+    {% if related_products %}
+      <div class="slider-product">
+        <div class="grid">
+          <div class="slider no-slider">
+            <div class="title-h2 blue">You might also like</div>
+            {% for item in related_products %}
+              <a href="{{ item.get_absolute_url }}" class="slider-item item">
+                <div class="upper">
+                  <img src="{{ item.preview.normal.url }}"
+                       alt=""
+                       srcset="{{ item.preview.normal.url }} 1x, {{ item.preview.url }} 2x">
+                  <div class="tab-color" style="background: {{ product.category.background_color }}"></div>
+                </div>
+                <div class="title title-italic-h4">{{ item.title }}</div>
+              </a>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    {% endif %}
+  </div>
+  <div class="bottom-side">
+    <div class="grid">
+      <div class="text-styles w780">{% away product.additional_text|typograf %}</div>
+    </div>
+  </div>
+{% endblock content %}

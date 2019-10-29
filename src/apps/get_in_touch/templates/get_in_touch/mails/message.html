@@ -1,0 +1,37 @@
+{% load i18n %}
+
+{% if message.name %}
+  <p><b>Name:</b> {{ message.name }}</p>
+{% endif %}
+
+{% if message.reach_type %}
+  <p><b>How can we reach you?:</b> {{ message.reach_type }}</p>
+{% endif %}
+
+{% if message.email %}
+  <p><b>E-mail:</b> {{ message.email }}</p>
+{% endif %}
+
+{% if message.reach_time %}
+  <p><b>Best time to reach you?:</b> {{ message.reach_time }}</p>
+{% endif %}
+
+{% if message.time_zone %}
+  <p><b>Time zone:</b> {{ message.time_zone }}</p>
+{% endif %}
+
+{% if message.phone %}
+  <p><b>Phone:</b> {{ message.phone }}</p>
+{% endif %}
+
+{% if message.comments %}
+  <p><b>{% trans 'Comments' %}:</b> {{ message.comments|safe|linebreaksbr }}</p>
+{% endif %}
+
+{% if message.date %}
+  <p><b>Date:</b> {{ message.date }}</p>
+{% endif %}
+
+{% if request.COOKIES.utm %}
+  <p><b>{% trans 'UTM' %}:</b> {{ request.COOKIES.utm }}</p>
+{% endif %}

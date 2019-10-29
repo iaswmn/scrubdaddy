@@ -1,0 +1,1 @@
+default_app_config = 'where_to_buy.apps.Config'

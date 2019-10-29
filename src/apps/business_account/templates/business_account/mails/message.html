@@ -1,0 +1,166 @@
+{% load i18n %}
+{% load text %}
+
+{% if message.name %}
+  <p><b>name:</b> {{ message.name }}</p>
+{% endif %}
+
+{% if message.last_name %}
+  <p><b>last name:</b> {{ message.last_name }}</p>
+{% endif %}
+
+{% if message.title %}
+  <p><b>title:</b> {{ message.title }}</p>
+{% endif %}
+
+{% if message.company_name %}
+  <p><b>company name:</b> {{ message.company_name }}</p>
+{% endif %}
+
+{% if message.date_of_commencement %}
+  <p><b>date of commencement:</b> {{ message.date_of_commencement }}</p>
+{% endif %}
+
+{% if message.registered_company_address %}
+  <p><b>street address:</b> {{ message.registered_company_address }}</p>
+{% endif %}
+
+{% if message.company_street_address_2 %}
+  <p><b>street address 2:</b> {{ message.company_street_address_2 }}</p>
+{% endif %}
+
+{% if message.company_city %}
+  <p><b>city:</b> {{ message.company_city }}</p>
+{% endif %}
+
+{% if message.company_state %}
+  <p><b>state:</b> {{ message.company_state }}</p>
+{% endif %}
+
+{% if message.company_zip %}
+  <p><b>zip:</b> {{ message.company_zip }}</p>
+{% endif %}
+
+{% if message.company_country %}
+  <p><b>country:</b> {{ message.company_country }}</p>
+{% endif %}
+
+{% if message.phone %}
+  <p><b>phone:</b> {{ message.phone }}</p>
+{% endif %}
+
+{% if message.email %}
+  <p><b>e-mail:</b> {{ message.email }}</p>
+{% endif %}
+
+{% if message.fax %}
+  <p><b>fax:</b> {{ message.fax }}</p>
+{% endif %}
+
+{% if message.website %}
+  <p><b>website:</b> {{ message.website }}</p>
+{% endif %}
+
+{% if message.wholesale %}
+  <p><b>wholesale:</b> {{ message.wholesale }}</p>
+{% endif %}
+
+{% if message.distributor %}
+  <p><b>distributor:</b> {{ message.distributor }}</p>
+{% endif %}
+
+{% if message.retailer %}
+  <p><b>retailer:</b> {{ message.retailer }}</p>
+{% endif %}
+
+{% if message.broker %}
+  <p><b>broker:</b> {{ message.broker }}</p>
+{% endif %}
+
+{% if message.trade_reference_company_name %}
+  <p><b>trade reference company name:</b> {{ message.trade_reference_company_name }}</p>
+{% endif %}
+
+{% if message.trade_reference_street_address %}
+  <p><b>trade reference street address:</b> {{ message.trade_reference_street_address }}</p>
+{% endif %}
+
+{% if message.trade_reference_street_address_2 %}
+  <p><b>trade reference street address 2:</b> {{ message.trade_reference_street_address_2 }}</p>
+{% endif %}
+
+{% if message.trade_reference_city %}
+  <p><b>trade reference city:</b> {{ message.trade_reference_city }}</p>
+{% endif %}
+
+{% if message.trade_reference_state %}
+  <p><b>trade reference state:</b> {{ message.trade_reference_state }}</p>
+{% endif %}
+
+{% if message.trade_reference_zip %}
+  <p><b>trade reference zip:</b> {{ message.trade_reference_zip }}</p>
+{% endif %}
+
+{% if message.trade_reference_country %}
+  <p><b>trade reference country:</b> {{ message.trade_reference_country }}</p>
+{% endif %}
+
+{% if message.trade_reference_phone %}
+  <p><b>trade reference phone:</b> {{ message.trade_reference_phone }}</p>
+{% endif %}
+
+{% if message.trade_reference_email %}
+  <p><b>trade reference email:</b> {{ message.trade_reference_email }}</p>
+{% endif %}
+
+{% if message.trade_reference_fax %}
+  <p><b>trade reference fax:</b> {{ message.trade_reference_fax }}</p>
+{% endif %}
+
+{% if message.trade_reference_2_company_name %}
+  <p><b>second trade reference company name:</b> {{ message.trade_reference_2_company_name }}</p>
+{% endif %}
+
+{% if message.trade_reference_2_street_address %}
+  <p><b>second trade reference street address:</b> {{ message.trade_reference_2_street_address }}</p>
+{% endif %}
+
+{% if message.trade_reference_2_street_address_2 %}
+  <p><b>second trade reference street address 2:</b> {{ message.trade_reference_2_street_address_2 }}</p>
+{% endif %}
+
+{% if message.trade_reference_2_city %}
+  <p><b>second trade reference city:</b> {{ message.trade_reference_2_city }}</p>
+{% endif %}
+
+{% if message.trade_reference_2_state %}
+  <p><b>second trade reference state:</b> {{ message.trade_reference_2_state }}</p>
+{% endif %}
+
+{% if message.trade_reference_2_zip %}
+  <p><b>second trade reference zip:</b> {{ message.trade_reference_2_zip }}</p>
+{% endif %}
+
+{% if message.trade_reference_2_country %}
+  <p><b>second trade reference country:</b> {{ message.trade_reference_2_country }}</p>
+{% endif %}
+
+{% if message.trade_reference_2_phone %}
+  <p><b>second trade reference phone:</b> {{ message.trade_reference_2_phone }}</p>
+{% endif %}
+
+{% if message.trade_reference_2_email %}
+  <p><b>second trade reference email:</b> {{ message.trade_reference_2_email }}</p>
+{% endif %}
+
+{% if message.trade_reference_2_fax %}
+  <p><b>second trade reference fax:</b> {{ message.trade_reference_2_fax }}</p>
+{% endif %}
+
+{% if message.date %}
+  <p><b>date sent:</b> {{ message.date }}</p>
+{% endif %}
+
+{% if request.COOKIES.utm %}
+  <p><b>UTM:</b> {{ request.COOKIES.utm }}</p>
+{% endif %}

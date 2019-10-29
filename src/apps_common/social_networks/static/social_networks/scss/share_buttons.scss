@@ -1,0 +1,107 @@
+@import "mixins";
+
+$icon_size: 20px;
+
+.social-button {
+  vertical-align: top;
+  display: inline-block;
+  padding: 6px 12px;
+  margin-right: 5px;
+  cursor: pointer;
+  line-height: 0;
+  @include border_radius(3px);
+
+  @include media_interval(0, $media1024) {
+    padding: 6px;
+  }
+
+  &:last-child {
+    margin-right: 0;
+  }
+
+  &:before {
+    margin-right: 7px;
+    vertical-align: middle;
+    width: 20px;
+    height: 20px;
+    content: '';
+    display: inline-block;
+    background: $sprite_url no-repeat;
+    background-size: rel-background-size($icon_size, $icon_size);
+
+    @include media_interval(0, $media1024) {
+      margin: 0;
+    }
+  }
+
+  &:after {
+    vertical-align: middle;
+    color: #fff;
+    font-weight: bold;
+    @include font-size(14px, 14px);
+
+    @include media_interval(0, $media1024) {
+      display: none;
+    }
+  }
+
+  &.social-fb:before {
+    background-position: rel-background-position($icon_size, $icon_size, 0px, -347px);
+  }
+  &.social-tw:before {
+    background-position: rel-background-position($icon_size, $icon_size, -20px, -347px);
+  }
+  &.social-gp:before {
+    background-position: rel-background-position($icon_size, $icon_size, -60px, -347px);
+  }
+  &.social-li:before {
+    background-position: rel-background-position($icon_size, $icon_size, -40px, -347px);
+  }
+  &.social-pn:before {
+    background-position: rel-background-position($icon_size, $icon_size, -80px, -347px);
+  }
+  &.social-email:before {
+    background-position: rel-background-position($icon_size, $icon_size, -100px, -347px);
+  }
+
+  &.social-fb:after {
+    content: 'Share';
+  }
+  &.social-tw:after {
+    content: 'Tweet';
+  }
+  &.social-gp:after {
+    content: 'Share';
+  }
+  &.social-li:after {
+    content: 'Share';
+  }
+  &.social-pn:after {
+    content: 'Pin';
+  }
+  &.social-vk:after {
+    content: 'Share';
+  }
+  &.social-email:after {
+    content: 'Send';
+  }
+
+  &.social-fb {
+    background-color: #4065b4;
+  }
+  &.social-tw {
+    background-color: #55acee;
+  }
+  &.social-gp {
+    background-color: #eb5e4c;
+  }
+  &.social-li {
+    background-color: #238cc8;
+  }
+  &.social-pn {
+    background-color: #cc2127;
+  }
+  &.social-email {
+    background-color: #717171;
+  }
+}

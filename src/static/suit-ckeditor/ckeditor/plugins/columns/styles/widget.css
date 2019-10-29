@@ -1,0 +1,32 @@
+.columns {
+  margin-bottom: 1em;
+  padding: 2px;
+  border: 1px solid #a0a0a0;
+}
+
+.columns:after {
+  display: table;
+  clear: both;
+  content: '';
+}
+
+.columns .column {
+  float: left;
+  box-sizing: border-box;
+  width: 49.4%;
+  min-height: 1.4em;
+  padding: 5px;
+  border: 1px solid #a0a0a0;
+}
+
+.columns .column > *:first-child {
+  margin-top: 0;
+}
+
+.columns .column > *:last-child {
+  margin-bottom: 0;
+}
+
+.columns .column-left {
+  margin-right: 1.2%;
+}

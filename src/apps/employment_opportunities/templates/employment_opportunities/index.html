@@ -1,0 +1,194 @@
+{% extends 'std_page/index.html' %}
+{% load staticfiles %}
+
+{% load attachable_blocks %}
+{% load form_helper %}
+{% load pipeline_plus %}
+{% load away %}
+{% load i18n %}
+{% load staticfiles %}
+
+{% block static_head %}
+  {{ block.super }}
+  {% stylesheet 'employment_opportunities' %}
+{% endblock static_head %}
+
+{% block static_js %}
+  {{ block.super }}
+  {% javascript 'employment_opportunities' %}
+{% endblock static_js %}
+
+
+{% block content %}
+
+  <div class="employment_opportunities-form">
+    <div class="grid">
+      <div class="form">
+        <div class="top">
+          <div class="title-h2 blue">Employment Opportunities</div>
+          <div class="line">We’re always looking for talented individuals to join the Scrub Daddy family. If you think you have the skills we’d be looking for, take a few minutes and fill out the form below!</div>
+        </div>
+        <form method="post" action="" id="employment_opportunities-form" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="container wipe">
+            <div class="row margin">
+              {% render_field form 'first_name' %}
+              {% render_field form 'last_name' %}
+            </div>
+
+            <div class="row">
+              {% render_field form 'street_address' %}
+              {% render_field form 'street_address_2' %}
+            </div>
+
+            <div class="row">
+              {% render_field form 'city' %}
+              {% render_field form 'state' %}
+            </div>
+
+            <div class="row margin">
+              {% render_field form 'zip_code' %}
+            </div>
+
+            <div class="row margin">
+              {% render_field form 'phone' %}
+              {% render_field form 'email' %}
+            </div>
+
+            <div class="row margin">
+              {% render_field form 'date_available' %}
+              {% render_field form 'desired_salary' %}
+            </div>
+
+            <div class="row margin">
+              {% render_field form 'position' %}
+            </div>
+
+            <div class="row w100 margin">
+              {% render_field form 'about' %}
+            </div>
+            <div class="row-field column bold">
+              <div class="row">
+                {% render_field form 'citizen' template='form_helper/checkbox.html' %}
+                {% render_field form 'worked' template='form_helper/checkbox.html' %}
+                {% render_field form 'felony' template='form_helper/checkbox.html' %}
+              </div>
+            </div>
+          </div>
+
+
+          <div class="container">
+            <div class="title-italic-h4">Education</div>
+
+            <div class="row margin">
+              {% render_field form 'education' %}
+            </div>
+            <div class="row margin">
+              {% render_field form 'school_name' %}
+              {% render_field form 'school_state' %}
+            </div>
+
+            <div class="row margin">
+              {% render_field form 'school_street_address' %}
+              {% render_field form 'school_zip_code' %}
+            </div>
+
+            <div class="row">
+              {% render_field form 'school_city' %}
+              {% render_field form 'years_attended' %}
+            </div>
+
+          </div>
+
+          <div class="container">
+            <div class="title-italic-h4">Previous Employment</div>
+
+            <div class="row margin">
+              {% render_field form 'company_name' %}
+              {% render_field form 'company_phone' %}
+            </div>
+
+            <div class="row">
+              {% render_field form 'company_street_address' %}
+              {% render_field form 'company_street_address_2' %}
+            </div>
+
+            <div class="row">
+              {% render_field form 'company_state' %}
+              {% render_field form 'company_zip_code' %}
+            </div>
+
+            <div class="row margin">
+              {% render_field form 'company_city' %}
+              {% render_field form 'company_country' %}
+            </div>
+
+            <div class="row margin">
+              {% render_field form 'supervisor_first_name' %}
+              {% render_field form 'supervisor_last_name' %}
+            </div>
+
+            <div class="row margin">
+              {% render_field form 'job_title' %}
+              {% render_field form 'starting_salary' %}
+            </div>
+
+            <div class="row margin">
+              {% render_field form 'years_worked' %}
+              {% render_field form 'ending_salary' %}
+            </div>
+            <div class="row w100 margin">
+              {% render_field form 'responsibilities' %}
+            </div>
+            <div class="row w100 margin">
+              {% render_field form 'reason_for_leaving' %}
+            </div>
+            <div class="row-field bold">
+              <div class="row">
+                {% render_field form 'contact_previous_supervisor' template='form_helper/checkbox.html' %}
+              </div>
+            </div>
+          </div>
+
+          <div class="container">
+            <div class="title-italic-h4">Disclaimer and signature</div>
+            <div class="agree">
+              <div>By signing I certify that my answers are true and complete to the best of my knowledge.
+                If this application leads to employment, I understand that false or misleading information in my application or interview may result in my release.</div>
+            </div>
+
+            <div class="row margin">
+              {% render_field form 'user_date' %}
+              {% render_field form 'resume' %}
+            </div>
+
+            <div class="row sign-error">
+
+              <div class="field-sign{% if form.signature.errors %} error{% endif %}">
+                <div class="label-holder">Signature*</div>
+                <div id="signature">
+                  <div class="reset"></div>
+                </div>
+                {% render_field form 'signature' %}
+              </div>
+
+              <div class="text">Hint: use your mouse if on a computer or laptop or your finger/stylus if on a tablet or
+                smart phone.
+              </div>
+            </div>
+
+          </div>
+
+
+          <div class="buttons">
+            <button type="submit" class="btn medium blue moema">{% trans 'Send' %}</button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+
+  </div>
+
+
+{% endblock content %}

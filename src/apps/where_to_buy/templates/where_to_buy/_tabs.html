@@ -1,0 +1,22 @@
+<div class="tabs-box-wrapper">
+
+  <div class="tabs-btn btn-box-2">
+    <a href="{% url 'where_to_buy:retail' %}"
+       class="btn big orange regular{% if request.resolver_match.url_name == "retail" %} active{% endif %}">
+      <span>Retail</span>
+    </a>
+
+    {% if country != 'IL' %}
+      <a href="{% url 'where_to_buy:shop' %}"
+        class="btn big sky reverse{% if request.resolver_match.url_name == "shop" %} active{% endif %}">
+        <span>Online Smile Shop</span>
+      </a>
+    {% endif %}
+
+{#    <a href="{% url 'where_to_buy:international' %}"#}
+{#       class="btn big green regular{% if request.resolver_match.url_name == "international" %} active{% endif %}">#}
+{#      <span>International</span>#}
+{#    </a>#}
+  </div>
+
+</div>

@@ -1,0 +1,61 @@
+@import "mixins";
+
+$icon_size: 30px;
+
+.social-links {
+  a {
+    display: inline-block;
+    margin-right: 10px;
+    width: 30px;
+    vertical-align: middle;
+    @include opacity(1);
+    @include media-interval(0, $media640){
+      width: 24px;
+      margin-right: 3px;
+    }
+
+    &:last-child {
+      margin-right: 0;
+    }
+
+    &:before {
+      content: '';
+      display: block;
+      padding-top: 100%;
+      background: $sprite_url no-repeat;
+      background-size: rel-background-size($icon_size, $icon_size);
+    }
+
+    &.fb:before {
+      background-position: rel-background-position($icon_size, $icon_size, 0px, -120px);
+    }
+    &.tw:before {
+      background-position: rel-background-position($icon_size, $icon_size, -30px, -120px);
+    }
+    &.in:before {
+      background-position: rel-background-position($icon_size, $icon_size, -60px, -120px);
+    }
+    &.pi:before {
+      background-position: rel-background-position($icon_size, $icon_size, -90px, -120px);
+    }
+    &.li:before {
+      background-position: rel-background-position($icon_size, $icon_size, -120px, -120px);
+    }
+    &.yt:before {
+      background-position: rel-background-position($icon_size, $icon_size, -150px, -120px);
+    }
+    &.gp:before {
+      background-position: rel-background-position($icon_size, $icon_size, -180px, -120px);
+    }
+    &.pi:before {
+      background-position: rel-background-position($icon_size, $icon_size, -210px, -120px);
+    }
+    &.ye:before {
+      background-position: rel-background-position($icon_size, $icon_size, -240px, -120px);
+    }
+
+    &:hover {
+      @include opacity(0.8);
+    }
+  }
+}

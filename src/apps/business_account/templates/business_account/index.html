@@ -1,0 +1,183 @@
+{% extends 'std_page/index.html' %}
+{% load staticfiles %}
+
+{% load attachable_blocks %}
+{% load form_helper %}
+{% load pipeline_plus %}
+{% load away %}
+{% load i18n %}
+{% load staticfiles %}
+
+{% block static_head %}
+  {{ block.super }}
+  {% stylesheet 'business_account' %}
+{% endblock static_head %}
+
+{% block static_js %}
+  {{ block.super }}
+  {% javascript 'business_account' %}
+{% endblock static_js %}
+
+
+{% block content %}
+
+  <div class="business-form">
+    <div class="grid">
+      <div class="form">
+        <div class="top">
+          <div class="title-h2 blue">Open A Business Account</div>
+          <div class="line">Please make sure to fill out the form below in its entirety. Thank you!</div>
+        </div>
+        <form id="business-form" method="post" action="">
+          {% csrf_token %}
+          <div class="container wipe">
+            <div class="row margin">
+              {% render_field form 'name' %}
+              {% render_field form 'last_name' %}
+            </div>
+
+            <div class="row margin">
+              {% render_field form 'title' %}
+            </div>
+
+            <div class="row margin">
+              {% render_field form 'company_name' %}
+              {% render_field form 'date_of_commencement' %}
+            </div>
+
+            <div class="row">
+              {% render_field form 'registered_company_address' %}
+              {% render_field form 'company_street_address_2' %}
+            </div>
+
+            <div class="row">
+              {% render_field form 'company_city' %}
+              {% render_field form 'company_state' %}
+            </div>
+
+            <div class="row margin">
+              {% render_field form 'company_zip' %}
+              {% render_field form 'company_country' %}
+            </div>
+
+            <div class="row margin">
+              {% render_field form 'phone' %}
+              {% render_field form 'email' %}
+            </div>
+
+            <div class="row margin">
+              {% render_field form 'fax' %}
+              {% render_field form 'website' %}
+            </div>
+
+            <div class="row-field">
+              <div class="title-h5" style="margin-bottom: 20px;">Please indicate if you are a:</div>
+              <div class="row">
+                {% render_field form 'wholesale' template='form_helper/checkbox.html' %}
+                {% render_field form 'distributor' template='form_helper/checkbox.html' %}
+                {% render_field form 'retailer' template='form_helper/checkbox.html' %}
+                {% render_field form 'broker' template='form_helper/checkbox.html' %}
+              </div>
+            </div>
+          </div>
+
+
+          <div class="container">
+            <div class="title-italic-h4">Trade references (provide 2 references)</div>
+
+            <div class="row margin">
+              {% render_field form 'trade_reference_company_name' %}
+            </div>
+            <div class="row">
+              {% render_field form 'trade_reference_street_address' %}
+              {% render_field form 'trade_reference_street_address_2' %}
+            </div>
+
+            <div class="row">
+              {% render_field form 'trade_reference_city' %}
+              {% render_field form 'trade_reference_state' %}
+            </div>
+
+            <div class="row margin">
+              {% render_field form 'trade_reference_zip' %}
+              {% render_field form 'trade_reference_country' %}
+            </div>
+
+            <div class="row margin">
+              {% render_field form 'trade_reference_phone' %}
+              {% render_field form 'trade_reference_email' %}
+            </div>
+
+            <div class="row">
+              {% render_field form 'trade_reference_fax' %}
+            </div>
+
+          </div>
+
+          <div class="container">
+            <div class="title-italic-h4">Trade references 2</div>
+
+            <div class="row margin">
+              {% render_field form 'trade_reference_2_company_name' %}
+            </div>
+
+            <div class="row">
+              {% render_field form 'trade_reference_2_street_address' %}
+              {% render_field form 'trade_reference_2_street_address_2' %}
+            </div>
+
+            <div class="row">
+              {% render_field form 'trade_reference_2_city' %}
+              {% render_field form 'trade_reference_2_state' %}
+            </div>
+
+            <div class="row margin">
+              {% render_field form 'trade_reference_2_zip' %}
+              {% render_field form 'trade_reference_2_country' %}
+            </div>
+
+            <div class="row margin">
+              {% render_field form 'trade_reference_2_phone' %}
+              {% render_field form 'trade_reference_2_email' %}
+            </div>
+
+            <div class="row">
+              {% render_field form 'trade_reference_2_fax' %}
+            </div>
+          </div>
+
+          <div class="container">
+            <div class="title-italic-h4">Agreement</div>
+            <div class="agree">
+              <div>By signing this document I agree to:</div>
+              <div>— Prepay all invoices promptly</div>
+              <div>— Not sell on any deal sites (i.e: Amazon, Ebay, Groupon, Dealchicken)</div>
+              <div>— Report any changes of the above listed information immediately</div>
+              <div>— Not misrepresent Scrub Daddy’s products or brand in any way</div>
+            </div>
+            <div class="row margin">
+
+              <div class="field-sign{% if form.signature.errors %} error{% endif %}">
+                <div class="label-holder">Signature*</div>
+                <div id="signature">
+                  <div class="reset"></div>
+                </div>
+                {% render_field form 'signature' %}
+              </div>
+
+              <div class="text">Hint: use your mouse if on a computer or laptop or your finger/stylus if on a tablet or smart phone.</div>
+            </div>
+          </div>
+
+
+          <div class="buttons">
+            <button type="submit" class="btn medium blue moema">{% trans 'Send' %}</button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+{% endblock content %}

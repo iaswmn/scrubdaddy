@@ -1,0 +1,23 @@
+{% load away %}
+{% load text %}
+
+{% if advantages %}
+  <div class="advantages">
+    <div class="grid">
+      {% if config.advantages_title %}
+        <div class="text-styles">
+          {% away config.advantages_title %}
+        </div>
+      {% endif %}
+      <div class="flex-container">
+        {% for item in advantages %}
+          <div class="item">
+            <img src="{{ item.preview.normal.url }}" alt="{{ item.preview_alt }}" srcset="{{ item.preview.url }} 1x, {{ item.preview.url }} 2x">
+            <h3 class="title-italic-h4 white">{{ item.title }}</h3>
+            <div class="description">{{ item.description|linebreaksbr|safe }}</div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+{% endif %}

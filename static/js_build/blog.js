@@ -1,0 +1,1 @@
+(function(){(function($){$(document).ready(function(){var trending=$('#posts').find('.flex-container');var item=trending.find('.post');item.on('mouseover',function(){$(this).siblings().addClass('active');});item.on('mouseout',function(){item.removeClass('active');});});})(jQuery);}).call(this);

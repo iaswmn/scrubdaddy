@@ -1,0 +1,61 @@
+{% extends 'std_page/index.html' %}
+
+{% load attachable_blocks %}
+{% load away %}
+{% load pipeline_plus %}
+{% load staticfiles %}
+{% load text %}
+
+{% block static_head %}
+    {{ block.super }}
+    {% stylesheet 'product' %}
+{% endblock static_head %}
+
+{% block static_js %}
+    {{ block.super }}
+    {% javascript 'product' %}
+{% endblock static_js %}
+
+
+{% block tabs %}
+    <div class="tabs-box-wrapper">
+        <div class="tabs-btn btn-box-{{ categories.count|add:"1" }}">
+            <a href="{% url 'products:index' %}" class="btn big blue regular active"><span>All</span></a>
+            {% for category in categories %}
+                <a href="
+                    {% if category.products.count == 1 %}
+                        {{ category.products.first.get_absolute_url }}
+                    {% else %}
+                        {{ category.get_absolute_url }}
+                    {% endif %}"
+                   class="btn big {% cycle 'orange' 'sky' 'green' 'brown' 'violet' %} reverse"><span>{{ category.title }}</span></a>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock tabs %}
+
+{% block page_data %}
+    <div class="grid">
+        <div class="all">
+            <div class="products_tabs">
+                {% for category in categories %}
+                    {% if category.products.all %}
+                        <div class="scrub_products">
+                            {% for product in category.products.all %}
+                                <a class="item" href="{{ product.get_absolute_url }}">
+                                    <div class="upper">
+                                        <img src="{{ product.preview.normal.url }}" alt="" srcset="{{ product.preview.normal.url }} 1x, {{ product.preview.url }} 2x">
+                                        <div class="tab-color" style="background: {{ category.background_color }}"></div>
+                                    </div>
+                                    <h2 class="title-h4">{{ product.title }}</h2>
+                                </a>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <div class="text-styles w780">{% away page_data.text|typograf %}</div>
+        </div>
+    </div>
+    {% render_attached_blocks page_data %}
+{% endblock page_data %}

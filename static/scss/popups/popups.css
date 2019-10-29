@@ -1,0 +1,326 @@
+@charset "UTF-8";
+/*
+  $list: a, b, d, e, f;
+  $new-list: insert-nth($list, 3, c);     // a, b, c, d, e, f
+*/
+/*
+  $list: a, b, r, a, c a, d a, b, r, a;
+  $new-list: replace($list, a, u);       // u, b, r, u, c a, d a, b, r, u;
+*/
+/*
+  $list: a, b, z, d, e, f;
+  $new-list: replace-nth($list,   3, c); // a, b, c, d, e, f
+  $new-list: replace-nth($list,  -2, c); // a, b, c, d, z, f
+*/
+/*
+  $list: a, b z, c, z, d, z, e, f;
+  $new-list: remove($list, z);       // a, b z, c, d, e, f;
+*/
+/*
+  $list: a, b, z, c, d, e, f;
+  $new-list: remove-nth($list,   3); // a, b, c, d, e, f
+  $new-list: remove-nth($list,  -2); // a, b, z, c, d, f
+*/
+/*
+  $list: a, b, c, d, e, f;
+  $new-list: slice($list, 3, 5);   // c, d, e
+  $new-list: slice($list, 4, 4);   // d
+*/
+/*
+  $list: a, b, c d e, f, g, h;
+  $new-list: reverse($list);       // h, g, f, c d e, b, a
+  $new-list: reverse($list, true); // h, g, f, e d c, b, a
+*/
+/*
+    Добавляет константу к каждому значению карты.
+
+    Пример:
+      $map: (
+        (1024px, 0): 100px,
+        (768px, 1024px): 80px,
+        (0, 768px): 60px,
+      )
+
+      > map_add($map, 10px)
+      (
+        (1024px, 0): 110px,
+        (768px, 1024px): 90px,
+        (0, 768px): 70px,
+      )
+ */
+/*
+    Получение ключа карты $map media-интервалов,
+    в который входит искомый интервал $media.
+    Если искомый интервал находится на границе
+    двух или более интервалов карты, генерируется ошибка.
+
+    Пример:
+      $map: (
+        (1024px, 0): 100px,
+        (768px, 1024px): 80px,
+        (0, 768px): 60px,
+      )
+
+      > media_map_key($map, (1200px, 0))
+      (1024px, 0)
+ */
+/*
+    Получение среза media-карты.
+
+    Пример:
+      $map: (
+        (1024px, 0): 100px,
+        (768px, 1024px): 80px,
+        (0, 768px): 60px,
+      )
+
+      > media_map_slice($map, (640px, 1200px))
+      (
+        (1024px, 1200px): 100px,
+        (768px, 1024px): 80px,
+        (640px, 768px): 60px,
+      )
+ */
+/*
+  Многоколоночная верстка через flexbox.
+
+  Пример:
+    .list {
+      @include flexbox;
+      @include flex-flow(row wrap);
+
+      .item {
+        @include flex-columns(2, 10px, 10px);
+      }
+    }
+*/
+/*
+  Пример:
+    input {
+      color: #808080;
+      ...
+      @include placeholder {
+        color: red;
+      }
+    }
+*/
+.popup-opened {
+  overflow: hidden !important; }
+
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  overflow-y: auto;
+  overflow-x: hidden;
+  z-index: 101;
+  font-size: 20px;
+  font-size: 1.25rem; }
+
+.popup-wrapper {
+  max-width: 1400px;
+  margin: 0 auto;
+  height: 100%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  font-size: 0; }
+  .popup-wrapper:after {
+    content: '';
+    display: inline-block;
+    height: 100%;
+    min-height: inherit;
+    vertical-align: middle; }
+
+.popup-window {
+  display: inline-block;
+  position: relative;
+  margin: 0 auto;
+  z-index: 1;
+  text-align: left;
+  vertical-align: middle;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box; }
+
+.popup-content {
+  position: relative;
+  overflow: hidden;
+  z-index: 5;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box; }
+
+#popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  background: rgba(0, 0, 0, 0.4); }
+
+.popup .popup-custom {
+  padding: 40px;
+  text-align: center; }
+
+.popup .popup-title {
+  color: #0032a0;
+  text-shadow: none;
+  margin-bottom: 40px; }
+
+.popup .popup-window {
+  width: auto; }
+  @media all and (min-width: 1024px) {
+    .popup .popup-window {
+      max-width: 70%; } }
+  @media all and (min-width: 480px) and (max-width: 1023px) {
+    .popup .popup-window {
+      max-width: 80%; } }
+  @media all and (max-width: 479px) {
+    .popup .popup-window {
+      max-width: 90%; } }
+  @media all and (min-width: 1024px) {
+    .popup .popup-window {
+      margin-top: 60px;
+      margin-bottom: 60px; } }
+  @media all and (max-width: 1023px) {
+    .popup .popup-window {
+      margin-top: 50px;
+      margin-bottom: 50px; } }
+
+.popup .popup-close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 21px;
+  height: 21px;
+  z-index: 6;
+  cursor: pointer;
+  -webkit-transition: -webkit-transform 0.2s, transform 0.2s, opacity 0.2s;
+  -moz-transition: -webkit-transform 0.2s, transform 0.2s, opacity 0.2s;
+  -ms-transition: -webkit-transform 0.2s, transform 0.2s, opacity 0.2s;
+  -o-transition: -webkit-transform 0.2s, transform 0.2s, opacity 0.2s;
+  transition: -webkit-transform 0.2s, transform 0.2s, opacity 0.2s; }
+  .popup .popup-close-button:before, .popup .popup-close-button:after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 100%;
+    height: 3px;
+    background: #819AD1;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px; }
+  .popup .popup-close-button:before {
+    -webkit-transform: translate3d(-50%, -50%, 0) rotate(45deg);
+    -moz-transform: translate3d(-50%, -50%, 0) rotate(45deg);
+    -ms-transform: translate3d(-50%, -50%, 0) rotate(45deg);
+    -o-transform: translate3d(-50%, -50%, 0) rotate(45deg);
+    transform: translate3d(-50%, -50%, 0) rotate(45deg); }
+  .popup .popup-close-button:after {
+    -webkit-transform: translate3d(-50%, -50%, 0) rotate(-45deg);
+    -moz-transform: translate3d(-50%, -50%, 0) rotate(-45deg);
+    -ms-transform: translate3d(-50%, -50%, 0) rotate(-45deg);
+    -o-transform: translate3d(-50%, -50%, 0) rotate(-45deg);
+    transform: translate3d(-50%, -50%, 0) rotate(-45deg); }
+  .popup .popup-close-button:hover {
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=70);
+    opacity: 0.7; }
+
+.popup .popup-content {
+  background-color: #fff;
+  padding: 80px 120px 80px 120px; }
+
+.popup-wrapper form {
+  max-width: 580px; }
+  .popup-wrapper form .row {
+    margin-bottom: 30px;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex; }
+    .popup-wrapper form .row.w100 .field {
+      width: 100%; }
+    .popup-wrapper form .row:first-child .field {
+      width: 100%; }
+    .popup-wrapper form .row .field {
+      margin-right: 40px; }
+      .popup-wrapper form .row .field:last-child {
+        margin-right: 0; }
+    .popup-wrapper form .row .help-text {
+      font-size: 14px;
+      font-weight: 500;
+      margin-top: 4px; }
+    .popup-wrapper form .row .field-reach_time {
+      width: 140px; }
+    .popup-wrapper form .row .field-time_zone {
+      width: 100px; }
+  .popup-wrapper form .upload-field {
+    font-size: 16px;
+    font-size: 1rem;
+    margin-bottom: 64px; }
+    .popup-wrapper form .upload-field .queue {
+      color: #0032a0;
+      margin-bottom: 20px; }
+      .popup-wrapper form .upload-field .queue .record {
+        display: -webkit-box;
+        display: -moz-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex; }
+        .popup-wrapper form .upload-field .queue .record .name {
+          margin-bottom: 6px; }
+          .popup-wrapper form .upload-field .queue .record .name:last-child {
+            margin-bottom: 0; }
+      .popup-wrapper form .upload-field .queue .cancel-btn {
+        top: -3px;
+        position: relative;
+        width: 21px;
+        height: 21px;
+        z-index: 6;
+        cursor: pointer;
+        -webkit-transform: scale(0.8);
+        -moz-transform: scale(0.8);
+        -ms-transform: scale(0.8);
+        -o-transform: scale(0.8);
+        transform: scale(0.8);
+        -webkit-transition: -webkit-transform 0.2s, transform 0.2s;
+        -moz-transition: -webkit-transform 0.2s, transform 0.2s;
+        -ms-transition: -webkit-transform 0.2s, transform 0.2s;
+        -o-transition: -webkit-transform 0.2s, transform 0.2s;
+        transition: -webkit-transform 0.2s, transform 0.2s; }
+        .popup-wrapper form .upload-field .queue .cancel-btn:before, .popup-wrapper form .upload-field .queue .cancel-btn:after {
+          content: '';
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          width: 80%;
+          height: 3px;
+          background: #0032a0;
+          -webkit-border-radius: 3px;
+          -moz-border-radius: 3px;
+          border-radius: 3px; }
+        .popup-wrapper form .upload-field .queue .cancel-btn:before {
+          -webkit-transform: translate3d(-50%, -50%, 0) rotate(45deg);
+          -moz-transform: translate3d(-50%, -50%, 0) rotate(45deg);
+          -ms-transform: translate3d(-50%, -50%, 0) rotate(45deg);
+          -o-transform: translate3d(-50%, -50%, 0) rotate(45deg);
+          transform: translate3d(-50%, -50%, 0) rotate(45deg); }
+        .popup-wrapper form .upload-field .queue .cancel-btn:after {
+          -webkit-transform: translate3d(-50%, -50%, 0) rotate(-45deg);
+          -moz-transform: translate3d(-50%, -50%, 0) rotate(-45deg);
+          -ms-transform: translate3d(-50%, -50%, 0) rotate(-45deg);
+          -o-transform: translate3d(-50%, -50%, 0) rotate(-45deg);
+          transform: translate3d(-50%, -50%, 0) rotate(-45deg); }
+        .popup-wrapper form .upload-field .queue .cancel-btn:hover {
+          -webkit-transform: scale(1);
+          -moz-transform: scale(1);
+          -ms-transform: scale(1);
+          -o-transform: scale(1);
+          transform: scale(1); }

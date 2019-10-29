@@ -1,0 +1,228 @@
+@import 'mixins';
+
+.products_main {
+  .flex-container {
+    padding-top: 30px;
+    @include flexbox;
+
+    @include media_interval(0, $media1024) {
+      padding: 0;
+    }
+    @include media_interval(0, $media768) {
+      @include flex-wrap(wrap);
+    }
+
+    .item {
+      position: relative;
+      width: 25%;
+      text-align: center;
+
+      @include media_interval(0, $media1024) {
+        padding: 40px 5px;
+        @include box-sizing(border-box);
+      }
+      @include media_interval(0, $media768) {
+        width: 50%;
+      }
+
+      .title-italic-h4 {
+        max-width: 280px;
+        margin: 0 auto;
+        padding: 0 20px;
+        text-shadow: 1px 3px 0 #00276c;
+      }
+
+      &::before {
+        position: absolute;
+        z-index: 1;
+        top: -10%;
+        left: 0;
+        width: 100.5%;
+        height: 60.5%;
+        content: '';
+
+        @include media_interval(0, $media1024) {
+          display: none;
+        }
+      }
+
+      &::after {
+        position: absolute;
+        z-index: 1;
+        bottom: -10%;
+        left: 0;
+        width: 100.5%;
+        height: 60.5%;
+        content: '';
+
+        @include media_interval(0, $media1024) {
+          display: none;
+        }
+      }
+
+      &:nth-child(1) {
+        @include media_interval(0, $media1024) {
+          background-image: linear-gradient(to top, #ff9d00, #ffe451);
+        }
+
+        &::before {
+          background-image: linear-gradient(to top, #ff9d00, #ffe451);
+          @include transform(skewY(-2deg));
+        }
+
+        &::after {
+          background: #ff9d00;
+          @include transform(skewY(-2deg));
+        }
+
+        .title-italic-h4 {
+          text-shadow: 0 3px 0 rgb(157, 38, 22);
+        }
+      }
+
+      &:nth-child(2) {
+        @include transition(all .3s);
+
+        @include media_interval(0, $media1024) {
+          background-image: linear-gradient(to bottom, #7ddbff, #0089db);
+        }
+
+        &::before {
+          background-image: linear-gradient(to bottom, #7ddbff, #0089db);
+          @include transform(skewY(2deg));
+        }
+
+        &::after {
+          background: #0089db;
+          @include transform(skewY(2deg));
+        }
+      }
+
+      &:nth-child(3) {
+        @include transition(all .3s);
+
+        @include media_interval(0, $media1024) {
+          background-image: linear-gradient(to bottom, #a3ed6b, #6eb800);
+        }
+
+        &::before {
+          background-image: linear-gradient(to bottom, #a3ed6b, #6eb800);
+          @include transform(skewY(-2deg));
+        }
+
+        &::after {
+          background: #6eb800;
+          @include transform(skewY(-2deg));
+        }
+
+        .title-italic-h4 {
+          text-shadow: 0 3px 0 #126e03;
+        }
+      }
+
+      &:nth-child(4) {
+        @include transition(all .3s);
+
+        @include media_interval(0, $media1024) {
+          background-image: linear-gradient(to bottom, #ff985c, #eb561d);
+        }
+
+        &::before {
+          background-image: linear-gradient(to bottom, #ff985c, #eb561d);
+          @include transform(skewY(2deg));
+        }
+
+        &::after {
+          background: #eb561d;
+          @include transform(skewY(2deg));
+        }
+
+        .title-italic-h4 {
+          text-shadow: 0 3px 0 rgb(137, 19, 3);
+        }
+      }
+
+      .content {
+        position: relative;
+        z-index: 6;
+        max-width: 340px;
+        margin: 0 auto;
+
+        .title-italic-h4 {
+          position: relative;
+          top: -60px;
+
+          @include media_interval(0, $media1024) {
+            top: 0;
+          }
+        }
+      }
+
+      &:hover {
+        &:nth-child(1) {
+          @include media_interval(0, $media1024) {
+            background-image: linear-gradient(to top, #ffb339, #fdea7a);
+          }
+
+          &::before {
+            background-image: linear-gradient(to top, #ffb339, #fdea7a);
+            @include transform(skewY(-2deg));
+          }
+
+          &::after {
+            background: #ffb339;
+            @include transform(skewY(-2deg));
+          }
+        }
+
+        &:nth-child(2) {
+          @include media_interval(0, $media1024) {
+            background-image: linear-gradient(to bottom, #90e0ff, #30a0e3);
+          }
+
+          &::before {
+            background-image: linear-gradient(to bottom, #90e0ff, #30a0e3);
+            @include transform(skewY(2deg));
+          }
+
+          &::after {
+            background: #30a0e3;
+            @include transform(skewY(2deg));
+          }
+        }
+
+        &:nth-child(3) {
+          @include media_interval(0, $media1024) {
+            background-image: linear-gradient(to bottom, #b0ef81, #83c226);
+          }
+
+          &::before {
+            background-image: linear-gradient(to bottom, #b0ef81, #83c226);
+            @include transform(skewY(-2deg));
+          }
+
+          &::after {
+            background: #83c226;
+            @include transform(skewY(-2deg));
+          }
+        }
+
+        &:nth-child(4) {
+          @include media_interval(0, $media1024) {
+            background-image: linear-gradient(to bottom, #ffa774, #ee7040);
+          }
+
+          &::before {
+            background-image: linear-gradient(to bottom, #ffa774, #ee7040);
+            @include transform(skewY(2deg));
+          }
+
+          &::after {
+            background: #ee7040;
+            @include transform(skewY(2deg));
+          }
+        }
+      }
+    }
+  }
+}

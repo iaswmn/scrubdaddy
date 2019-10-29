@@ -1,0 +1,40 @@
+{% load form_helper %}
+{% load i18n %}
+
+
+<p class="title title-h2 blue">{% trans 'Get In Touch' %}</p>
+
+{{ form.media }}
+<form method="post" action="{% url 'contacts:ajax_get_in_touch' %}" id="ajax-popup-get-in-touch-form" autocomplete="off">
+
+  <div class="row">
+    {% render_field form 'name' %}
+  </div>
+
+  <div class="row">
+    {% render_field form 'email' %}
+    {% render_field form 'reach_type' %}
+  </div>
+
+  <div class="row">
+    {% render_field form 'phone' %}
+    <div class="field">
+      <div class="label-holder">{{ form.reach_time.label }}</div>
+      <div class="time-fields">
+        {% render_field form 'reach_time' template='form_helper/unlabeled_field.html' %}
+        {% render_field form 'time_zone' template='form_helper/unlabeled_field.html' %}
+      </div>
+    </div>
+  </div>
+
+  <div class="row w100">
+    {% render_field form 'comments' %}
+  </div>
+
+
+  {% include 'contacts/upload.html' %}
+
+  <div class="button-block">
+    <button type="submit" class="btn medium blue moema">{% trans 'Send' %}</button>
+  </div>
+</form>

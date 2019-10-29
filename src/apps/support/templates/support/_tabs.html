@@ -1,0 +1,27 @@
+<div class="tabs-box-wrapper">
+  <div class="tabs-btn btn-box-{% if posts %}4{% else %}3{% endif %}">
+    {% if country != 'IL' %}
+      <a href="{% url 'support:index' %}"
+        class="btn big blue regular{% if request.resolver_match.url_name == "index" %} active{% endif %}">
+        <span>All</span>
+      </a>
+    {% endif %}
+    <a href="{% url 'support:faq' %}"
+       class="btn big orange reverse{% if request.resolver_match.url_name == "faq" %} active{% endif %}">
+      <span>Faqs</span>
+    </a>
+    {% if posts and country != 'IL' %}
+      <a href="{% url 'support:blog' %}"
+         class="btn big regular sky{% if request.resolver_match.url_name == "blog" %} active{% endif %}">
+        <span>Blog</span>
+      </a>
+    {% endif %}
+    {% if country != 'IL' %}
+      <a href="{% url 'support:media' %}"
+        class="btn big green reverse{% if request.resolver_match.url_name == "media" %} active{% endif %}">
+        <span>News</span>
+      </a>
+    {% endif %}
+  </div>
+
+</div>

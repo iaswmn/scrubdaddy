@@ -1,0 +1,406 @@
+@charset "UTF-8";
+/*
+  $list: a, b, d, e, f;
+  $new-list: insert-nth($list, 3, c);     // a, b, c, d, e, f
+*/
+/*
+  $list: a, b, r, a, c a, d a, b, r, a;
+  $new-list: replace($list, a, u);       // u, b, r, u, c a, d a, b, r, u;
+*/
+/*
+  $list: a, b, z, d, e, f;
+  $new-list: replace-nth($list,   3, c); // a, b, c, d, e, f
+  $new-list: replace-nth($list,  -2, c); // a, b, c, d, z, f
+*/
+/*
+  $list: a, b z, c, z, d, z, e, f;
+  $new-list: remove($list, z);       // a, b z, c, d, e, f;
+*/
+/*
+  $list: a, b, z, c, d, e, f;
+  $new-list: remove-nth($list,   3); // a, b, c, d, e, f
+  $new-list: remove-nth($list,  -2); // a, b, z, c, d, f
+*/
+/*
+  $list: a, b, c, d, e, f;
+  $new-list: slice($list, 3, 5);   // c, d, e
+  $new-list: slice($list, 4, 4);   // d
+*/
+/*
+  $list: a, b, c d e, f, g, h;
+  $new-list: reverse($list);       // h, g, f, c d e, b, a
+  $new-list: reverse($list, true); // h, g, f, e d c, b, a
+*/
+/*
+    Добавляет константу к каждому значению карты.
+
+    Пример:
+      $map: (
+        (1024px, 0): 100px,
+        (768px, 1024px): 80px,
+        (0, 768px): 60px,
+      )
+
+      > map_add($map, 10px)
+      (
+        (1024px, 0): 110px,
+        (768px, 1024px): 90px,
+        (0, 768px): 70px,
+      )
+ */
+/*
+    Получение ключа карты $map media-интервалов,
+    в который входит искомый интервал $media.
+    Если искомый интервал находится на границе
+    двух или более интервалов карты, генерируется ошибка.
+
+    Пример:
+      $map: (
+        (1024px, 0): 100px,
+        (768px, 1024px): 80px,
+        (0, 768px): 60px,
+      )
+
+      > media_map_key($map, (1200px, 0))
+      (1024px, 0)
+ */
+/*
+    Получение среза media-карты.
+
+    Пример:
+      $map: (
+        (1024px, 0): 100px,
+        (768px, 1024px): 80px,
+        (0, 768px): 60px,
+      )
+
+      > media_map_slice($map, (640px, 1200px))
+      (
+        (1024px, 1200px): 100px,
+        (768px, 1024px): 80px,
+        (640px, 768px): 60px,
+      )
+ */
+/*
+  Многоколоночная верстка через flexbox.
+
+  Пример:
+    .list {
+      @include flexbox;
+      @include flex-flow(row wrap);
+
+      .item {
+        @include flex-columns(2, 10px, 10px);
+      }
+    }
+*/
+/*
+  Пример:
+    input {
+      color: #808080;
+      ...
+      @include placeholder {
+        color: red;
+      }
+    }
+*/
+body {
+  font-family: 'Roboto', sans-serif;
+  font-size: 13px;
+  font-size: 0.8125rem; }
+  body button,
+  body select,
+  body textarea,
+  body input[type='text'],
+  body input[type='password'],
+  body input[type='datetime'],
+  body input[type='datetime-local'],
+  body input[type='date'],
+  body input[type='month'],
+  body input[type='time'],
+  body input[type='week'],
+  body input[type='number'],
+  body input[type='email'],
+  body input[type='url'],
+  body input[type='search'],
+  body input[type='tel'],
+  body input[type='color'],
+  body .uneditable-input {
+    font-family: 'Roboto', sans-serif;
+    font-size: 13px;
+    font-size: 0.8125rem; }
+  body select,
+  body input[type='text'],
+  body input[type='password'],
+  body input[type='datetime'],
+  body input[type='datetime-local'],
+  body input[type='date'],
+  body input[type='month'],
+  body input[type='time'],
+  body input[type='week'],
+  body input[type='number'],
+  body input[type='email'],
+  body input[type='url'],
+  body input[type='search'],
+  body input[type='tel'],
+  body input[type='color'],
+  body .uneditable-input {
+    padding: 6px; }
+  body textarea {
+    padding: 4px 6px; }
+
+.popup #suit-center {
+  width: 100%; }
+
+.popup .inner-two-columns .inner-right-column {
+  width: 140px; }
+  .popup .inner-two-columns .inner-right-column .btn {
+    max-width: 100%; }
+
+.popup .inner-two-columns .inner-center-column {
+  margin-right: 160px; }
+
+input[type='file'] {
+  font-size: 12px;
+  font-size: 0.75rem; }
+
+.input-mini {
+  width: 70px; }
+
+input[type=number] {
+  -moz-appearance: textfield; }
+
+.controls .file-upload .clearable-file-input input {
+  margin: 7px 7px 0 0; }
+
+.controls .file-upload .clearable-file-input label {
+  line-height: 1.2;
+  margin: 0; }
+
+.input-append .add-on,
+.input-prepend .add-on {
+  min-width: 28px;
+  height: 32px;
+  padding: 6px 5px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  font-size: 14px;
+  font-size: 0.875rem; }
+
+.control-group .related-widget-wrapper-link {
+  width: 14px;
+  height: 14px;
+  margin: 0 0 0 10px;
+  padding: 4px;
+  vertical-align: middle;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=20);
+  opacity: 0.2; }
+  .control-group .related-widget-wrapper-link.add-related {
+    background-position: 4px -92px; }
+  .control-group .related-widget-wrapper-link.change-related {
+    background-position: 4px -68px; }
+  .control-group .related-widget-wrapper-link.related-lookup {
+    background-position: -44px 4px; }
+  .control-group .related-widget-wrapper-link.delete-related {
+    display: inline-block;
+    border: 1px solid transparent;
+    background: url(/static/suit/bootstrap/img/glyphicons-halflings.png) no-repeat -308px 4px; }
+  .control-group .related-widget-wrapper-link > img {
+    display: none; }
+  .control-group .related-widget-wrapper-link + .related-widget-wrapper-link {
+    margin-left: 0; }
+  .control-group .related-widget-wrapper-link:link {
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
+    opacity: 0.6; }
+    .control-group .related-widget-wrapper-link:link:hover {
+      filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
+      opacity: 1; }
+
+textarea.autosize {
+  height: auto;
+  max-height: none; }
+
+.full-width {
+  width: 90%; }
+
+.url.input-append {
+  display: block;
+  margin-right: 30px; }
+
+.url a:hover {
+  background-color: #d0d0d0; }
+
+td.mini-column,
+th.mini-column {
+  width: 1%; }
+
+td.sort_order-column,
+th.sort_order-column {
+  width: 1%;
+  white-space: nowrap; }
+
+.table thead th {
+  line-height: 1.1;
+  background-image: -webkit-linear-gradient(top, #f4f4f4, #eaeaea);
+  background-image: linear-gradient(to bottom, #f4f4f4, #eaeaea); }
+  .table thead th.sorted {
+    background-image: -webkit-linear-gradient(top, #f2f2f2, #e0e0e0);
+    background-image: linear-gradient(to bottom, #f2f2f2, #e0e0e0); }
+  .table thead th.action-checkbox-column {
+    width: 1%; }
+
+.inline-group .tabular table.table tr.add-row td {
+  background-image: -webkit-linear-gradient(top, #f4f4f4, #eaeaea);
+  background-image: linear-gradient(to bottom, #f4f4f4, #eaeaea); }
+
+.cke_panel {
+  overflow: hidden !important; }
+
+.cke_dialog .cke_dialog_contents_body {
+  padding: 5px 10px; }
+
+.cke_dialog .cke_dialog_ui_labeled_label {
+  display: inline-block;
+  margin-bottom: 4px; }
+
+.cke_dialog .cke_dialog_ui_input_textarea {
+  width: 100%;
+  height: 10em;
+  white-space: normal; }
+
+.actions {
+  margin-bottom: 18px; }
+
+.pagination-info {
+  margin: 0; }
+
+.table.table-condensed tbody th,
+.table.table-condensed tbody td {
+  padding: 5px 10px 5px 10px; }
+
+.table td > img {
+  vertical-align: text-bottom; }
+  .table td > img:only-child {
+    vertical-align: baseline; }
+
+.table .action-select {
+  margin: -3px 0 0; }
+
+#changelist .actions span.all,
+#changelist .actions span.action-counter,
+#changelist .actions span.clear,
+#changelist .actions span.question {
+  vertical-align: middle; }
+
+.search-container {
+  margin-top: 0; }
+
+.search-container input,
+.search-container select {
+  margin-top: 0; }
+
+.search-container .result-count {
+  margin: 0 0 0 5px; }
+
+.search-filters {
+  display: inline-block;
+  vertical-align: middle; }
+
+.form-horizontal .control-group .controls .selector .selector-available select {
+  min-height: 200px;
+  font-size: 12px;
+  font-size: 0.75rem; }
+
+.form-horizontal .control-group .controls .selector .selector-chosen select {
+  min-height: 180px;
+  font-size: 12px;
+  font-size: 0.75rem; }
+
+.form-horizontal .control-group .controls ul {
+  margin: 0;
+  list-style-type: none; }
+  .form-horizontal .control-group .controls ul label {
+    position: relative;
+    z-index: 1;
+    display: inline-block;
+    margin: 0;
+    padding-left: 20px; }
+    .form-horizontal .control-group .controls ul label input {
+      position: absolute;
+      z-index: 1;
+      top: .2em;
+      left: 0; }
+
+.form-horizontal .inline-group .add-row,
+.inline-group .tabular table.table tr.add-row td {
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  background-image: -webkit-linear-gradient(top, #f3f3f3, #e5e5e5);
+  background-image: linear-gradient(to bottom, #f3f3f3, #e5e5e5); }
+
+label {
+  font-size: 12px;
+  font-size: 0.75rem; }
+
+.form-horizontal .control-group:first-child .control-label,
+.form-horizontal .control-group:first-of-type .control-label {
+  padding-top: 16px; }
+
+.form-horizontal .control-group .control-label {
+  min-width: 100px;
+  padding-top: 12px; }
+
+.form-horizontal .inline-related h3 > a {
+  display: none; }
+
+.form-horizontal .inline-related h3 b {
+  min-width: 130px; }
+
+.form-horizontal .inline-related:not(:first-of-type) h3 {
+  margin-top: 10px; }
+
+.form-horizontal .inline-group > h2 {
+  line-height: 24px;
+  margin: 24px 0 3px 10px; }
+
+.form-horizontal .inline-group .tabular {
+  margin-top: 24px; }
+
+.form-horizontal fieldset {
+  margin-top: 38px; }
+  .form-horizontal fieldset .legend {
+    margin: -33px 0 0 0; }
+
+.popup .form-horizontal fieldset:first-of-type > .legend:first-child {
+  display: none; }
+
+.form-horizontal .inline-related.tabular fieldset > h2 {
+  margin: 0 0 3px 10px; }
+
+tr.selected .select2-chosen {
+  color: #444; }
+
+input[type='radio'],
+input[type='checkbox'] {
+  width: 14px;
+  height: 14px;
+  margin: 0; }
+
+select,
+input[type='file'] {
+  height: auto; }
+
+.gm-style {
+  line-height: normal; }
+
+/*
+  Font-size
+*/
+.nav-tabs-suit li a {
+  font-size: 13px;
+  font-size: 0.8125rem;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none; }

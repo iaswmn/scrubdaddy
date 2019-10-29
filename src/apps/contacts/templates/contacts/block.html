@@ -1,0 +1,55 @@
+{% load form_helper %}
+{% load i18n %}
+{% load text %}
+{% load static %}
+
+<div class="contact-block">
+
+    <img src="{% static 'img/Points2.png' %}" alt="" class="decorative">
+
+    <div class="grid">
+
+        <div class="top">
+            {% if block.header %}
+                <h2 class="title-h1">{{ block.header }}</h2>
+            {% endif %}
+            {% if country != 'IL' %}
+                <p class="description_small">Please fill out the form below
+
+                    {% if phone_number %}
+                        <a href="tel:{{ phone_number.number|phone2numeric|phone }}"> or call us at
+                            {{ phone_number.number }}
+
+                            {% if phone_number.phone_word %}
+                                <span>({{ phone_number.phone_word|phone2numeric }})</span>
+                            {% endif %}
+                        </a>
+                    {% endif %}
+
+                </p>
+            {% endif %}
+        </div>
+
+        <div class="bottom">
+            {{ form.media }}
+
+                <div class="bottom">
+                    {{ form.media }}
+                    <form method="post" action="{% url 'contacts:ajax_contact' %}" id="ajax-popup-contact-form" autocomplete="off">
+                        <div class="left">
+                            {% render_field form 'name' %}
+                            {% render_field form 'phone' %}
+                            {% render_field form 'email' %}
+                        </div>
+                        <div class="right">
+                            {% render_field form 'message' %}
+                        </div>
+
+                        <div class="btn-bottom">
+                            <button type="submit" class="btn medium-240 blue moema">{% trans 'SUBMIT' %}</button>
+                        </div>
+                    </form>
+                </div>
+        </div>
+    </div>
+</div>

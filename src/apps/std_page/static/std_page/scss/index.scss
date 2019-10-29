@@ -1,0 +1,83 @@
+@import 'mixins';
+
+.tabs-btn {
+  position: relative;
+  z-index: 2;
+  margin: 0 auto;
+
+  @include media_interval($media1200, 1300px) {
+    max-width: 1040px;
+  }
+  @include media_interval($media900, $media1200) {
+    max-width: 780px;
+  }
+  @include media_interval(560px, $media900) {
+    max-width: 520px;
+  }
+  @include media_interval(0, 560px) {
+    max-width: 260px;
+  }
+
+  &.btn-box-2 {
+    @include media_interval($media900, 0) {
+      max-width: 520px;
+    }
+  }
+
+  &.btn-box-3 {
+    @include media_interval($media900, 0) {
+      max-width: 780px;
+    }
+  }
+
+  &.btn-box-4 {
+    @include media_interval($media1200, 0) {
+      max-width: 1040px;
+    }
+  }
+
+  &.btn-box-5 {
+    @include media_interval(1300px, 0) {
+      max-width: 1300px;
+    }
+  }
+
+  &.btn-box-6 {
+    @include media_interval(1560px, 0) {
+      max-width: 1560px;
+    }
+    @include media_interval(1300px, 1560px) {
+      max-width: 1300px;
+    }
+  }
+
+  .btn {
+    box-shadow: none;
+
+    @include media_interval(560px, 0) {
+      float: left;
+    }
+    @include media_interval(0, 560px) {
+      display: block;
+    }
+  }
+
+  &::after {
+    display: block;
+    clear: both;
+    content: '';
+  }
+}
+
+.std_head::before {
+  position: absolute;
+  right: -50px;
+  bottom: -350px;
+  display: block;
+  width: 630px;
+  height: 530px;
+  content: '';
+  background: url('/static/img/Points2.png') no-repeat ;
+  background-size: cover;
+  @include opacity(.6);
+}

@@ -1,0 +1,50 @@
+{% load text %}
+
+<div class="feature feature-double">
+  <div class="grid">
+    <div class="flex-container">
+      <div class="item-wrapper {% if not block.title and not block.text %} empty-text{% endif %}">
+        <div class="item">
+          {% if block.preview %}
+          <img src="{{ block.preview.normal.url }}" alt="" srcset="{{ block.preview.url }} 1x, {{ block.preview.url }} 2x">
+          {% endif %}
+          {% if block.title or block.text %}
+            <div class="top">
+              {% if block.title %}
+                <div class="title-italic-h4 shadow">
+                  {{ block.title }}
+                </div>
+              {% endif %}
+              {% if block.text %}
+                <div class="description shadow">
+                  {{ block.text|typograf|safe }}
+                </div>
+              {% endif %}
+            </div>
+          {% endif %}
+        </div>
+      </div>
+      <div class="item-wrapper {% if not block.title_second and not block.text_second %} empty-text{% endif %}">
+        <div class="item">
+          {% if block.preview_second %}
+            <img src="{{ block.preview_second.normal.url }}" alt="" srcset="{{ block.preview_second.url }} 1x, {{ block.preview_second.url }} 2x">
+          {% endif %}
+          {% if block.title_second or block.text_second %}
+            <div class="top">
+              {% if block.title_second %}
+                <div class="title-italic-h4 shadow">
+                  {{ block.title_second }}
+                </div>
+              {% endif %}
+              {% if block.text_second %}
+                <div class="description shadow">
+                  {{ block.text_second|typograf|safe }}
+                </div>
+              {% endif %}
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

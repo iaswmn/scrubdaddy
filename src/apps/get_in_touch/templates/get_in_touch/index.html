@@ -1,0 +1,75 @@
+{% extends 'layout.html' %}
+
+{% load attachable_blocks %}
+{% load pipeline_plus %}
+{% load form_helper %}
+{% load i18n %}
+
+{% block static_head %}
+  {{ block.super }}
+  {% stylesheet 'get_in_touch' %}
+{% endblock static_head %}
+
+{% block static_js %}
+  {{ block.super }}
+  {% javascript 'get_in_touch' %}
+{% endblock static_js %}
+
+
+{% block content %}
+
+  <div class="page-content-wrapper">
+
+
+    <p class="title title-h2 blue">{% trans 'Get In Touch' %}</p>
+
+    {{ form.media }}
+
+    <div class="form-wrapper">
+      <form method="post" action="" id="get-in-touch-form" autocomplete="off">
+        {% csrf_token %}
+
+        <div class="row">
+          {% render_field form 'name' required='' %}
+        </div>
+
+        <div class="row two-items mobile-margin">
+          {% render_field form 'reach_type' classes="mobile-margin" %}
+
+          <div id="hidden-fields-box" class="hidden-inputs">
+            {% render_field form 'email' classes="mobile-margin" %}
+          </div>
+        </div>
+
+        <div class="row mobile-margin">
+          <div class="time-fields-outer-box">
+            <div class="field">
+              <div class="label-holder time-label-holder">{{ form.reach_time.label }}</div>
+            </div>
+            <div class="time-fields">
+              {% render_field form 'reach_time' template='form_helper/unlabeled_field.html' %}
+              {% if country != 'IL' %}
+                {% render_field form 'time_zone' template='form_helper/unlabeled_field.html' %}
+              {% endif %}
+            </div>
+          </div>
+          {% render_field form 'phone'  classes="mobile-margin" %}
+        </div>
+
+        <div class="row w100 mobile-margin">
+          {% render_field form 'comments' %}
+        </div>
+
+        {% include 'get_in_touch/upload.html' %}
+
+        <div class="button-block">
+          <button type="submit" class="btn medium blue moema">{% trans 'Send' %}</button>
+        </div>
+      </form>
+    </div>
+
+    {% render_attached_blocks page_data %}
+
+  </div>
+
+{% endblock content %}

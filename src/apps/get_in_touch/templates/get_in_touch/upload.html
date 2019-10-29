@@ -1,0 +1,11 @@
+{% load i18n %}
+
+<div class="upload-field" data-upload-url="{% url 'get_in_touch:upload' %}" data-upload-name="images">
+  <div class="queue"></div>
+
+  <div class="button-holder">
+    <div class="add-photo">
+      <button type="button" class="btn small blue moema">{% trans 'Upload Picture' %}</button>
+    </div>
+  </div>
+</div>

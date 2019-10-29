@@ -1,0 +1,268 @@
+@charset "UTF-8";
+/*
+  $list: a, b, d, e, f;
+  $new-list: insert-nth($list, 3, c);     // a, b, c, d, e, f
+*/
+/*
+  $list: a, b, r, a, c a, d a, b, r, a;
+  $new-list: replace($list, a, u);       // u, b, r, u, c a, d a, b, r, u;
+*/
+/*
+  $list: a, b, z, d, e, f;
+  $new-list: replace-nth($list,   3, c); // a, b, c, d, e, f
+  $new-list: replace-nth($list,  -2, c); // a, b, c, d, z, f
+*/
+/*
+  $list: a, b z, c, z, d, z, e, f;
+  $new-list: remove($list, z);       // a, b z, c, d, e, f;
+*/
+/*
+  $list: a, b, z, c, d, e, f;
+  $new-list: remove-nth($list,   3); // a, b, c, d, e, f
+  $new-list: remove-nth($list,  -2); // a, b, z, c, d, f
+*/
+/*
+  $list: a, b, c, d, e, f;
+  $new-list: slice($list, 3, 5);   // c, d, e
+  $new-list: slice($list, 4, 4);   // d
+*/
+/*
+  $list: a, b, c d e, f, g, h;
+  $new-list: reverse($list);       // h, g, f, c d e, b, a
+  $new-list: reverse($list, true); // h, g, f, e d c, b, a
+*/
+/*
+    Добавляет константу к каждому значению карты.
+
+    Пример:
+      $map: (
+        (1024px, 0): 100px,
+        (768px, 1024px): 80px,
+        (0, 768px): 60px,
+      )
+
+      > map_add($map, 10px)
+      (
+        (1024px, 0): 110px,
+        (768px, 1024px): 90px,
+        (0, 768px): 70px,
+      )
+ */
+/*
+    Получение ключа карты $map media-интервалов,
+    в который входит искомый интервал $media.
+    Если искомый интервал находится на границе
+    двух или более интервалов карты, генерируется ошибка.
+
+    Пример:
+      $map: (
+        (1024px, 0): 100px,
+        (768px, 1024px): 80px,
+        (0, 768px): 60px,
+      )
+
+      > media_map_key($map, (1200px, 0))
+      (1024px, 0)
+ */
+/*
+    Получение среза media-карты.
+
+    Пример:
+      $map: (
+        (1024px, 0): 100px,
+        (768px, 1024px): 80px,
+        (0, 768px): 60px,
+      )
+
+      > media_map_slice($map, (640px, 1200px))
+      (
+        (1024px, 1200px): 100px,
+        (768px, 1024px): 80px,
+        (640px, 768px): 60px,
+      )
+ */
+/*
+  Многоколоночная верстка через flexbox.
+
+  Пример:
+    .list {
+      @include flexbox;
+      @include flex-flow(row wrap);
+
+      .item {
+        @include flex-columns(2, 10px, 10px);
+      }
+    }
+*/
+/*
+  Пример:
+    input {
+      color: #808080;
+      ...
+      @include placeholder {
+        color: red;
+      }
+    }
+*/
+#tags {
+  margin: 20px 0;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: start;
+  -webkit-box-align-items: flex-start;
+  -moz-box-align-items: flex-start;
+  -webkit-align-items: flex-start;
+  -ms-align-items: flex-start;
+  align-items: flex-start;
+  -webkit-box-pack: center;
+  -webkit-box-justify-content: center;
+  -moz-box-justify-content: center;
+  -webkit-justify-content: center;
+  -ms-justify-content: center;
+  justify-content: center; }
+  @media all and (max-width: 599px) {
+    #tags {
+      -webkit-box-align: center;
+      -webkit-box-align-items: center;
+      -moz-box-align-items: center;
+      -webkit-align-items: center;
+      -ms-align-items: center;
+      align-items: center;
+      -webkit-box-orient: vertical;
+      -webkit-box-flex-direction: column;
+      -moz-box-flex-direction: column;
+      -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+      flex-direction: column; } }
+  #tags .tag {
+    font-weight: 900;
+    display: inline-block;
+    margin: 10px 0 10px 0;
+    padding: 7px 20px;
+    text-transform: uppercase;
+    color: #0032a0;
+    border: 2px solid #0032a0;
+    border-radius: 15px;
+    font-size: 14px;
+    font-size: 0.875rem;
+    line-height: 1;
+    -webkit-transition: background 0.3s;
+    -moz-transition: background 0.3s;
+    -ms-transition: background 0.3s;
+    -o-transition: background 0.3s;
+    transition: background 0.3s; }
+    @media all and (min-width: 600px) {
+      #tags .tag:not(:first-child) {
+        margin-left: 10px; } }
+    #tags .tag:hover {
+      background: rgba(0, 50, 160, 0.15); }
+    #tags .tag.active {
+      color: #fff;
+      background: #0032a0; }
+
+#posts .flex-container {
+  margin-top: 30px;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-flex-wrap: wrap;
+  -moz-box-flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  /*Need to refactor in one piece of shit instead two pieces of shit*/ }
+  #posts .flex-container .post {
+    overflow: hidden;
+    min-height: 430px;
+    margin-bottom: 20px;
+    background: #fff;
+    -webkit-transition: -webkit-transform 0.3s, transform 0.3s;
+    -moz-transition: -webkit-transform 0.3s, transform 0.3s;
+    -ms-transition: -webkit-transform 0.3s, transform 0.3s;
+    -o-transition: -webkit-transform 0.3s, transform 0.3s;
+    transition: -webkit-transform 0.3s, transform 0.3s;
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    -o-transform: scale(1);
+    transform: scale(1); }
+    @media all and (min-width: 768px) {
+      #posts .flex-container .post:hover {
+        z-index: 4;
+        -webkit-box-shadow: 0 10px 20px 0 rgba(20, 47, 105, 0.5);
+        -moz-box-shadow: 0 10px 20px 0 rgba(20, 47, 105, 0.5);
+        box-shadow: 0 10px 20px 0 rgba(20, 47, 105, 0.5);
+        -webkit-transform: scale(1.2);
+        -moz-transform: scale(1.2);
+        -ms-transform: scale(1.2);
+        -o-transform: scale(1.2);
+        transform: scale(1.2); }
+        #posts .flex-container .post:hover .read-more {
+          opacity: 1; } }
+    @media all and (max-width: 767px) {
+      #posts .flex-container .post {
+        min-height: 280px; } }
+    #posts .flex-container .post .read-more {
+      font-weight: 700;
+      margin-left: 20px;
+      opacity: 0;
+      color: #0032a0;
+      -webkit-transition: opacity 0.3s;
+      -moz-transition: opacity 0.3s;
+      -ms-transition: opacity 0.3s;
+      -o-transition: opacity 0.3s;
+      transition: opacity 0.3s;
+      font-size: 16px;
+      font-size: 1rem;
+      line-height: 1.5625; }
+    #posts .flex-container .post .top-side {
+      position: relative;
+      min-height: 177px; }
+      #posts .flex-container .post .top-side img {
+        position: absolute;
+        z-index: 3;
+        top: 0;
+        left: 0;
+        width: 100.5%;
+        height: 100.5%; }
+    #posts .flex-container .post .treinding-title {
+      font-weight: 900;
+      margin-bottom: 15px;
+      font-size: 19px;
+      font-size: 1.1875rem;
+      line-height: 1.47368; }
+    #posts .flex-container .post .bottom-side {
+      position: relative;
+      z-index: 1;
+      overflow: hidden;
+      margin: 0 20px 5px 10px; }
+    #posts .flex-container .post::before {
+      position: absolute;
+      z-index: 6;
+      width: 100.5%;
+      height: 100.5%;
+      content: '';
+      opacity: 0;
+      background: rgba(255, 255, 255, 0.2);
+      -webkit-transition: opacity 0.3s;
+      -moz-transition: opacity 0.3s;
+      -ms-transition: opacity 0.3s;
+      -o-transition: opacity 0.3s;
+      transition: opacity 0.3s; }
+    #posts .flex-container .post.active::before {
+      opacity: 1; }
+
+#posts .title {
+  margin: 10px 0; }
+
+#posts .preview {
+  display: inline-block;
+  margin-bottom: 20px; }
+
+#paginator {
+  margin-top: 60px; }

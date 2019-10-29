@@ -1,0 +1,59 @@
+{% extends 'std_page/index.html' %}
+
+{% load staticfiles %}
+{% load attachable_blocks %}
+{% load pipeline_plus %}
+{% load away %}
+
+{% block static_head %}
+  {{ block.super }}
+  {% stylesheet 'support' %}
+{% endblock static_head %}
+
+{% block static_js %}
+  {{ block.super }}
+  {% javascript 'support' %}
+{% endblock static_js %}
+
+
+{% block tabs %}
+  {% include 'support/_tabs.html' %}
+{% endblock %}
+
+{% block page_data %}
+  <div class="faq accordion" id="accordion">
+    <div class="grid">
+      <div class="accordion-container">
+
+        <div class="choosen">
+          <select class="category">
+            <option value="disable">-</option>
+            {% for product in products %}
+              <option value="{{ product.title }}">{{ product.title }}</option>
+            {% endfor %}
+          </select>
+          <div class="among">or</div>
+          <div class="form">
+            <input class="search" placeholder="Enter your question or search term here" />
+          </div>
+        </div>
+
+        <ul class="list">
+          {% for question in questions %}
+            <li {% if question.active %}class="item active" {% else %}class="item" {% endif %}
+                data-category="{% for product in question.product.all %}{{ product }}{% endfor %}">
+              <h2 class="title-italic-h4 title">{{ question.title }}</h2>
+              <div class="hide__side">
+                <div class="description text-styles">
+                  {% away question.text %}
+                </div>
+                <img src="{{ question.image.normal.url }}" alt="">
+              </div>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+  {% render_attached_blocks page_data %}
+{% endblock page_data %}

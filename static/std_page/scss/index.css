@@ -1,0 +1,165 @@
+@charset "UTF-8";
+/*
+  $list: a, b, d, e, f;
+  $new-list: insert-nth($list, 3, c);     // a, b, c, d, e, f
+*/
+/*
+  $list: a, b, r, a, c a, d a, b, r, a;
+  $new-list: replace($list, a, u);       // u, b, r, u, c a, d a, b, r, u;
+*/
+/*
+  $list: a, b, z, d, e, f;
+  $new-list: replace-nth($list,   3, c); // a, b, c, d, e, f
+  $new-list: replace-nth($list,  -2, c); // a, b, c, d, z, f
+*/
+/*
+  $list: a, b z, c, z, d, z, e, f;
+  $new-list: remove($list, z);       // a, b z, c, d, e, f;
+*/
+/*
+  $list: a, b, z, c, d, e, f;
+  $new-list: remove-nth($list,   3); // a, b, c, d, e, f
+  $new-list: remove-nth($list,  -2); // a, b, z, c, d, f
+*/
+/*
+  $list: a, b, c, d, e, f;
+  $new-list: slice($list, 3, 5);   // c, d, e
+  $new-list: slice($list, 4, 4);   // d
+*/
+/*
+  $list: a, b, c d e, f, g, h;
+  $new-list: reverse($list);       // h, g, f, c d e, b, a
+  $new-list: reverse($list, true); // h, g, f, e d c, b, a
+*/
+/*
+    Добавляет константу к каждому значению карты.
+
+    Пример:
+      $map: (
+        (1024px, 0): 100px,
+        (768px, 1024px): 80px,
+        (0, 768px): 60px,
+      )
+
+      > map_add($map, 10px)
+      (
+        (1024px, 0): 110px,
+        (768px, 1024px): 90px,
+        (0, 768px): 70px,
+      )
+ */
+/*
+    Получение ключа карты $map media-интервалов,
+    в который входит искомый интервал $media.
+    Если искомый интервал находится на границе
+    двух или более интервалов карты, генерируется ошибка.
+
+    Пример:
+      $map: (
+        (1024px, 0): 100px,
+        (768px, 1024px): 80px,
+        (0, 768px): 60px,
+      )
+
+      > media_map_key($map, (1200px, 0))
+      (1024px, 0)
+ */
+/*
+    Получение среза media-карты.
+
+    Пример:
+      $map: (
+        (1024px, 0): 100px,
+        (768px, 1024px): 80px,
+        (0, 768px): 60px,
+      )
+
+      > media_map_slice($map, (640px, 1200px))
+      (
+        (1024px, 1200px): 100px,
+        (768px, 1024px): 80px,
+        (640px, 768px): 60px,
+      )
+ */
+/*
+  Многоколоночная верстка через flexbox.
+
+  Пример:
+    .list {
+      @include flexbox;
+      @include flex-flow(row wrap);
+
+      .item {
+        @include flex-columns(2, 10px, 10px);
+      }
+    }
+*/
+/*
+  Пример:
+    input {
+      color: #808080;
+      ...
+      @include placeholder {
+        color: red;
+      }
+    }
+*/
+.tabs-btn {
+  position: relative;
+  z-index: 2;
+  margin: 0 auto; }
+  @media all and (min-width: 1200px) and (max-width: 1299px) {
+    .tabs-btn {
+      max-width: 1040px; } }
+  @media all and (min-width: 900px) and (max-width: 1199px) {
+    .tabs-btn {
+      max-width: 780px; } }
+  @media all and (min-width: 560px) and (max-width: 899px) {
+    .tabs-btn {
+      max-width: 520px; } }
+  @media all and (max-width: 559px) {
+    .tabs-btn {
+      max-width: 260px; } }
+  @media all and (min-width: 900px) {
+    .tabs-btn.btn-box-2 {
+      max-width: 520px; } }
+  @media all and (min-width: 900px) {
+    .tabs-btn.btn-box-3 {
+      max-width: 780px; } }
+  @media all and (min-width: 1200px) {
+    .tabs-btn.btn-box-4 {
+      max-width: 1040px; } }
+  @media all and (min-width: 1300px) {
+    .tabs-btn.btn-box-5 {
+      max-width: 1300px; } }
+  @media all and (min-width: 1560px) {
+    .tabs-btn.btn-box-6 {
+      max-width: 1560px; } }
+  @media all and (min-width: 1300px) and (max-width: 1559px) {
+    .tabs-btn.btn-box-6 {
+      max-width: 1300px; } }
+  .tabs-btn .btn {
+    box-shadow: none; }
+    @media all and (min-width: 560px) {
+      .tabs-btn .btn {
+        float: left; } }
+    @media all and (max-width: 559px) {
+      .tabs-btn .btn {
+        display: block; } }
+  .tabs-btn::after {
+    display: block;
+    clear: both;
+    content: ''; }
+
+.std_head::before {
+  position: absolute;
+  right: -50px;
+  bottom: -350px;
+  display: block;
+  width: 630px;
+  height: 530px;
+  content: '';
+  background: url("/static/img/Points2.png") no-repeat;
+  background-size: cover;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
+  opacity: 0.6; }

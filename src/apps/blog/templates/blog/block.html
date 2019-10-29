@@ -1,0 +1,42 @@
+{% load text %}
+
+{% if posts %}
+  <div id="posts">
+    <div class="grid">
+      {% if is_product_page %}
+        <div class="title-h2">Our Blog</div>
+      {% else %}
+        <div class="title-h1">Trending Now</div>
+      {% endif %}
+      <div class="flex-container four-in-row">
+        {% for post in posts %}
+          <a href="{{ post.get_absolute_url }}" class="item-w280 post" typeof="BlogPosting">
+            {% if post.preview %}
+              <img srcset="{{ post.preview.normal.srcset }}, {{ post.preview.mobile.srcset }}"
+                   src="{{ post.preview.normal.url }}"
+                   width="{{ post.preview.normal.target_width }}"
+                   height="{{ post.preview.normal.target_height }}"
+                   property="url"
+                   sizes="100vw">
+            {% endif %}
+            <div class="bottom-side">
+              {% if post.preview %}
+                <h2 class="title title-h5" property="headline">
+                  {{ post.header }}
+                </h2>
+              {% endif %}
+              {% if post.note %}
+                <div class="description_small">
+                  {{ post.note|typograf|safe }}
+                </div>
+              {% endif %}
+            </div>
+            <div class="link">
+              <div class="read-more">Read more</div>
+            </div>
+          </a>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+{% endif %}

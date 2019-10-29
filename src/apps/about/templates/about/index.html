@@ -1,0 +1,65 @@
+{% extends 'std_page/index.html' %}
+
+{% load attachable_blocks %}
+{% load away %}
+{% load pipeline_plus %}
+{% load staticfiles %}
+{% load text %}
+
+{% block static_head %}
+  {{ block.super }}
+  {% stylesheet 'about' %}
+{% endblock static_head %}
+
+{% block static_js %}
+  {{ block.super }}
+  {% javascript 'about' %}
+{% endblock static_js %}
+
+
+{% block page_data %}
+  <div class="grid">
+    <div class="text-styles w780 center">
+      {% away page_data.text|typograf %}
+    </div>
+  </div>
+  <div class="history">
+    <div class="grid">
+      <h2 class="title-h1 blue">Our History</h2>
+      <div class="history-navigation">
+        {% for item in events %}
+          <a href="#{{ item.id }}" class="year">
+            <div class="round"></div>
+            <div class="line"></div>
+            {{ item.year }}</a>
+        {% endfor %}
+      </div>
+      <div class="history-container">
+        {% for event in events %}
+          <div id="{{ event.id }}" class="item">
+            {% if event.year %}
+              <h3 class="title-italic-h4">{{ event.year }}</h3>
+            {% endif %}
+            {% if event.title %}
+              <h4 class="title-italic-h3">{{ event.title }}</h4>
+            {% endif %}
+            <div class="hint-parent-box">
+              <img src="{{ event.image.url }}" alt="" class="hint-parent-box">
+              {% for hint in event.hints.all %}
+                <div class="hint-marker {{ hint.position }}" data-position="{{ hint.position }}">
+                  <div class="hint-wrapper {{ hint.position }}">
+                    <div class="hint-inner-wrapper" data-position="{{ hint.position }}">
+                      <span class="hint-text">{{ hint.text|typograf|safe }}</span>
+                    </div>
+                  </div>
+                </div>
+              {% endfor %}
+            </div>
+            <p class="description">{{ event.text|typograf|safe }}</p>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  {% render_attached_blocks page_data %}
+{% endblock page_data %}

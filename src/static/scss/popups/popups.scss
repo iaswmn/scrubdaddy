@@ -1,0 +1,191 @@
+@import "popups_core";
+
+
+// вертикальные отступы окна
+$window_margin: (
+    ($media1024, 0): 60px,
+    (0, $media1024): 50px
+);
+
+// размер окна
+$window_width: auto;
+
+// максимальная ширина окна
+$window_max_width: (
+    ($media1024, 0): 70%,
+    ($media480, $media1024): 80%,
+    (0, $media480): 90%,
+);
+
+// поля контентной части окна
+$content_paddings: (
+    ($media640, 0): 36px 50px,
+    ($media480, $media640): 36px,
+    (0, $media480): 20px 20px 36px,
+);
+
+// цвет фона окна
+$background_color: $white;
+
+// кнопка закрытия
+$close_btn_size: 21px;
+$close_btn_color: #819AD1;
+$close_btn_weight: 3px;
+
+
+//=======================
+// CORE
+//=======================
+
+#popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  background: rgba(0,0,0,0.4);
+}
+
+.popup {
+
+  .popup-custom {
+    padding: 40px;
+    text-align: center;
+  }
+
+  .popup-title {
+    color: $darkish-blue;
+    text-shadow: none;
+    margin-bottom: 40px;
+  }
+
+
+  .popup-window {
+    @include media_map(width, $window_width);
+    @include media_map(max-width, $window_max_width);
+    @include media_map((margin-top, margin-bottom), $window_margin);
+  }
+
+  .popup-close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: $close_btn_size;
+    height: $close_btn_size;
+    z-index: 6;
+    cursor: pointer;
+    @include transition((transform 0.2s), (opacity 0.2s));
+
+    &:before, &:after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 100%;
+      height: $close_btn_weight;
+      background: $close_btn_color;
+      @include border_radius($close_btn_weight);
+    }
+    &:before {
+      @include transform(translate3d(-50%, -50%, 0) rotate(45deg));
+    }
+    &:after {
+      @include transform(translate3d(-50%, -50%, 0) rotate(-45deg));
+    }
+
+    &:hover {
+      @include opacity(0.7);
+    }
+  }
+
+  .popup-content {
+    background-color: $background_color;
+    padding: 80px 120px 80px 120px;
+  }
+}
+
+.popup-wrapper{
+  form{
+    max-width: 580px;
+    .row{
+      margin-bottom: 30px;
+      @include flexbox;
+      &.w100{
+        .field{
+          width: 100%;
+        }
+      }
+      &:first-child{
+        .field{
+          width: 100%;
+        }
+      }
+      .field{
+        margin-right: 40px;
+        &:last-child{
+          margin-right: 0;
+        }
+      }
+      .help-text{
+        font-size: 14px;
+        font-weight: 500;
+        margin-top: 4px;
+      }
+      .field-reach_time{
+        width: 140px;
+      }
+      .field-time_zone{
+        width: 100px;
+      }
+    }
+    .upload-field{
+      @include font-size(16px);
+      margin-bottom: 64px;
+      .queue{
+        color: $darkish-blue;
+        margin-bottom: 20px;
+        .record{
+          @include flexbox;
+          .name{
+            margin-bottom: 6px;
+            &:last-child{
+              margin-bottom: 0;
+            }
+          }
+        }
+        .cancel-btn{
+          top: -3px;
+          position: relative;
+          width: $close_btn_size;
+          height: $close_btn_size;
+          z-index: 6;
+          cursor: pointer;
+          @include transform(scale(0.8));
+          @include transition(transform 0.2s);
+      
+          &:before, &:after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 80%;
+            height: $close_btn_weight;
+            background: $darkish-blue;
+            @include border_radius($close_btn_weight);
+          }
+          &:before {
+            @include transform(translate3d(-50%, -50%, 0) rotate(45deg));
+          }
+          &:after {
+            @include transform(translate3d(-50%, -50%, 0) rotate(-45deg));
+          }
+      
+          &:hover {
+            @include transform(scale(1));
+          }
+        }
+      }
+    }
+  }
+}

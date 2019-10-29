@@ -1,0 +1,17 @@
+@import 'mixins';
+
+.std_head {
+  position: relative;
+  overflow: hidden;
+  padding-top: 120px;
+  background-image: linear-gradient(to bottom, #2471e6, #0042b7);
+
+  .w780 {
+    position: relative;
+    z-index: 2;
+    max-width: 780px;
+    margin: 0 auto;
+    padding-bottom: 60px;
+    text-align: center;
+  }
+}

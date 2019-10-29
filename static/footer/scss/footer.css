@@ -1,0 +1,292 @@
+@charset "UTF-8";
+/*
+  $list: a, b, d, e, f;
+  $new-list: insert-nth($list, 3, c);     // a, b, c, d, e, f
+*/
+/*
+  $list: a, b, r, a, c a, d a, b, r, a;
+  $new-list: replace($list, a, u);       // u, b, r, u, c a, d a, b, r, u;
+*/
+/*
+  $list: a, b, z, d, e, f;
+  $new-list: replace-nth($list,   3, c); // a, b, c, d, e, f
+  $new-list: replace-nth($list,  -2, c); // a, b, c, d, z, f
+*/
+/*
+  $list: a, b z, c, z, d, z, e, f;
+  $new-list: remove($list, z);       // a, b z, c, d, e, f;
+*/
+/*
+  $list: a, b, z, c, d, e, f;
+  $new-list: remove-nth($list,   3); // a, b, c, d, e, f
+  $new-list: remove-nth($list,  -2); // a, b, z, c, d, f
+*/
+/*
+  $list: a, b, c, d, e, f;
+  $new-list: slice($list, 3, 5);   // c, d, e
+  $new-list: slice($list, 4, 4);   // d
+*/
+/*
+  $list: a, b, c d e, f, g, h;
+  $new-list: reverse($list);       // h, g, f, c d e, b, a
+  $new-list: reverse($list, true); // h, g, f, e d c, b, a
+*/
+/*
+    Добавляет константу к каждому значению карты.
+
+    Пример:
+      $map: (
+        (1024px, 0): 100px,
+        (768px, 1024px): 80px,
+        (0, 768px): 60px,
+      )
+
+      > map_add($map, 10px)
+      (
+        (1024px, 0): 110px,
+        (768px, 1024px): 90px,
+        (0, 768px): 70px,
+      )
+ */
+/*
+    Получение ключа карты $map media-интервалов,
+    в который входит искомый интервал $media.
+    Если искомый интервал находится на границе
+    двух или более интервалов карты, генерируется ошибка.
+
+    Пример:
+      $map: (
+        (1024px, 0): 100px,
+        (768px, 1024px): 80px,
+        (0, 768px): 60px,
+      )
+
+      > media_map_key($map, (1200px, 0))
+      (1024px, 0)
+ */
+/*
+    Получение среза media-карты.
+
+    Пример:
+      $map: (
+        (1024px, 0): 100px,
+        (768px, 1024px): 80px,
+        (0, 768px): 60px,
+      )
+
+      > media_map_slice($map, (640px, 1200px))
+      (
+        (1024px, 1200px): 100px,
+        (768px, 1024px): 80px,
+        (640px, 768px): 60px,
+      )
+ */
+/*
+  Многоколоночная верстка через flexbox.
+
+  Пример:
+    .list {
+      @include flexbox;
+      @include flex-flow(row wrap);
+
+      .item {
+        @include flex-columns(2, 10px, 10px);
+      }
+    }
+*/
+/*
+  Пример:
+    input {
+      color: #808080;
+      ...
+      @include placeholder {
+        color: red;
+      }
+    }
+*/
+#footer-cell > footer {
+  color: #4a4a4a;
+  background-image: linear-gradient(to top, #ff8f10, #ffbe01);
+  padding-top: 40px;
+  padding-bottom: 40px; }
+  @media all and (max-width: 639px) {
+    #footer-cell > footer {
+      padding-top: 30px;
+      padding-bottom: 30px; } }
+  #footer-cell > footer .flex {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-box-align-items: center;
+    -moz-box-align-items: center;
+    -webkit-align-items: center;
+    -ms-align-items: center;
+    align-items: center; }
+    @media all and (max-width: 1023px) {
+      #footer-cell > footer .flex {
+        -webkit-box-flex-wrap: wrap;
+        -moz-box-flex-wrap: wrap;
+        -webkit-flex-wrap: wrap;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap; } }
+  #footer-cell > footer .copyright-box {
+    -webkit-box-flex: 1;
+    -moz-box-flex: 1 1 auto;
+    -webkit-flex: 1 1 auto;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto; }
+    #footer-cell > footer .copyright-box .copyright {
+      font-size: 16px;
+      font-size: 1rem;
+      line-height: 1.5; }
+      @media all and (max-width: 767px) {
+        #footer-cell > footer .copyright-box .copyright {
+          font-size: 14px;
+          font-size: 0.875rem; } }
+      @media all and (max-width: 639px) {
+        #footer-cell > footer .copyright-box .copyright {
+          margin-bottom: 16px;
+          text-align: center; } }
+  #footer-cell > footer .menu-box {
+    width: 55%; }
+    @media all and (max-width: 1023px) {
+      #footer-cell > footer .menu-box {
+        width: 100%;
+        margin-top: 15px;
+        -webkit-box-ordinal-group: 3;
+        -moz-box-ordinal-group: 3;
+        -ms-flex-order: 3;
+        -webkit-order: 3;
+        order: 3; } }
+    #footer-cell > footer .menu-box .menu-footer {
+      max-width: 425px;
+      margin: 0 auto; }
+      @media all and (min-width: 1024px) and (max-width: 1199px) {
+        #footer-cell > footer .menu-box .menu-footer {
+          margin: 0 0 0 auto; } }
+      @media all and (max-width: 1023px) {
+        #footer-cell > footer .menu-box .menu-footer {
+          max-width: none; } }
+      #footer-cell > footer .menu-box .menu-footer ul {
+        display: -webkit-box;
+        display: -moz-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-box-flex-wrap: wrap;
+        -moz-box-flex-wrap: wrap;
+        -webkit-flex-wrap: wrap;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap; }
+        @media all and (max-width: 1023px) {
+          #footer-cell > footer .menu-box .menu-footer ul {
+            -webkit-box-orient: vertical;
+            -webkit-box-flex-direction: column;
+            -moz-box-flex-direction: column;
+            -webkit-flex-direction: column;
+            -ms-flex-direction: column;
+            flex-direction: column; } }
+        #footer-cell > footer .menu-box .menu-footer ul li {
+          color: #0032a0;
+          width: 50%;
+          margin-bottom: 7px; }
+  #footer-cell > footer .logo-box {
+    width: 15%;
+    -moz-box-flex: 0 0 auto;
+    -webkit-flex: 0 0 auto;
+    -ms-flex: 0 0 auto;
+    flex: 0 0 auto; }
+    @media all and (min-width: 640px) and (max-width: 1023px) {
+      #footer-cell > footer .logo-box {
+        width: 50%; } }
+    @media all and (max-width: 639px) {
+      #footer-cell > footer .logo-box {
+        width: 100%; } }
+    #footer-cell > footer .logo-box .logo {
+      display: inline-block;
+      width: 175px;
+      vertical-align: middle; }
+      @media all and (max-width: 1023px) {
+        #footer-cell > footer .logo-box .logo {
+          width: 134px; } }
+      #footer-cell > footer .logo-box .logo:before {
+        content: '';
+        display: block;
+        padding-bottom: 66.28571%;
+        background: url(/static/img/sprite.svg) no-repeat 0 0;
+        background-size: 154.28571% 316.37931%; }
+    #footer-cell > footer .logo-box a.logo:hover {
+      filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=75);
+      opacity: 0.75; }
+  #footer-cell > footer .dl-logo-box {
+    width: 30%;
+    font-weight: 700;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    font-size: 13px;
+    font-size: 0.8125rem;
+    line-height: 1.53846;
+    -webkit-box-orient: vertical;
+    -webkit-box-flex-direction: column;
+    -moz-box-flex-direction: column;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-align: start;
+    -webkit-box-align-items: flex-start;
+    -moz-box-align-items: flex-start;
+    -webkit-align-items: flex-start;
+    -ms-align-items: flex-start;
+    align-items: flex-start; }
+    @media all and (min-width: 640px) and (max-width: 1023px) {
+      #footer-cell > footer .dl-logo-box {
+        width: 50%; } }
+    @media all and (max-width: 639px) {
+      #footer-cell > footer .dl-logo-box {
+        width: 100%;
+        margin-top: 10px;
+        max-width: 280px;
+        -webkit-box-ordinal-group: 4;
+        -moz-box-ordinal-group: 4;
+        -ms-flex-order: 4;
+        -webkit-order: 4;
+        order: 4;
+        font-size: 14px;
+        font-size: 0.875rem;
+        line-height: 1; } }
+    #footer-cell > footer .dl-logo-box .dl-links {
+      text-align: right; }
+      #footer-cell > footer .dl-logo-box .dl-links p {
+        display: inline-block;
+        margin-bottom: 10px;
+        text-align: left;
+        white-space: nowrap; }
+        @media all and (max-width: 639px) {
+          #footer-cell > footer .dl-logo-box .dl-links p {
+            text-align: center; } }
+        #footer-cell > footer .dl-logo-box .dl-links p:last-child {
+          margin-bottom: 0; }
+      #footer-cell > footer .dl-logo-box .dl-links a:hover {
+        filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=70);
+        opacity: 0.7; }
+    #footer-cell > footer .dl-logo-box .rating-wrapper {
+      margin: 14px 0 12px 0;
+      display: -webkit-box;
+      display: -moz-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-box-flex-wrap: wrap;
+      -moz-box-flex-wrap: wrap;
+      -webkit-flex-wrap: wrap;
+      -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+      font-size: 13px;
+      font-size: 0.8125rem;
+      line-height: 1.46154; }

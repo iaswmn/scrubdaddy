@@ -1,0 +1,377 @@
+@charset "UTF-8";
+/*
+  $list: a, b, d, e, f;
+  $new-list: insert-nth($list, 3, c);     // a, b, c, d, e, f
+*/
+/*
+  $list: a, b, r, a, c a, d a, b, r, a;
+  $new-list: replace($list, a, u);       // u, b, r, u, c a, d a, b, r, u;
+*/
+/*
+  $list: a, b, z, d, e, f;
+  $new-list: replace-nth($list,   3, c); // a, b, c, d, e, f
+  $new-list: replace-nth($list,  -2, c); // a, b, c, d, z, f
+*/
+/*
+  $list: a, b z, c, z, d, z, e, f;
+  $new-list: remove($list, z);       // a, b z, c, d, e, f;
+*/
+/*
+  $list: a, b, z, c, d, e, f;
+  $new-list: remove-nth($list,   3); // a, b, c, d, e, f
+  $new-list: remove-nth($list,  -2); // a, b, z, c, d, f
+*/
+/*
+  $list: a, b, c, d, e, f;
+  $new-list: slice($list, 3, 5);   // c, d, e
+  $new-list: slice($list, 4, 4);   // d
+*/
+/*
+  $list: a, b, c d e, f, g, h;
+  $new-list: reverse($list);       // h, g, f, c d e, b, a
+  $new-list: reverse($list, true); // h, g, f, e d c, b, a
+*/
+/*
+    Добавляет константу к каждому значению карты.
+
+    Пример:
+      $map: (
+        (1024px, 0): 100px,
+        (768px, 1024px): 80px,
+        (0, 768px): 60px,
+      )
+
+      > map_add($map, 10px)
+      (
+        (1024px, 0): 110px,
+        (768px, 1024px): 90px,
+        (0, 768px): 70px,
+      )
+ */
+/*
+    Получение ключа карты $map media-интервалов,
+    в который входит искомый интервал $media.
+    Если искомый интервал находится на границе
+    двух или более интервалов карты, генерируется ошибка.
+
+    Пример:
+      $map: (
+        (1024px, 0): 100px,
+        (768px, 1024px): 80px,
+        (0, 768px): 60px,
+      )
+
+      > media_map_key($map, (1200px, 0))
+      (1024px, 0)
+ */
+/*
+    Получение среза media-карты.
+
+    Пример:
+      $map: (
+        (1024px, 0): 100px,
+        (768px, 1024px): 80px,
+        (0, 768px): 60px,
+      )
+
+      > media_map_slice($map, (640px, 1200px))
+      (
+        (1024px, 1200px): 100px,
+        (768px, 1024px): 80px,
+        (640px, 768px): 60px,
+      )
+ */
+/*
+  Многоколоночная верстка через flexbox.
+
+  Пример:
+    .list {
+      @include flexbox;
+      @include flex-flow(row wrap);
+
+      .item {
+        @include flex-columns(2, 10px, 10px);
+      }
+    }
+*/
+/*
+  Пример:
+    input {
+      color: #808080;
+      ...
+      @include placeholder {
+        color: red;
+      }
+    }
+*/
+@-webkit-keyframes anim-moema-1 {
+  60% {
+    -webkit-transform: scale3d(0.9, 0.9, 1);
+    transform: scale3d(0.9, 0.9, 1); }
+  85% {
+    -webkit-transform: scale3d(1.1, 1.1, 1);
+    transform: scale3d(1.1, 1.1, 1); }
+  100% {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1); } }
+
+@keyframes anim-moema-1 {
+  60% {
+    -webkit-transform: scale3d(0.9, 0.9, 1);
+    transform: scale3d(0.9, 0.9, 1); }
+  85% {
+    -webkit-transform: scale3d(1.1, 1.1, 1);
+    transform: scale3d(1.1, 1.1, 1); }
+  100% {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1); } }
+
+@-webkit-keyframes anim-moema-2 {
+  to {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+    opacity: 0; } }
+
+@keyframes anim-moema-2 {
+  to {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+    opacity: 0; } }
+
+/* Btn colors */
+.btn {
+  font-weight: 900;
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  padding: 8px 20px;
+  cursor: pointer;
+  text-align: center;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: #0032a0;
+  border-radius: 28px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  font-size: 16px;
+  font-size: 1rem;
+  line-height: 1.5; }
+  @media all and (max-width: 767px) {
+    .btn {
+      font-size: 14px;
+      font-size: 0.875rem; } }
+  .btn.small {
+    width: 180px; }
+    @media all and (max-width: 767px) {
+      .btn.small {
+        width: 130px;
+        padding: 4px 8px; } }
+  .btn.yellow {
+    background: #fff100;
+    box-shadow: 0 2px 0 0 #00276c; }
+  .btn.blue {
+    color: #ffe22d;
+    background: #154cc5;
+    box-shadow: 0 2px 0 0 #00276c; }
+  .btn.moema::after {
+    position: absolute;
+    z-index: -1;
+    top: -20px;
+    right: -20px;
+    bottom: -20px;
+    left: -20px;
+    content: '';
+    opacity: .8;
+    border-radius: 50px;
+    background: inherit;
+    -webkit-transform: scale3d(0.8, 0.5, 1);
+    -moz-transform: scale3d(0.8, 0.5, 1);
+    -ms-transform: scale3d(0.8, 0.5, 1);
+    -o-transform: scale3d(0.8, 0.5, 1);
+    transform: scale3d(0.8, 0.5, 1); }
+    @media all and (max-width: 767px) {
+      .btn.moema::after {
+        display: none; } }
+  .btn.moema:hover {
+    -o-animation: anim-moema-1 0.5s forwards;
+    -moz-animation: anim-moema-1 0.5s forwards;
+    -webkit-animation: anim-moema-1 0.5s forwards;
+    animation: anim-moema-1 0.5s forwards; }
+    .btn.moema:hover::after {
+      -o-animation: anim-moema-2 0.5s forwards;
+      -moz-animation: anim-moema-2 0.5s forwards;
+      -webkit-animation: anim-moema-2 0.5s forwards;
+      animation: anim-moema-2 0.5s forwards; }
+  .btn.medium-240 {
+    width: 240px;
+    padding: 15px 20px;
+    font-size: 19px;
+    font-size: 1.1875rem;
+    line-height: 1; }
+    .btn.medium-240.blue {
+      color: #ffe22d;
+      background: #154cc5;
+      box-shadow: 0 3px 0 0 #0032a0; }
+  .btn.medium {
+    width: 280px;
+    padding: 13px 21px 14px 21px;
+    font-size: 19px;
+    font-size: 1.1875rem;
+    line-height: 1; }
+    @media all and (max-width: 767px) {
+      .btn.medium {
+        width: 240px; } }
+    .btn.medium.blue {
+      color: #ffe22d;
+      background: #154cc5;
+      box-shadow: 0 3px 0 0 #0032a0; }
+  .btn.big {
+    font-weight: 500;
+    width: 100%;
+    max-width: 260px;
+    height: 80px;
+    padding: 0 34px;
+    text-transform: none;
+    color: #fff;
+    border-radius: 0;
+    text-shadow: 1px 2px 0 rgba(0, 50, 160, 0.71);
+    font-size: 18px;
+    font-size: 1.125rem;
+    line-height: 1.33333;
+    font-family: 'KumizFY';
+    font-style: italic; }
+    .btn.big::before {
+      position: absolute;
+      z-index: -1;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      content: '';
+      -webkit-transition: opacity 0.3s linear;
+      -moz-transition: opacity 0.3s linear;
+      -ms-transition: opacity 0.3s linear;
+      -o-transition: opacity 0.3s linear;
+      transition: opacity 0.3s linear; }
+    .btn.big::after {
+      position: absolute;
+      z-index: -2;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 50%;
+      content: '';
+      -webkit-transform: translateY(0) skewY(0);
+      -moz-transform: translateY(0) skewY(0);
+      -ms-transform: translateY(0) skewY(0);
+      -o-transform: translateY(0) skewY(0);
+      transform: translateY(0) skewY(0); }
+    .btn.big span {
+      height: inherit;
+      display: -webkit-box;
+      display: -moz-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-box-pack: center;
+      -webkit-box-justify-content: center;
+      -moz-box-justify-content: center;
+      -webkit-justify-content: center;
+      -ms-justify-content: center;
+      justify-content: center;
+      -webkit-box-align: center;
+      -webkit-box-align-items: center;
+      -moz-box-align-items: center;
+      -webkit-align-items: center;
+      -ms-align-items: center;
+      align-items: center; }
+    .btn.big.green::before {
+      background-image: linear-gradient(to top, #6eb800, #a3ed6b); }
+    .btn.big.green::after {
+      background-color: ""; }
+    .btn.big.sky::before {
+      background-image: linear-gradient(to top, #0089db, #7ddbff); }
+    .btn.big.sky::after {
+      background-color: ""; }
+    .btn.big.blue::before {
+      background-image: linear-gradient(to top, #0050db, #5384ff); }
+    .btn.big.blue::after {
+      background-color: ""; }
+    .btn.big.orange::before {
+      background-image: linear-gradient(to top, #ff9d00, #ffe451); }
+    .btn.big.orange::after {
+      background-color: ""; }
+    .btn.big.brown::before {
+      background-image: linear-gradient(to top, #eb561d, #ff985c); }
+    .btn.big.brown::after {
+      background-color: ""; }
+    .btn.big.violet::before {
+      background-image: linear-gradient(to top, #764490, #ac7ab4); }
+    .btn.big.violet::after {
+      background-color: ""; }
+    .btn.big:not(.active) {
+      filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=75);
+      opacity: 0.75; }
+      .btn.big:not(.active):hover {
+        filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
+        opacity: 1; }
+
+/*Back to Top btn*/
+.back-to-top-outer-box {
+  font-weight: 900;
+  position: absolute;
+  display: none;
+  width: 80px;
+  text-align: center;
+  color: #0032a0;
+  font-size: 14px;
+  font-size: 0.875rem;
+  line-height: 1.07143;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  padding-left: 10px;
+  padding-right: 10px; }
+  @media all and (min-width: 1600px) {
+    .back-to-top-outer-box {
+      top: 50%;
+      left: 30px;
+      -webkit-transform: translateY(-50%);
+      -moz-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+      -o-transform: translateY(-50%);
+      transform: translateY(-50%); } }
+  @media all and (max-width: 1599px) {
+    .back-to-top-outer-box {
+      bottom: 70px; } }
+  .back-to-top-outer-box.js-active {
+    position: fixed;
+    z-index: 999;
+    display: block; }
+
+.back-to-top-btn {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none; }
+  .back-to-top-btn::before {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: block;
+    width: 17px;
+    height: 24px;
+    content: '';
+    background: url(/static/img/sprite.svg) -25px -266px no-repeat;
+    -webkit-transform: translate(-50%, -50%) rotate(-90deg);
+    -moz-transform: translate(-50%, -50%) rotate(-90deg);
+    -ms-transform: translate(-50%, -50%) rotate(-90deg);
+    -o-transform: translate(-50%, -50%) rotate(-90deg);
+    transform: translate(-50%, -50%) rotate(-90deg); }
+
+.back-to-top-text-box {
+  margin-top: 6px; }

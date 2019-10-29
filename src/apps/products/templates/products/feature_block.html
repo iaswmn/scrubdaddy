@@ -1,0 +1,19 @@
+{% load text %}
+
+<div class="feature feature-single">
+  <div class="grid">
+    <div class="item-wrapper">
+      <div class="item">
+        <img src="{{ block.background.normal.url }}" alt="" srcset="{{ block.background.url }} 1x, {{ block.background.url }} 2x">
+      </div>
+      <div class="{{ block.text_position }} test-block-title feature-text-block">
+        <div class="title-italic-h4 shadow">
+          {{ block.title }}
+        </div>
+        <div class="description shadow">
+          {{ block.text|typograf|safe }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,93 @@
+@import 'mixins/all';
+
+@import 'conf';
+
+
+//=========================================
+//  Градиент
+//=========================================
+@mixin gradient($deg, $a, $b, $c, $d) {
+  background: -moz-linear-gradient($deg, $a, $b, $c, $d);
+  background: -webkit-linear-gradient($deg, $a, $b, $c, $d);
+  background: linear-gradient($deg, $a, $b, $c, $d);
+}
+
+//=========================================
+//  Размеры шрифта
+//=========================================
+@mixin fontsize_default() {
+  @include font-size(16px, 24px);
+
+  @include media_interval(0, $media768) {
+    @include font-size(14px);
+  }
+}
+
+//=========================================
+//  Old
+//=========================================
+@mixin fontsize_h1() {
+  @include font-size(46px, 56px);
+  @include font_title_style;
+
+  @include media_interval(0, $media768) {
+    @include font-size(32px);
+  }
+}
+
+@mixin fontsize_h2() {
+  @include font-size(36px, 43px);
+  @include font_title_style;
+
+  @include media_interval(0, $media768) {
+    @include font-size(24px);
+  }
+}
+
+@mixin fontsize_title_h3 {
+  @include font-size(36px, 30px);
+  @include font_title;
+}
+
+@mixin fontsize_h3() {
+  @include font-size(36px, 43px);
+}
+
+@mixin fontsize_title_h4 {
+  @include font-size(24px, 34px);
+  @include font_title;
+
+  @include media_interval(0, $media768) {
+    @include font-size(20px);
+  }
+}
+
+@mixin fontsize_h4() {
+  @include font-size(24px, 32px);
+}
+
+
+@mixin fontsize_h5() {
+  @include font-size(18px, 18px);
+  // @include media_interval(0, $media768) {
+  //   @include font-size(24px);
+  // }
+}
+
+//=========================================
+//  Шрифты
+//=========================================
+@mixin font_default() {
+  font-family: 'museo_sans';
+}
+
+@mixin font_title() {
+  font-family: 'KumizFY';
+  font-style: italic;
+}
+
+@mixin font_title_style() {
+  color: $bright-yellow-two;
+  text-shadow: #0032a0 0 3px 0;
+  @include font_title;
+}

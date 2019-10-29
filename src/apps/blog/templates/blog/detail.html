@@ -1,0 +1,59 @@
+{% extends 'layout.html' %}
+
+{% load pipeline_plus %}
+{% load share_buttons %}
+{% load breadcrumbs %}
+{% load blog %}
+{% load away %}
+{% load text %}
+
+{% block static_head %}
+  {{ block.super }}
+  {% stylesheet 'blog' %}
+{% endblock static_head %}
+
+{% block static_js %}
+  {{ block.super }}
+  {% javascript 'blog' %}
+{% endblock static_js %}
+
+
+{% block content %}
+  <div id="blog-post" class="block" typeof="BlogPosting">
+    <div class="grid">
+      <div>
+        <div>{% breadcrumbs %}</div>
+      </div>
+      <h1 class="title-h1 blue" property="headline">{{ post.header }}</h1>
+      <div class="text-styles w780" property="articleBody">
+        {% away post.text|typograf %}
+        <hr>
+        <div class="post-footer">
+          {% if post.author %}
+            <div class="author">
+              <img src="{{ post.author.photo.normal.url }}" alt="" class="photo">
+              <div class="name">{{ post.author.first_name }} {{ post.author.last_name }}</div>
+            </div>
+          {% endif %}
+          <div class="social-buttons no-counter">
+            {% share_button 'fb' %}
+            {% share_button 'tw' %}
+            {% share_button 'gp' %}
+            {% share_button 'li' %}
+            {% share_button 'pn' %}
+            <a class="social-button social-email"
+               href="mailto:?
+                     subject=I wanted you to see this site&amp;
+                     body=Check out this <a href='{{ request.get_full_path }}'>site</a>"
+               title="Share by Email"></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <a href="{{ instagram }}" target="_blank" class="follow">
+      <div class="icon"></div>
+      <div class="title-italic-h4">Follow @theScrubDaddy</div>
+    </a>
+    {% blog_block %}
+  </div>
+{% endblock content %}

@@ -1,0 +1,47 @@
+{% extends 'std_page/index.html' %}
+{% load staticfiles %}
+
+{% load attachable_blocks %}
+{% load pipeline_plus %}
+{% load away %}
+
+
+{% block static_head %}
+  {{ block.super }}
+  {% stylesheet 'where_to_buy' %}
+{% endblock static_head %}
+
+{% block static_js %}
+  {{ block.super }}
+  {% javascript 'where_to_buy' %}
+{% endblock static_js %}
+
+{% block tabs %}
+  {% include 'where_to_buy/_tabs.html' %}
+{% endblock tabs %}
+
+{% block page_data %}
+
+
+  <div class="flags">
+    <div class="grid">
+      <div class="flex-container">
+        {% for country in countries %}
+          {% if country.link %}
+            <a href="{{ country.link }}" class="country">
+              <i class="{{ country.country.flag_css }}"></i>
+              <span class="title-h5">{{ country.country.name }}</span>
+            </a>
+          {% else %}
+            <div class="country">
+              <i class="{{ country.country.flag_css }}"></i>
+              <span class="title-h5">{{ country.country.name }}</span>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  {% render_attached_blocks page_data %}
+{% endblock page_data %}

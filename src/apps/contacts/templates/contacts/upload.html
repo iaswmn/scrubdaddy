@@ -1,0 +1,12 @@
+{% load i18n %}
+
+<div class="upload-field" data-upload-url="{% url 'contacts:upload' %}" data-upload-name="images">
+  <div class="queue"></div>
+
+  <div class="button-holder">
+    <div class="add-photo">
+      <button type="button" class="btn-green"></button>
+      <span class="btn small blue moema">{% trans 'Upload Picture' %}</span>
+    </div>
+  </div>
+</div>

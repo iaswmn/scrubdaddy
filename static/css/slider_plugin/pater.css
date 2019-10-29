@@ -1,0 +1,113 @@
+.pater {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  width: 100%;
+  padding: .5em;
+  color: inherit;
+  background: #000;
+
+  align-items: center;
+}
+
+.pater:hover {
+  color: inherit;
+}
+
+.pater__logo {
+  max-width: 100px;
+  transition: transform .5s, opacity .5s;
+  transition-timing-function: cubic-bezier(.7,0,.3,1);
+  vertical-align: middle;
+}
+
+.pater__title {
+  font-size: 1em;
+  font-weight: normal;
+  margin: 0;
+  transition: transform .5s, opacity .5s;
+  transition-timing-function: cubic-bezier(.7,0,.3,1);
+}
+
+.pater__desc {
+  font-size: .85em;
+}
+
+.pater__img-wrap {
+  position: absolute;
+  bottom: 2em;
+  left: 0;
+  width: 100%;
+  transition: transform .5s .1s;
+  transition-timing-function: cubic-bezier(.7,0,.3,1);
+  transform: translate3d(0,100%,0) translate3d(0,2em,0);
+  background: #000;
+}
+
+.pater__img {
+  display: block;
+  max-width: 100%;
+  transition: opacity .5s .2s;
+  opacity: 0;
+}
+
+@media screen and (min-width: 60em) {
+  .pater {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    display: block;
+    width: 300px;
+    margin: 0 2em;
+    padding: 2em 0;
+    color: inherit;
+    background: transparent;
+  }
+
+  .pater::before {
+    font-size: .75em;
+    display: inline-block;
+    padding: 0 1em 0 0;
+    content: 'Sponsored by:';
+    transition: transform .5s .1s;
+    transition-timing-function: cubic-bezier(.7,0,.3,1);
+    vertical-align: middle;
+  }
+
+  .pater__title {
+    font-size: 1.5em;
+  }
+
+  .demo-6 .pater__title {
+    text-shadow: 1px 1px 3px rgba(0,0,0,.6);
+  }
+
+  .pater::before {
+    display: block;
+    padding: 0 0 1em 0;
+  }
+
+  .pater__logo {
+    max-width: 250px;
+  }
+
+  .pater:hover::before {
+    transition-delay: 0s;
+    transform: translate3d(0, -70px, 0);
+  }
+
+  .pater:hover .pater__logo,
+  .pater:hover .pater__title {
+    transform: translate3d(0, -80px, 0);
+    opacity: 0;
+  }
+
+  .pater:hover .pater__img-wrap {
+    transform: translate3d(0,0,0);
+  }
+
+  .pater:hover .pater__img {
+    opacity: 1;
+  }
+}

@@ -1,0 +1,53 @@
+{% extends 'layout.html' %}
+
+{% load pipeline_plus %}
+{% load staticfiles %}
+{% load breadcrumbs %}
+{% load away %}
+{% load i18n %}
+{% load text %}
+
+{% block critical_css %}
+  {{ block.super }}
+  {% inline_stylesheet 'std_page_critical' %}
+{% endblock critical_css %}
+
+{% block static_head %}
+  {{ block.super }}
+  {% stylesheet 'std_page' %}
+{% endblock static_head %}
+
+{% block static_js %}
+  {{ block.super }}
+  {% javascript 'std_page' %}
+{% endblock static_js %}
+
+
+{% block content %}
+  <div class="std_head">
+
+    <div class="grid">
+
+      <div class="w780">
+        <div>{% breadcrumbs %}</div>
+        {% if is_about_page %}
+          <h1 class="title-h1 blue">{{ page_data.header }}</h1>
+        {% elif is_product_category_page %}
+          <h1 class="title-h1">{{ current_category.title }}</h1>
+        {% else %}
+          <h1 class="title-h1">{{ page_data.header }}</h1>
+        {% endif %}
+      </div>
+    </div>
+
+    {% block tabs %}
+    {% endblock tabs %}
+
+  </div>
+
+  {% block page_data %}
+  {% endblock page_data %}
+
+
+
+{% endblock content %}

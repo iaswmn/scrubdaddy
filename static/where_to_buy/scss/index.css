@@ -1,0 +1,246 @@
+@charset "UTF-8";
+/*
+  $list: a, b, d, e, f;
+  $new-list: insert-nth($list, 3, c);     // a, b, c, d, e, f
+*/
+/*
+  $list: a, b, r, a, c a, d a, b, r, a;
+  $new-list: replace($list, a, u);       // u, b, r, u, c a, d a, b, r, u;
+*/
+/*
+  $list: a, b, z, d, e, f;
+  $new-list: replace-nth($list,   3, c); // a, b, c, d, e, f
+  $new-list: replace-nth($list,  -2, c); // a, b, c, d, z, f
+*/
+/*
+  $list: a, b z, c, z, d, z, e, f;
+  $new-list: remove($list, z);       // a, b z, c, d, e, f;
+*/
+/*
+  $list: a, b, z, c, d, e, f;
+  $new-list: remove-nth($list,   3); // a, b, c, d, e, f
+  $new-list: remove-nth($list,  -2); // a, b, z, c, d, f
+*/
+/*
+  $list: a, b, c, d, e, f;
+  $new-list: slice($list, 3, 5);   // c, d, e
+  $new-list: slice($list, 4, 4);   // d
+*/
+/*
+  $list: a, b, c d e, f, g, h;
+  $new-list: reverse($list);       // h, g, f, c d e, b, a
+  $new-list: reverse($list, true); // h, g, f, e d c, b, a
+*/
+/*
+    Добавляет константу к каждому значению карты.
+
+    Пример:
+      $map: (
+        (1024px, 0): 100px,
+        (768px, 1024px): 80px,
+        (0, 768px): 60px,
+      )
+
+      > map_add($map, 10px)
+      (
+        (1024px, 0): 110px,
+        (768px, 1024px): 90px,
+        (0, 768px): 70px,
+      )
+ */
+/*
+    Получение ключа карты $map media-интервалов,
+    в который входит искомый интервал $media.
+    Если искомый интервал находится на границе
+    двух или более интервалов карты, генерируется ошибка.
+
+    Пример:
+      $map: (
+        (1024px, 0): 100px,
+        (768px, 1024px): 80px,
+        (0, 768px): 60px,
+      )
+
+      > media_map_key($map, (1200px, 0))
+      (1024px, 0)
+ */
+/*
+    Получение среза media-карты.
+
+    Пример:
+      $map: (
+        (1024px, 0): 100px,
+        (768px, 1024px): 80px,
+        (0, 768px): 60px,
+      )
+
+      > media_map_slice($map, (640px, 1200px))
+      (
+        (1024px, 1200px): 100px,
+        (768px, 1024px): 80px,
+        (640px, 768px): 60px,
+      )
+ */
+/*
+  Многоколоночная верстка через flexbox.
+
+  Пример:
+    .list {
+      @include flexbox;
+      @include flex-flow(row wrap);
+
+      .item {
+        @include flex-columns(2, 10px, 10px);
+      }
+    }
+*/
+/*
+  Пример:
+    input {
+      color: #808080;
+      ...
+      @include placeholder {
+        color: red;
+      }
+    }
+*/
+.shop-block {
+  padding: 100px 0; }
+  .shop-block .shop-link {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-flex-direction: column;
+    -moz-box-flex-direction: column;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-align: center;
+    -webkit-box-align-items: center;
+    -moz-box-align-items: center;
+    -webkit-align-items: center;
+    -ms-align-items: center;
+    align-items: center; }
+    .shop-block .shop-link img {
+      max-width: 280px; }
+    .shop-block .shop-link .title-italic-h3 {
+      margin: 26px 0; }
+
+@media all and (min-width: 768px) {
+  .where-shops {
+    padding-top: 100px;
+    padding-bottom: 100px; } }
+
+@media all and (max-width: 767px) {
+  .where-shops {
+    padding-top: 50px;
+    padding-bottom: 50px; } }
+
+.where-shops .flex-container {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-flex-wrap: wrap;
+  -moz-box-flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap; }
+  .where-shops .flex-container .title-h5 {
+    position: relative;
+    width: calc(25% - 50px);
+    margin-right: 25px;
+    margin-bottom: 20px;
+    padding-left: 25px;
+    color: #000; }
+    @media all and (min-width: 768px) and (max-width: 1023px) {
+      .where-shops .flex-container .title-h5 {
+        width: calc(33% - 20px);
+        margin-right: 20px; } }
+    @media all and (min-width: 480px) and (max-width: 767px) {
+      .where-shops .flex-container .title-h5 {
+        width: calc(50% - 20px);
+        margin-right: 20px; } }
+    @media all and (max-width: 479px) {
+      .where-shops .flex-container .title-h5 {
+        width: 100%;
+        margin-right: 0; }
+        .where-shops .flex-container .title-h5:last-child {
+          margin-bottom: 0; } }
+    .where-shops .flex-container .title-h5::before {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: 6px;
+      height: 6px;
+      content: '';
+      border-radius: 100%;
+      background: #000;
+      -webkit-transform: translateY(-50%);
+      -moz-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+      -o-transform: translateY(-50%);
+      transform: translateY(-50%); }
+
+.where-shops .disclaimer {
+  margin-top: 4em;
+  color: #5c5c5c;
+  font-size: 16px;
+  font-size: 1rem;
+  line-height: 1.75; }
+  @media all and (max-width: 599px) {
+    .where-shops .disclaimer {
+      margin-top: 2em; } }
+
+.flags {
+  padding-top: 100px;
+  padding-bottom: 100px; }
+  .flags .flex-container {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-flex-wrap: wrap;
+    -moz-box-flex-wrap: wrap;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap; }
+    .flags .flex-container .country {
+      width: calc(25% - 5px);
+      margin-right: 5px;
+      margin-bottom: 20px; }
+      @media all and (min-width: 768px) and (max-width: 1023px) {
+        .flags .flex-container .country {
+          width: calc(33% - 10px);
+          margin-right: 10px; } }
+      @media all and (min-width: 480px) and (max-width: 767px) {
+        .flags .flex-container .country {
+          width: calc(50% - 20px);
+          margin-right: 20px; } }
+      @media all and (max-width: 479px) {
+        .flags .flex-container .country {
+          width: 100%;
+          margin-right: 0; }
+          .flags .flex-container .country:last-child {
+            margin-bottom: 0; } }
+      .flags .flex-container .country:not(a) .title-h5 {
+        color: #000; }
+      .flags .flex-container .country i {
+        margin-right: 10px; }
+
+.where-to-buy-page ul {
+  columns: 280px 4; }
+  .where-to-buy-page ul li {
+    font-weight: 900;
+    font-size: 18px;
+    font-size: 1.125rem;
+    line-height: 1.11111; }
+    .where-to-buy-page ul li:not(:first-child) {
+      margin-top: 18px; }
+    .where-to-buy-page ul li::before {
+      top: 0; }

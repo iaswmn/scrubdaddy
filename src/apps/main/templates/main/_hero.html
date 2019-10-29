@@ -1,0 +1,24 @@
+{% load staticfiles %}
+
+<div class="main_head">
+  <div class="main-wrapper">
+    <div class="slideshow">
+      <div class="slides">
+        {% for item in slider %}
+          {% if item.is_small_slide %}
+            {% include 'main/slides/small_img_slide.html' with counter=forloop.counter0 item=item %}
+          {% else %}
+            {% include 'main/slides/fullscreen_img_slide.html' with counter=forloop.counter0 item=item %}
+          {% endif %}
+        {% endfor %}
+
+
+      </div>
+      <nav class="slidenav" id="slider-navigation">
+        <button class="slidenav__item slidenav__item--prev">Previous</button>
+        <span>/</span>
+        <button class="slidenav__item slidenav__item--next">Next</button>
+      </nav>
+    </div>
+  </div>
+</div>

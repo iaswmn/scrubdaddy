@@ -1,0 +1,141 @@
+@import 'mixins';
+
+.shop-block {
+  padding: 100px 0;
+
+  .shop-link {
+    @include flexbox;
+    @include flex-direction(column);
+    @include align-items(center);
+
+    img {
+      max-width: 280px;
+    }
+
+    .title-italic-h3 {
+      margin: 26px 0;
+    }
+  }
+}
+
+.where-shops {
+  @include media_interval($media768, 0) {
+    @include vpad(100px);
+  }
+  @include media_interval(0, $media768) {
+    @include vpad(50px);
+  }
+
+  .flex-container {
+    @include flexbox;
+    @include flex-wrap(wrap);
+
+    .title-h5 {
+      position: relative;
+      width: calc(25% - 50px);
+      margin-right: 25px;
+      margin-bottom: 20px;
+      padding-left: 25px;
+      color: #000;
+      @include media-interval($media768, $media1024) {
+        width: calc(33% - 20px);
+        margin-right: 20px;
+      }
+      @include media-interval($media480, $media768) {
+        width: calc(50% - 20px);
+        margin-right: 20px;
+      }
+      @include media-interval(0, $media480) {
+        width: 100%;
+        margin-right: 0;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+
+      &::before {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        width: 6px;
+        height: 6px;
+        content: '';
+        border-radius: 100%;
+        background: #000;
+        @include transform(translateY(-50%));
+      }
+    }
+  }
+
+  .disclaimer {
+    margin-top: 4em;
+    color: #5c5c5c;
+    @include font-size(16px, 28px);
+
+    @include media_interval(0, $media600) {
+      margin-top: 2em;
+    }
+  }
+}
+
+.flags {
+  padding-top: 100px;
+  padding-bottom: 100px;
+
+  .flex-container {
+    @include flexbox;
+    @include flex-wrap(wrap);
+
+    .country {
+      width: calc(25% - 5px);
+      margin-right: 5px;
+      margin-bottom: 20px;
+      @include media-interval($media768, $media1024) {
+        width: calc(33% - 10px);
+        margin-right: 10px;
+      }
+      @include media-interval($media480, $media768) {
+        width: calc(50% - 20px);
+        margin-right: 20px;
+      }
+      @include media-interval(0, $media480) {
+        width: 100%;
+        margin-right: 0;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+
+      &:not(a) {
+        .title-h5 {
+          color: #000;
+        }
+      }
+
+      i {
+        margin-right: 10px;
+      }
+    }
+  }
+}
+
+.where-to-buy-page {
+  ul {
+    columns: 280px 4;
+
+    & li {
+      font-weight: 900;
+      @include font-size(18px, 20px);
+
+      &:not(:first-child) {
+        margin-top: 18px;
+      }
+
+      &::before {
+        top: 0;
+      }
+    }
+  }
+}

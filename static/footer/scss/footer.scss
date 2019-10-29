@@ -1,0 +1,148 @@
+@import 'mixins';
+
+// точка перехода к вертикальному подвалу
+$column_footer: $media640;
+$logo_width: 175px;
+$logo_height: 116px;
+
+#footer-cell>footer {
+  color: #4a4a4a;
+  background-image: linear-gradient(to top, #ff8f10, #ffbe01);
+  @include vpad(40px);
+  @include media_interval(0, $media640) {
+    @include vpad(30px); 
+  }
+
+  .flex {
+    @include flexbox;
+    @include align-items(center);
+
+    @include media_interval(0, $media1024){
+      @include flex-wrap(wrap);
+    }
+  }
+
+  .copyright-box {
+    @include flex(1 1 auto);
+
+    .copyright {
+      @include fontsize_default;
+
+      @include media_interval(0, $column_footer) {
+        margin-bottom: 16px;
+        text-align: center;
+      }
+    }
+  }
+  .menu-box{
+    width: 55%;
+    @include media_interval(0, $media1024){
+      width: 100%;
+      margin-top: 15px;
+      @include order(3);
+    }
+    .menu-footer{
+      max-width: 425px;
+      margin: 0 auto;
+      @include media_interval($media1024, $media1200){
+        margin: 0 0 0 auto;
+      }
+      @include media_interval(0, $media1024){
+        max-width: none;
+      }
+      ul{
+        @include flexbox;
+        @include flex-wrap(wrap);
+        @include media_interval(0, $media1024){
+          @include flex-direction(column);
+        }
+        li{
+          color: $darkish-blue;
+          width: 50%;
+          margin-bottom: 7px;
+        }
+      }
+    }
+  }
+  .logo-box {
+    width: 15%;
+    @include flex(0 0 auto);
+    @include media_interval($media640, $media1024){
+      width: 50%;
+    }
+    @include media_interval(0, $media640) {
+      width: 100%;
+    }
+    .logo {
+      display: inline-block;
+      width: $logo_width;
+      vertical-align: middle;
+      @include media_interval(0, $media1024){
+        width: 134px;
+      }
+
+      &:before {
+        content: '';
+        display: block;
+        padding-bottom: #{100 * $logo_height/$logo_width + "%"};
+        background: $sprite_url no-repeat 0 0;
+        background-size: rel-background-size($logo_width, $logo_height);
+      }
+    }
+
+    a.logo:hover {
+      @include opacity(0.75);
+    }
+  }
+
+  .dl-logo-box {
+    width: 30%;
+    font-weight: 700;
+    @include flexbox;
+    @include font-size(13px, 20px);
+    @include flex-direction(column);
+    @include align-items(flex-start);
+
+    @include media_interval($media640, $media1024){
+      width: 50%;
+    }
+
+    @include media_interval(0, $media640) {
+      width: 100%;
+      margin-top: 10px;
+      max-width: 280px;
+      @include order(4);
+      @include font-size(14px, 14px);
+    }
+
+    .dl-links {
+      text-align: right;
+
+
+      p {
+        display: inline-block;
+        margin-bottom: 10px;
+        text-align: left;
+        white-space: nowrap;
+        @include media_interval(0, $column_footer) {
+          text-align: center;
+        }
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+
+      a:hover {
+        @include opacity(0.7);
+      }
+    }
+
+    .rating-wrapper{
+      margin:  14px 0 12px 0;
+      @include flexbox;
+      @include flex-wrap(wrap);
+      @include font-size(13px, 19px);
+    }
+  }
+}

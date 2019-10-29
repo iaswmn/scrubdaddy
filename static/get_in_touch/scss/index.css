@@ -1,0 +1,314 @@
+@charset "UTF-8";
+/*
+  $list: a, b, d, e, f;
+  $new-list: insert-nth($list, 3, c);     // a, b, c, d, e, f
+*/
+/*
+  $list: a, b, r, a, c a, d a, b, r, a;
+  $new-list: replace($list, a, u);       // u, b, r, u, c a, d a, b, r, u;
+*/
+/*
+  $list: a, b, z, d, e, f;
+  $new-list: replace-nth($list,   3, c); // a, b, c, d, e, f
+  $new-list: replace-nth($list,  -2, c); // a, b, c, d, z, f
+*/
+/*
+  $list: a, b z, c, z, d, z, e, f;
+  $new-list: remove($list, z);       // a, b z, c, d, e, f;
+*/
+/*
+  $list: a, b, z, c, d, e, f;
+  $new-list: remove-nth($list,   3); // a, b, c, d, e, f
+  $new-list: remove-nth($list,  -2); // a, b, z, c, d, f
+*/
+/*
+  $list: a, b, c, d, e, f;
+  $new-list: slice($list, 3, 5);   // c, d, e
+  $new-list: slice($list, 4, 4);   // d
+*/
+/*
+  $list: a, b, c d e, f, g, h;
+  $new-list: reverse($list);       // h, g, f, c d e, b, a
+  $new-list: reverse($list, true); // h, g, f, e d c, b, a
+*/
+/*
+    Добавляет константу к каждому значению карты.
+
+    Пример:
+      $map: (
+        (1024px, 0): 100px,
+        (768px, 1024px): 80px,
+        (0, 768px): 60px,
+      )
+
+      > map_add($map, 10px)
+      (
+        (1024px, 0): 110px,
+        (768px, 1024px): 90px,
+        (0, 768px): 70px,
+      )
+ */
+/*
+    Получение ключа карты $map media-интервалов,
+    в который входит искомый интервал $media.
+    Если искомый интервал находится на границе
+    двух или более интервалов карты, генерируется ошибка.
+
+    Пример:
+      $map: (
+        (1024px, 0): 100px,
+        (768px, 1024px): 80px,
+        (0, 768px): 60px,
+      )
+
+      > media_map_key($map, (1200px, 0))
+      (1024px, 0)
+ */
+/*
+    Получение среза media-карты.
+
+    Пример:
+      $map: (
+        (1024px, 0): 100px,
+        (768px, 1024px): 80px,
+        (0, 768px): 60px,
+      )
+
+      > media_map_slice($map, (640px, 1200px))
+      (
+        (1024px, 1200px): 100px,
+        (768px, 1024px): 80px,
+        (640px, 768px): 60px,
+      )
+ */
+/*
+  Многоколоночная верстка через flexbox.
+
+  Пример:
+    .list {
+      @include flexbox;
+      @include flex-flow(row wrap);
+
+      .item {
+        @include flex-columns(2, 10px, 10px);
+      }
+    }
+*/
+/*
+  Пример:
+    input {
+      color: #808080;
+      ...
+      @include placeholder {
+        color: red;
+      }
+    }
+*/
+#wrapper {
+  background-image: radial-gradient(circle at 29% 49%, #3789ff, #0042b7); }
+
+#header-cell header {
+  background: none; }
+
+.page-content-wrapper {
+  margin: 2.8125em auto 6.25em auto;
+  border-radius: 4px;
+  background: white;
+  font-size: 16px;
+  font-size: 1rem;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box; }
+  @media all and (min-width: 800px) {
+    .page-content-wrapper {
+      padding: 5em 7.5em; } }
+  @media all and (min-width: 800px) and (max-width: 799px) {
+    .page-content-wrapper {
+      padding: 2.5em 4.75em; } }
+  @media all and (max-width: 799px) {
+    .page-content-wrapper {
+      padding: 1.25em 2em; } }
+  @media all and (min-width: 800px) {
+    .page-content-wrapper {
+      max-width: 820px; } }
+  @media all and (min-width: 600px) and (max-width: 799px) {
+    .page-content-wrapper {
+      max-width: 620px; } }
+  @media all and (max-width: 599px) {
+    .page-content-wrapper {
+      max-width: 360px; } }
+  @media all and (min-width: 400px) and (max-width: 767px) {
+    .page-content-wrapper {
+      margin: 4.8125em auto 3.25em auto; } }
+  @media all and (max-width: 399px) {
+    .page-content-wrapper {
+      margin: 2.8125em auto 2.8125em auto; } }
+
+.form-wrapper {
+  margin-top: 3.25em; }
+  @media all and (max-width: 599px) {
+    .form-wrapper {
+      margin-top: 1.75em; } }
+
+.row {
+  position: relative;
+  overflow: hidden; }
+  @media all and (min-width: 600px) {
+    .row {
+      display: -webkit-box;
+      display: -moz-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex; } }
+  @media all and (min-width: 600px) {
+    .row:not(:first-of-type) {
+      margin-top: 2em; } }
+  @media all and (min-width: 600px) {
+    .row.two-items > *:last-child {
+      position: relative;
+      margin-left: auto; } }
+
+@media all and (max-width: 599px) {
+  .mobile-margin {
+    margin-top: 25px; } }
+
+.help-text {
+  font-weight: 500;
+  margin-top: .3571em;
+  font-size: 14px;
+  font-size: 0.875rem;
+  line-height: 1.28571; }
+
+.time-fields-outer-box {
+  max-width: 260px; }
+  .time-fields-outer-box .time-fields {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex; }
+    .time-fields-outer-box .time-fields .field:first-child {
+      max-width: 140px; }
+    .time-fields-outer-box .time-fields .field:last-child {
+      max-width: 100px;
+      margin-left: auto; }
+
+.field-phone {
+  margin-left: auto;
+  right: 0; }
+
+/*JS Animation styles*/
+@media all and (min-width: 1024px) {
+  .show-hide-fields {
+    -webkit-transform: translateY(200px);
+    -moz-transform: translateY(200px);
+    -ms-transform: translateY(200px);
+    -o-transform: translateY(200px);
+    transform: translateY(200px);
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    opacity: 0;
+    -webkit-transition: opacity 0.3s ease 0.2s, -webkit-transform 0.3s, transform 0.3s;
+    -moz-transition: opacity 0.3s ease 0.2s, -webkit-transform 0.3s, transform 0.3s;
+    -ms-transition: opacity 0.3s ease 0.2s, -webkit-transform 0.3s, transform 0.3s;
+    -o-transition: opacity 0.3s ease 0.2s, -webkit-transform 0.3s, transform 0.3s;
+    transition: opacity 0.3s ease 0.2s, -webkit-transform 0.3s, transform 0.3s; } }
+
+@media all and (max-width: 1023px) {
+  .show-hide-fields {
+    display: none; } }
+
+@media all and (min-width: 1024px) {
+  .show-hide-fields.js-active {
+    filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
+    opacity: 1;
+    -webkit-transform: translateY(0);
+    -moz-transform: translateY(0);
+    -ms-transform: translateY(0);
+    -o-transform: translateY(0);
+    transform: translateY(0); } }
+
+@media all and (max-width: 1023px) {
+  .show-hide-fields.js-active {
+    display: block; } }
+
+.show-hide-fields.js-move-up {
+  -webkit-transform: translateY(-400px);
+  -moz-transform: translateY(-400px);
+  -ms-transform: translateY(-400px);
+  -o-transform: translateY(-400px);
+  transform: translateY(-400px); }
+
+/**********************/
+.field-comments {
+  width: 100%; }
+
+.upload-field {
+  margin-top: 2em; }
+  .upload-field .button-holder {
+    margin-top: .625em; }
+  @media all and (max-width: 767px) {
+    .upload-field .btn.small {
+      width: 180px;
+      padding: 8px 20px; } }
+
+.button-block {
+  margin-top: 4em;
+  text-align: center; }
+  @media all and (max-width: 599px) {
+    .button-block {
+      margin-top: 2.5em; } }
+
+/*Upload field styles*/
+.upload-field .record {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-box-align-items: center;
+  -moz-box-align-items: center;
+  -webkit-align-items: center;
+  -ms-align-items: center;
+  align-items: center; }
+
+.upload-field .cancel-btn {
+  position: relative;
+  width: 21px;
+  height: 21px; }
+  .upload-field .cancel-btn:hover {
+    cursor: pointer;
+    -webkit-transition: opacity 0.2s ease;
+    -moz-transition: opacity 0.2s ease;
+    -ms-transition: opacity 0.2s ease;
+    -o-transition: opacity 0.2s ease;
+    transition: opacity 0.2s ease;
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=70);
+    opacity: 0.7; }
+  .upload-field .cancel-btn::after, .upload-field .cancel-btn::before {
+    position: absolute;
+    top: calc(50% - 10px);
+    left: calc(50% - 2px);
+    width: 4px;
+    height: 20px;
+    content: '';
+    background: #0032a0; }
+  .upload-field .cancel-btn::before {
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    transform: rotate(-45deg); }
+  .upload-field .cancel-btn::after {
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg); }
+
+.upload-field .name {
+  margin-left: 5px;
+  color: #0032a0; }
+
+.field.required .label-holder label:after {
+  content: ''; }

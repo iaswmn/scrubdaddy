@@ -1,0 +1,132 @@
+@import 'mixins';
+
+.trending {
+  position: relative;
+  padding: 35px 0 15px 0;
+
+  .top {
+    text-align: center;
+  }
+
+  .bottom {
+    max-width: 240px;
+    margin: 35px auto 0;
+  }
+
+  .slider-slide {
+    text-align: center;
+  }
+
+  .flex-container {
+    margin-top: 60px;
+
+    .item {
+      display: inline-block;
+      overflow: hidden;
+      max-width: 280px;
+      min-height: 430px;
+      margin-bottom: 20px;
+      background-image: radial-gradient(circle at 54% 53%, #ffe430, #ffbb01);
+      box-shadow: 0 10px 20px 0 rgba(20, 47, 105, .5);
+      @include transition(transform .3s);
+      @include transform(scale(1));
+
+      @include media_interval(1380px, 0) {
+        &:not(:nth-child(4n)) {
+          margin-right: calc( (100% -  280px * 4 ) / 3 );
+        }
+      }
+      @include media_interval(1000px, 1380px) {
+        &:not(:nth-child(3n)) {
+          margin-right: calc( (100% - 280px * 3) / 2 );
+        }
+      }
+      @include media_interval($media768, 1000px) {
+        max-width: 300px;
+
+        &:not(:nth-child(2n)) {
+          margin-right: calc( 100% - 300px * 2 );
+        }
+      }
+      @include media_interval($media600, $media768) {
+        max-width: 260px;
+
+        &:not(:nth-child(2n)) {
+          margin-right: calc( 100% - 260px * 2 );
+        }
+      }
+
+      .read-more {
+        font-weight: bold;
+        margin-left: 18px;
+        letter-spacing: -.03em;
+        opacity: 0;
+        color: $darkish-blue;
+        @include font-size(17px, 25px);
+        @include transition(opacity .3s);
+      }
+
+      .top-side {
+        position: relative;
+        min-height: 177px;
+
+        img {
+          position: absolute;
+          z-index: 3;
+          top: 0;
+          left: 0;
+          width: 100.5%;
+          height: 100.5%;
+        }
+      }
+
+      .treinding-title {
+        font-weight: 900;
+        margin-bottom: 5px;
+        @include font-size(19px, 28px);
+      }
+
+      .description_small {
+        font-weight: bold;
+        letter-spacing: -.025em;
+        @include font-size(17px, 25px);
+      }
+
+      .bottom-side {
+        position: relative;
+        z-index: 1;
+        overflow: hidden;
+        max-height: 166px;
+        padding: 22px 18px 10px;
+      }
+
+      &::before {
+        position: absolute;
+        z-index: 6;
+        width: 100.5%;
+        height: 100.5%;
+        content: '';
+        opacity: 0;
+        background: rgba(20, 47, 105, .5);
+        @include transition(opacity .3s);
+      }
+
+      &.active {
+        &::before {
+          opacity: 1;
+        }
+      }
+
+      &.link {
+        .read-more {
+          opacity: 1;
+        }
+      }
+
+      &:hover {
+        z-index: 4;
+        @include transform(scale(1.2));
+      }
+    }
+  }
+}

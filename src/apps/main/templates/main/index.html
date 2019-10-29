@@ -1,0 +1,33 @@
+{% extends 'layout.html' %}
+
+{% load attachable_blocks %}
+{% load pipeline_plus %}
+{% load staticfiles %}
+
+{% block static_head %}
+  {{ block.super }}
+  {% stylesheet 'main' %}
+{% endblock static_head %}
+
+{% block static_js %}
+  {{ block.super }}
+  {% javascript 'main' %}
+{% endblock static_js %}
+
+{% block content %}
+
+  {% include 'main/_hero.html' %}
+  {% include 'main/_products_categories.html' %}
+
+  {% if advantages or blog_posts %}
+    <div class="linear main-linear">
+      {% include 'main/_advantages.html' %}
+      {% if country and country != 'IL' %}
+        {% include 'main/_blog_posts.html' %}
+      {% endif %}
+    </div>
+  {% endif %}
+
+  {% render_attached_blocks config %}
+
+{% endblock content %}

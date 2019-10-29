@@ -1,0 +1,30 @@
+{% extends 'layout.html' %}
+
+{% load pipeline_plus %}
+{% load i18n %}
+{% load staticfiles %}
+
+{% block static_head %}
+  {{ block.super }}
+  {% stylesheet 'error' %}
+{% endblock static_head %}
+
+
+{% block title %}{% trans 'Page not found' %}{% endblock %}
+
+{% block content %}
+
+  <div id="error" class="grid">
+    <div class="block-left">
+      <div class="title-h1-error">{% block code %}404{% endblock code %}</div>
+      <div class="description-error">Houston, we’ve got a problem!</div>
+      {% block text %}
+        {% blocktrans %}
+          <a class="btn medium blue moema" href="/">Return Home</a>
+        {% endblocktrans %}
+      {% endblock text %}
+    </div>
+      <img src="{% static 'img/404_icon.png' %}" alt="">
+  </div>
+
+{% endblock content %}

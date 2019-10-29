@@ -1,0 +1,33 @@
+@import 'mixins';
+
+#google-map {
+  position: relative;
+  z-index: 1;
+
+  .map {
+    height: 500px;
+  }
+}
+
+#addresses {
+  ul {
+    @include flexbox;
+    @include justify-content(space-between);
+  }
+
+  .address {
+    margin-right: 30px;
+    padding: 5px;
+    cursor: pointer;
+    background: rgba(#ff0, .1);
+    @include fontsize_default;
+
+    &:nth-last-child(1) {
+      margin-right: 0;
+    }
+
+    &.active {
+      background: rgba(#ff0, .5);
+    }
+  }
+}

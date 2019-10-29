@@ -1,0 +1,50 @@
+{% extends 'std_page/index.html' %}
+{% load staticfiles %}
+
+{% load attachable_blocks %}
+{% load pipeline_plus %}
+{% load away %}
+
+
+{% block static_head %}
+  {{ block.super }}
+  {% stylesheet 'where_to_buy' %}
+{% endblock static_head %}
+
+{% block static_js %}
+  {{ block.super }}
+  {% javascript 'where_to_buy' %}
+{% endblock static_js %}
+
+{% block tabs%}
+    {% include 'where_to_buy/_tabs.html' %}
+{% endblock %}
+
+
+{% block page_data %}
+
+
+  <div class="where-shops">
+    <div class="grid">
+
+      {% if page_data.text_content %}
+        <div class="text-styles where-to-buy-page">
+          {% if country == 'CA' %}
+            {%  away page_data.text_content_canada %}
+          {% else %}
+            {%  away page_data.text_content %}
+          {% endif %}
+        </div>
+      {% endif %}
+
+
+      {% if page_data.note %}
+        <div class="disclaimer">
+          {{ page_data.note }}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+
+  {% render_attached_blocks page_data %}
+{% endblock page_data %}

@@ -1,0 +1,174 @@
+{% load i18n %}
+{% load text %}
+
+{% if message.first_name %}
+  <p><b>name:</b> {{ message.first_name }}</p>
+{% endif %}
+
+{% if message.last_name %}
+  <p><b>last name:</b> {{ message.last_name }}</p>
+{% endif %}
+
+{% if message.street_address %}
+  <p><b>street address:</b> {{ message.street_address }}</p>
+{% endif %}
+
+{% if message.street_address_2 %}
+  <p><b>street address 2:</b> {{ message.street_address_2 }}</p>
+{% endif %}
+
+{% if message.city %}
+  <p><b>city:</b> {{ message.city }}</p>
+{% endif %}
+
+{% if message.state %}
+  <p><b>state:</b> {{ message.state }}</p>
+{% endif %}
+
+{% if message.zip_code %}
+  <p><b>zip code:</b> {{ message.zip_code }}</p>
+{% endif %}
+
+{% if message.phone %}
+  <p><b>phone:</b> {{ message.phone }}</p>
+{% endif %}
+
+{% if message.date_available %}
+  <p><b>date available:</b> {{ message.date_available }}</p>
+{% endif %}
+
+{% if message.desired_salary %}
+  <p><b>desired salary:</b> {{ message.desired_salary }}</p>
+{% endif %}
+
+{% if message.email %}
+  <p><b>e-mail:</b> {{ message.email }}</p>
+{% endif %}
+
+{% if message.position %}
+  <p><b>position:</b> {{ message.position }}</p>
+{% endif %}
+
+{% if message.about %}
+  <p><b>about:</b> {{ message.about }}</p>
+{% endif %}
+
+{% if message.citizen %}
+  <p><b>citizen:</b> {{ message.citizen }}</p>
+{% endif %}
+
+{% if message.worked %}
+  <p><b>have you ever worked for this company?:</b> {{ message.worked }}</p>
+{% endif %}
+
+{% if message.felony %}
+  <p><b>have you ever been convicted of a felony?:</b> {{ message.felony }}</p>
+{% endif %}
+
+{% if message.education %}
+  <p><b>education Level:</b> {{ message.education }}</p>
+{% endif %}
+
+{% if message.school_name %}
+  <p><b>school name:</b> {{ message.school_name }}</p>
+{% endif %}
+
+{% if message.school_street_address %}
+  <p><b>school street address:</b> {{ message.school_street_address }}</p>
+{% endif %}
+
+{% if message.school_city %}
+  <p><b>school city:</b> {{ message.school_city }}</p>
+{% endif %}
+
+{% if message.school_state %}
+  <p><b>school state:</b> {{ message.school_state }}</p>
+{% endif %}
+
+{% if message.school_zip_code %}
+  <p><b>school zip code:</b> {{ message.school_zip_code }}</p>
+{% endif %}
+
+{% if message.years_attended %}
+  <p><b>school years attended:</b> {{ message.years_attended }}</p>
+{% endif %}
+
+{% if message.years_attended %}
+  <p><b>school years attended:</b> {{ message.years_attended }}</p>
+{% endif %}
+
+{% if message.company_name %}
+  <p><b>previous employment company name:</b> {{ message.company_name }}</p>
+{% endif %}
+
+{% if message.company_phone %}
+  <p><b>previous employment company phone:</b> {{ message.company_phone }}</p>
+{% endif %}
+
+{% if message.company_street_address %}
+  <p><b>previous employment company street address:</b> {{ message.company_street_address }}</p>
+{% endif %}
+
+{% if message.company_street_address_2 %}
+  <p><b>previous employment company street address 2:</b> {{ message.company_street_address_2 }}</p>
+{% endif %}
+
+{% if message.company_city %}
+  <p><b>previous employment company city:</b> {{ message.company_city }}</p>
+{% endif %}
+
+{% if message.company_state %}
+  <p><b>previous employment company state:</b> {{ message.company_state }}</p>
+{% endif %}
+
+{% if message.company_country %}
+  <p><b>previous employment company country:</b> {{ message.company_country }}</p>
+{% endif %}
+
+{% if message.company_zip_code %}
+  <p><b>previous employment company zip code:</b> {{ message.company_zip_code }}</p>
+{% endif %}
+
+{% if message.supervisor_first_name %}
+  <p><b>previous employment supervisor first name:</b> {{ message.supervisor_first_name }}</p>
+{% endif %}
+
+{% if message.supervisor_last_name %}
+  <p><b>previous employment supervisor last name:</b> {{ message.supervisor_last_name }}</p>
+{% endif %}
+
+{% if message.job_title %}
+  <p><b>previous employment job title:</b> {{ message.job_title }}</p>
+{% endif %}
+
+{% if message.starting_salary %}
+  <p><b>previous employment starting salary:</b> {{ message.starting_salary }}</p>
+{% endif %}
+
+{% if message.years_worked %}
+  <p><b>previous employment years worked:</b> {{ message.years_worked }}</p>
+{% endif %}
+
+{% if message.ending_salary %}
+  <p><b>previous employment ending salary:</b> {{ message.ending_salary }}</p>
+{% endif %}
+
+{% if message.responsibilities %}
+  <p><b>previous employment responsibilities:</b> {{ message.responsibilities }}</p>
+{% endif %}
+
+{% if message.reason_for_leaving %}
+  <p><b>previous employment reason for leaving:</b> {{ message.reason_for_leaving }}</p>
+{% endif %}
+
+{% if message.contact_previous_supervisor %}
+  <p><b>may we contact your previous supervisor for a reference?:</b> {{ message.contact_previous_supervisor }}</p>
+{% endif %}
+
+{% if message.date %}
+  <p><b>date:</b> {{ message.date }}</p>
+{% endif %}
+
+{% if request.COOKIES.utm %}
+  <p><b>{% trans 'UTM' %}:</b> {{ request.COOKIES.utm }}</p>
+{% endif %}

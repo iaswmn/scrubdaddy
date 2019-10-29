@@ -1,0 +1,109 @@
+@import 'mixins';
+
+.media {
+  padding: 80px 0;
+
+  .tabs {
+    margin-bottom: 50px;
+    @include flexbox;
+    @include justify-content(center);
+
+    @include media_interval(0, $media600) {
+      @include flex-direction(column);
+      @include align-items(center);
+    }
+
+    .btn-tab {
+      font-weight: 900;
+      margin: 10px 20px 10px 0;
+      padding: 7px 20px;
+      cursor: pointer;
+      text-transform: uppercase;
+      color: $darkish-blue;
+      border: 2px solid $darkish-blue;
+      border-radius: 15px;
+      @include font-size(14px, 14px);
+      @include transition(background .3s);
+
+      @include media_interval(0 $media600) {
+        margin: 10px 0;
+      }
+
+      &:hover {
+        background: rgba(0, 50, 160, .15);
+      }
+
+      &.active {
+        color: $white;
+        background: $darkish-blue;
+      }
+    }
+  }
+
+  .all {
+    display: block;
+  }
+
+  .video,
+  .audio,
+  .article {
+    display: none;
+  }
+
+  .flex-container {
+    $icon_size: 32px;
+
+    @include flexbox;
+    @include flex-wrap(wrap);
+
+    .item {
+      margin-bottom: 50px;
+      @include media-interval(0, $media480) {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 25px;
+      }
+
+      .bottom {
+        margin-top: 10px;
+        @include flexbox;
+
+        .icon {
+          position: relative;
+
+          &::before {
+            position: absolute;
+            left: 0;
+            width: $icon_size;
+            height: $icon_size;
+            content: '';
+            background: $sprite_url no-repeat;
+            background-position: rel-background-position($icon_size, $icon_size, 0px, -291px);
+            background-size: rel-background-size($icon_size, $icon_size);
+          }
+        }
+
+        .title-h5 {
+          padding-top: 5px;
+          padding-left: 40px;
+        }
+      }
+
+      &.AU {
+        .icon {
+          &::before {
+            background-position: rel-background-position($icon_size, $icon_size, -65px, -292px);
+          }
+        }
+      }
+
+      &.AR {
+        .icon {
+          &::before {
+            background-position: rel-background-position($icon_size, $icon_size, -33px, -292px);
+          }
+        }
+      }
+    }
+  }
+}

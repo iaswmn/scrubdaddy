@@ -1,0 +1,89 @@
+{% load staticfiles %}
+{% load social_links %}
+{% load rating %}
+{% load footer %}
+{% load menu %}
+{% load text %}
+
+<footer typeof="WPFooter">
+  <div class="grid">
+
+    <div class="flex">
+      <div class="logo-box">
+        {% if is_main_page %}
+          <div class="logo"></div>
+        {% else %}
+          <a href="/" class="logo"></a>
+        {% endif %}
+      </div>
+
+      <div class="menu-box">
+
+        <nav class="menu menu-footer">
+          {% menu 'footer_menu' %}
+        </nav>
+      </div>
+
+      <div class="dl-logo-box">
+
+        <div class="scrub-daddy-info" itemscope itemtype="http://schema.org/Organization">
+
+          <span itemprop="name">Scrub Daddy Inc. </span>
+
+          {% if addr and country == 'IL' %}
+            <span itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+              <span itemprop="streetAddress">20 Derech Hayam, </span>
+
+              <span itemprop="addressLocality">Ganei Tikvah, </span>
+
+              <span itemprop="addressRegion">Israel </span>
+
+              <span itemprop="postalCode">599100.</span>
+          </span>
+          {% endif %}
+
+          {% if addr and country != 'IL' %}
+            <span itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+              <span itemprop="streetAddress">{{ addr.address }}, </span>
+
+              <span itemprop="addressLocality">{{ addr.city }}, </span>
+
+              {% if addr.region %}
+                <span itemprop="addressRegion">{{ addr.region }} </span>
+              {% endif %}
+
+              {% if addr.zip %}
+                <span itemprop="postalCode">{{ addr.zip }}.</span>
+              {% endif %}
+          </span>
+          {% endif %}
+
+          {% if phone_number and country != 'IL' %}
+            <p>
+              <a itemprop="telephone" href="tel:{{ phone_number.number|phone2numeric|phone }}">Toll free phone: {{ phone_number }} {% if phone_number.phone_word %}({{ phone_number.phone_word|phone2numeric }}){% endif %}</a>
+            </p>
+          {% endif %}
+
+          {% if country == 'IL' %}
+            <p>
+              <a itemprop="telephone" href="tel:972747017068">Toll free phone: +972 74-701-7068</a>
+            </p>
+          {% endif %}
+        </div>
+
+
+        <div class="rating-wrapper">
+          <span>Company rating:</span>
+          {% rating %}
+        </div>
+
+        <div class="social__box">
+          {% social_links %}
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</footer>

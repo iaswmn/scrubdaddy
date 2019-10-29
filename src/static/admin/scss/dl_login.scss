@@ -1,0 +1,111 @@
+@import 'mixins';
+
+.login {
+  min-width: 0;
+  background: url(/static/admin/img/bg.jpg) no-repeat center;
+  @include background-size(cover);
+
+  #content-main {
+    top: 45%;
+    left: 50%;
+    width: auto;
+    max-width: 80%;
+    margin: 0;
+    padding: 28px 100px 60px;
+    background-color: #f2f2f2;
+    @include border-box;
+    @include transform(translate(-50%, -50%));
+
+    @include media_interval($media768, $media1024) {
+      padding: 28px 60px 50px;
+    }
+    @include media_interval($media480, $media768) {
+      padding: 20px 50px 40px;
+    }
+    @include media_interval(0, $media480) {
+      padding: 16px 20px 20px;
+    }
+
+    h1 {
+      max-width: 280px;
+      margin-bottom: 26px;
+      padding: 0;
+      text-align: center;
+      color: #2c3035;
+      background: none;
+      text-shadow: none;
+      @include font-size(24px, 28px);
+
+      @include media_interval(0, $media768) {
+        margin-bottom: 20px;
+      }
+      @include media_interval(0, $media480) {
+        @include font-size(20px);
+      }
+
+      i {
+        display: none;
+      }
+    }
+
+    form {
+      margin: 0;
+
+      label {
+        display: none;
+      }
+
+      .control-group {
+        margin-bottom: 10px;
+      }
+
+      input[type=text],
+      input[type=password] {
+        width: 280px;
+        max-width: 100%;
+        height: auto;
+        margin: 0;
+        padding: 10px 20px;
+        text-align: center;
+        color: black;
+        border: none;
+        background: #d9d9d9;
+        @include border-box();
+        @include box-shadow(none);
+        @include font-size(16px, 16px);
+
+        @include media_interval(0, $media480) {
+          padding: 6px 12px 8px;
+        }
+      }
+    }
+
+    .submit-row {
+      margin: 20px 0 0;
+      padding: 0;
+      border: 0;
+      background: none;
+      @include box-shadow(none);
+
+      .btn {
+        width: 280px;
+        max-width: 100%;
+        padding: 10px 20px;
+        color: #fff;
+        border: 0;
+        background: #3991c9;
+        text-shadow: none;
+        @include box-shadow(none);
+        @include font-size(16px, 16px);
+
+        @include media_interval(0, $media480) {
+          padding: 6px 12px 8px;
+        }
+
+        &:hover {
+          background: lighten(#3991c9, 5%);
+        }
+      }
+    }
+  }
+}

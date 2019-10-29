@@ -1,0 +1,56 @@
+@import 'mixins', 'hero', 'products_categories', 'advantages', 'blog_posts';
+
+@include keyframes(gradient-transition) {
+  0% {
+    top: 0;
+    left: 0;
+  }
+
+  50% {
+    top: -200%;
+    left: -200%;
+  }
+
+  100% {
+    top: 0;
+    left: 0;
+  }
+}
+
+.main-linear {
+  position: relative;
+  overflow: hidden;
+  padding-bottom: 200px;
+
+  &::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 400%;
+    height: 400%;
+    content: '';
+    opacity: .8;
+    @include gradient(-45deg, #19cbff, #1b95ff, #0032a0, #1a6df1);
+    @include animation(gradient-transition 15s ease infinite);
+  }
+
+  &::after {
+    position: absolute;
+    top: -265px;
+    left: -50px;
+    display: block;
+    width: 630px;
+    height: 530px;
+    content: '';
+    background: url('/static/img/Points2.png') no-repeat ;
+    background-size: cover;
+    @include opacity(.6);
+
+    @include media_interval(500px, $media768) {
+      top: -330px;
+    }
+    @include media_interval(0, 500px) {
+      top: -400px;
+    }
+  }
+}

@@ -1,0 +1,557 @@
+@charset "UTF-8";
+/*
+  $list: a, b, d, e, f;
+  $new-list: insert-nth($list, 3, c);     // a, b, c, d, e, f
+*/
+/*
+  $list: a, b, r, a, c a, d a, b, r, a;
+  $new-list: replace($list, a, u);       // u, b, r, u, c a, d a, b, r, u;
+*/
+/*
+  $list: a, b, z, d, e, f;
+  $new-list: replace-nth($list,   3, c); // a, b, c, d, e, f
+  $new-list: replace-nth($list,  -2, c); // a, b, c, d, z, f
+*/
+/*
+  $list: a, b z, c, z, d, z, e, f;
+  $new-list: remove($list, z);       // a, b z, c, d, e, f;
+*/
+/*
+  $list: a, b, z, c, d, e, f;
+  $new-list: remove-nth($list,   3); // a, b, c, d, e, f
+  $new-list: remove-nth($list,  -2); // a, b, z, c, d, f
+*/
+/*
+  $list: a, b, c, d, e, f;
+  $new-list: slice($list, 3, 5);   // c, d, e
+  $new-list: slice($list, 4, 4);   // d
+*/
+/*
+  $list: a, b, c d e, f, g, h;
+  $new-list: reverse($list);       // h, g, f, c d e, b, a
+  $new-list: reverse($list, true); // h, g, f, e d c, b, a
+*/
+/*
+    Добавляет константу к каждому значению карты.
+
+    Пример:
+      $map: (
+        (1024px, 0): 100px,
+        (768px, 1024px): 80px,
+        (0, 768px): 60px,
+      )
+
+      > map_add($map, 10px)
+      (
+        (1024px, 0): 110px,
+        (768px, 1024px): 90px,
+        (0, 768px): 70px,
+      )
+ */
+/*
+    Получение ключа карты $map media-интервалов,
+    в который входит искомый интервал $media.
+    Если искомый интервал находится на границе
+    двух или более интервалов карты, генерируется ошибка.
+
+    Пример:
+      $map: (
+        (1024px, 0): 100px,
+        (768px, 1024px): 80px,
+        (0, 768px): 60px,
+      )
+
+      > media_map_key($map, (1200px, 0))
+      (1024px, 0)
+ */
+/*
+    Получение среза media-карты.
+
+    Пример:
+      $map: (
+        (1024px, 0): 100px,
+        (768px, 1024px): 80px,
+        (0, 768px): 60px,
+      )
+
+      > media_map_slice($map, (640px, 1200px))
+      (
+        (1024px, 1200px): 100px,
+        (768px, 1024px): 80px,
+        (640px, 768px): 60px,
+      )
+ */
+/*
+  Многоколоночная верстка через flexbox.
+
+  Пример:
+    .list {
+      @include flexbox;
+      @include flex-flow(row wrap);
+
+      .item {
+        @include flex-columns(2, 10px, 10px);
+      }
+    }
+*/
+/*
+  Пример:
+    input {
+      color: #808080;
+      ...
+      @include placeholder {
+        color: red;
+      }
+    }
+*/
+#header-cell > header {
+  padding: 30px 0;
+  position: relative; }
+  @media all and (max-width: 767px) {
+    #header-cell > header {
+      padding: 10px 0; } }
+  #header-cell > header .flex {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: start;
+    -webkit-box-justify-content: flex-start;
+    -moz-box-justify-content: flex-start;
+    -webkit-justify-content: flex-start;
+    -ms-justify-content: flex-start;
+    justify-content: flex-start; }
+    @media all and (min-width: 1024px) {
+      #header-cell > header .flex {
+        -webkit-box-align: baseline;
+        -webkit-box-align-items: baseline;
+        -moz-box-align-items: baseline;
+        -webkit-align-items: baseline;
+        -ms-align-items: baseline;
+        align-items: baseline; } }
+    @media all and (max-width: 1023px) {
+      #header-cell > header .flex {
+        -webkit-box-align: center;
+        -webkit-box-align-items: center;
+        -moz-box-align-items: center;
+        -webkit-align-items: center;
+        -ms-align-items: center;
+        align-items: center; } }
+    @media all and (max-width: 479px) {
+      #header-cell > header .flex {
+        -webkit-box-pack: justify;
+        -webkit-box-justify-content: space-between;
+        -moz-box-justify-content: space-between;
+        -webkit-justify-content: space-between;
+        -ms-justify-content: space-between;
+        justify-content: space-between; } }
+  #header-cell > header .btn-box {
+    margin-left: auto; }
+    @media all and (min-width: 1024px) {
+      #header-cell > header .btn-box {
+        display: -webkit-box;
+        display: -moz-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex; } }
+    @media all and (max-width: 1023px) {
+      #header-cell > header .btn-box {
+        margin-right: 20px;
+        text-align: right;
+        width: 60%; } }
+    @media all and (max-width: 1023px) {
+      #header-cell > header .btn-box .flug {
+        display: none; } }
+  #header-cell > header .logo-box {
+    width: 20%; }
+    #header-cell > header .logo-box .logo {
+      display: inline-block;
+      width: 175px;
+      vertical-align: middle;
+      position: absolute;
+      top: 13px;
+      z-index: 99; }
+      @media all and (max-width: 767px) {
+        #header-cell > header .logo-box .logo {
+          width: 90px; } }
+      #header-cell > header .logo-box .logo:before {
+        content: '';
+        display: block;
+        padding-bottom: 66.28571%;
+        background: url(/static/img/sprite.svg) no-repeat 0 0;
+        background-size: 154.28571% 316.37931%; }
+    #header-cell > header .logo-box a.logo:hover {
+      filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=75);
+      opacity: 0.75; }
+  #header-cell > header .menu-box {
+    width: 60%;
+    text-align: center; }
+    @media all and (min-width: 1024px) and (max-width: 1099px) {
+      #header-cell > header .menu-box {
+        padding-left: 20px; } }
+    @media all and (max-width: 1023px) {
+      #header-cell > header .menu-box {
+        width: auto;
+        -webkit-box-ordinal-group: 3;
+        -moz-box-ordinal-group: 3;
+        -ms-flex-order: 3;
+        -webkit-order: 3;
+        order: 3; } }
+    @media all and (max-width: 479px) {
+      #header-cell > header .menu-box {
+        padding-left: 0; } }
+  @media all and (max-width: 1023px) {
+    #header-cell > header .open-get-in-touch-popup {
+      margin-right: 17px; } }
+
+.flug {
+  cursor: pointer;
+  margin-right: 20px;
+  margin-top: 6px;
+  width: 32px;
+  position: relative; }
+  .flug .bg {
+    position: absolute;
+    background: #fff;
+    height: 96px;
+    width: 32px;
+    top: 0px;
+    left: 0px;
+    z-index: 0;
+    border-radius: 20px;
+    opacity: 0;
+    -webkit-transition: opacity 0.3s;
+    -moz-transition: opacity 0.3s;
+    -ms-transition: opacity 0.3s;
+    -o-transition: opacity 0.3s;
+    transition: opacity 0.3s; }
+  .flug .choosen {
+    z-index: 99;
+    position: absolute;
+    width: 32px;
+    height: 32px; }
+    .flug .choosen.usa {
+      top: 0;
+      position: absolute;
+      width: 32px;
+      height: 32px;
+      z-index: 99;
+      -webkit-transform: translateY(0);
+      -moz-transform: translateY(0);
+      -ms-transform: translateY(0);
+      -o-transform: translateY(0);
+      transform: translateY(0);
+      -webkit-transition: -webkit-transform 0.3s, transform 0.3s;
+      -moz-transition: -webkit-transform 0.3s, transform 0.3s;
+      -ms-transition: -webkit-transform 0.3s, transform 0.3s;
+      -o-transition: -webkit-transform 0.3s, transform 0.3s;
+      transition: -webkit-transform 0.3s, transform 0.3s; }
+      .flug .choosen.usa:before {
+        border: 3px solid #FFFFFF;
+        border-radius: 100%;
+        content: '';
+        position: absolute;
+        width: 32px;
+        height: 32px;
+        background: url(/static/img/sprite.svg) no-repeat;
+        background-size: 1038.46154% 1411.53846%;
+        background-position: 0.40984% 49.26686%;
+        box-shadow: 0 2px 0 0 #00276c;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box; }
+
+
+    .flug .choosen.israel {
+      top: 0;
+      position: absolute;
+      width: 32px;
+      height: 32px;
+      z-index: 99;
+      -webkit-transform: translateY(0);
+      -moz-transform: translateY(0);
+      -ms-transform: translateY(0);
+      -o-transform: translateY(0);
+      transform: translateY(0);
+      -webkit-transition: -webkit-transform 0.3s, transform 0.3s;
+      -moz-transition: -webkit-transform 0.3s, transform 0.3s;
+      -ms-transition: -webkit-transform 0.3s, transform 0.3s;
+      -o-transition: -webkit-transform 0.3s, transform 0.3s;
+      transition: -webkit-transform 0.3s, transform 0.3s; }
+      .flug .choosen.israel:before {
+        border: 3px solid #FFFFFF;
+        border-radius: 100%;
+        content: '';
+        position: absolute;
+        width: 32px;
+        height: 32px;
+        background: url(/static/img/sprite.svg) no-repeat;
+        background-size: 1038.46154% 1411.53846%;
+        background-position: 24.47541% 49.5762%;
+        box-shadow: 0 2px 0 0 #00276c;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box; }
+
+
+    .flug .choosen.canada {
+      top: 0;
+      position: absolute;
+      height: 32px;
+      width: 32px;
+      z-index: 99;
+      -webkit-transform: translateY(0);
+      -moz-transform: translateY(0);
+      -ms-transform: translateY(0);
+      -o-transform: translateY(0);
+      transform: translateY(0);
+      -webkit-transition: -webkit-transform 0.3s, transform 0.3s;
+      -moz-transition: -webkit-transform 0.3s, transform 0.3s;
+      -ms-transition: -webkit-transform 0.3s, transform 0.3s;
+      -o-transition: -webkit-transform 0.3s, transform 0.3s;
+      transition: -webkit-transform 0.3s, transform 0.3s; }
+      .flug .choosen.canada:before {
+        content: '';
+        border: 3px solid #fff;
+        border-radius: 100%;
+        position: absolute;
+        width: 32px;
+        height: 32px;
+        background: url(/static/img/sprite.svg) no-repeat;
+        background-size: 1038.46154% 1411.53846%;
+        background-position: 12.47541% 49.5762%;
+        box-shadow: 0 2px 0 0 #00276c;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box; }
+  .flug .usa {
+    pointer-events: none;
+    top: 0;
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    z-index: -2;
+    -webkit-transform: translateY(0);
+    -moz-transform: translateY(0);
+    -ms-transform: translateY(0);
+    -o-transform: translateY(0);
+    transform: translateY(0);
+    -webkit-transition: -webkit-transform 0.3s, transform 0.3s;
+    -moz-transition: -webkit-transform 0.3s, transform 0.3s;
+    -ms-transition: -webkit-transform 0.3s, transform 0.3s;
+    -o-transition: -webkit-transform 0.3s, transform 0.3s;
+    transition: -webkit-transform 0.3s, transform 0.3s; }
+    .flug .usa:before {
+      border: 3px solid #FFFFFF;
+      border-radius: 100%;
+      content: '';
+      position: absolute;
+      width: 32px;
+      height: 32px;
+      background: url(/static/img/sprite.svg) no-repeat;
+      background-size: 1038.46154% 1411.53846%;
+      background-position: 0.40984% 49.26686%;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box; }
+    .flug .usa:after {
+      content: '';
+      position: absolute;
+      width: 26px;
+      height: 26px;
+      border-radius: 100%;
+      z-index: 6;
+      top: 3px;
+      left: 3px;
+      background: #fff100;
+      opacity: 0;
+      -webkit-transition: opacity 0.3s;
+      -moz-transition: opacity 0.3s;
+      -ms-transition: opacity 0.3s;
+      -o-transition: opacity 0.3s;
+      transition: opacity 0.3s; }
+    .flug .usa:hover::after {
+      opacity: 0.63; }
+  .flug .israel {
+    pointer-events: none;
+    top: 0;
+    position: absolute;
+    height: 32px;
+    width: 32px;
+    z-index: -2;
+    -webkit-transform: translateY(0);
+    -moz-transform: translateY(0);
+    -ms-transform: translateY(0);
+    -o-transform: translateY(0);
+    transform: translateY(0);
+    -webkit-transition: -webkit-transform 0.3s, transform 0.3s;
+    -moz-transition: -webkit-transform 0.3s, transform 0.3s;
+    -ms-transition: -webkit-transform 0.3s, transform 0.3s;
+    -o-transition: -webkit-transform 0.3s, transform 0.3s;
+    transition: -webkit-transform 0.3s, transform 0.3s; }
+    .flug .israel:before {
+      border: 3px solid #FFFFFF;
+      border-radius: 100%;
+      content: '';
+      position: absolute;
+      width: 32px;
+      height: 32px;
+      background: url(/static/img/sprite.svg) no-repeat;
+      background-size: 1038.46154% 1411.53846%;
+      background-position: 24.47541% 49.5762%;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box; }
+    .flug .israel:after {
+      content: '';
+      position: absolute;
+      width: 26px;
+      height: 26px;
+      border-radius: 100%;
+      z-index: 6;
+      top: 3px;
+      left: 3px;
+      background: #fff100;
+      opacity: 0;
+      -webkit-transition: opacity 0.3s;
+      -moz-transition: opacity 0.3s;
+      -ms-transition: opacity 0.3s;
+      -o-transition: opacity 0.3s;
+      transition: opacity 0.3s; }
+    .flug .israel:hover::after {
+      opacity: 0.63; }
+  .flug .canada {
+    pointer-events: none;
+    top: 0;
+    position: absolute;
+    height: 32px;
+    width: 32px;
+    z-index: -2;
+    -webkit-transform: translateY(0);
+    -moz-transform: translateY(0);
+    -ms-transform: translateY(0);
+    -o-transform: translateY(0);
+    transform: translateY(0);
+    -webkit-transition: -webkit-transform 0.3s, transform 0.3s;
+    -moz-transition: -webkit-transform 0.3s, transform 0.3s;
+    -ms-transition: -webkit-transform 0.3s, transform 0.3s;
+    -o-transition: -webkit-transform 0.3s, transform 0.3s;
+    transition: -webkit-transform 0.3s, transform 0.3s; }
+    .flug .canada:before {
+      content: '';
+      border: 3px solid #fff;
+      border-radius: 100%;
+      position: absolute;
+      width: 32px;
+      height: 32px;
+      background: url(/static/img/sprite.svg) no-repeat;
+      background-size: 1038.46154% 1411.53846%;
+      background-position: 12.47541% 49.5762%;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box; }
+    .flug .canada:after {
+      content: '';
+      position: absolute;
+      width: 26px;
+      height: 26px;
+      top: 3px;
+      left: 3px;
+      border-radius: 100%;
+      z-index: 6;
+      background: #fff100;
+      opacity: 0;
+      -webkit-transition: opacity 0.3s;
+      -moz-transition: opacity 0.3s;
+      -ms-transition: opacity 0.3s;
+      -o-transition: opacity 0.3s;
+      transition: opacity 0.3s; }
+    .flug .canada:hover::after {
+      opacity: 0.63; }
+  .flug.active-canada .canada {
+    z-index: 2;
+    top: 0; }
+  .flug.active-canada .usa {
+    z-index: 0; }
+  .flug.active-canada .israel {
+    z-index: 0; }
+  .flug.active-canada.active .choosen {
+    z-index: -99;
+    pointer-events: none; }
+  .flug.active-canada.active .usa {
+    pointer-events: all;
+    -webkit-transform: translateY(32px);
+    -moz-transform: translateY(32px);
+    -ms-transform: translateY(32px);
+    -o-transform: translateY(32px);
+    transform: translateY(32px); }
+  .flug.active-canada.active .israel {
+    pointer-events: all;
+    -webkit-transform: translateY(64px);
+    -moz-transform: translateY(64px);
+    -ms-transform: translateY(64px);
+    -o-transform: translateY(64px);
+    transform: translateY(64px); }
+  .flug.active-canada.active .canada {
+    -webkit-transform: translateY(0);
+    -moz-transform: translateY(0);
+    -ms-transform: translateY(0);
+    -o-transform: translateY(0);
+    transform: translateY(0); }
+  .flug.active-usa .usa {
+    z-index: 2;
+    top: 0; }
+  .flug.active-usa .canada {
+    z-index: 0; }
+  .flug.active-usa .israel {
+    z-index: 0; }
+  .flug.active-usa.active .usa {
+    -webkit-transform: translateY(0);
+    -moz-transform: translateY(0);
+    -ms-transform: translateY(0);
+    -o-transform: translateY(0);
+    transform: translateY(0); }
+  .flug.active-usa.active .canada {
+    pointer-events: all;
+    -webkit-transform: translateY(32px);
+    -moz-transform: translateY(32px);
+    -ms-transform: translateY(32px);
+    -o-transform: translateY(32px);
+    transform: translateY(32px); }
+  .flug.active-usa.active .israel {
+    pointer-events: all;
+    -webkit-transform: translateY(64px);
+    -moz-transform: translateY(64px);
+    -ms-transform: translateY(64px);
+    -o-transform: translateY(64px);
+    transform: translateY(64px); }
+  .flug.active-israel .israel {
+    z-index: 2;
+    top: 0; }
+  .flug.active-israel .canada {
+    z-index: 0; }
+  .flug.active-israel .usa {
+    z-index: 0; }
+  .flug.active-israel.active .israel {
+    -webkit-transform: translateY(0);
+    -moz-transform: translateY(0);
+    -ms-transform: translateY(0);
+    -o-transform: translateY(0);
+    transform: translateY(0); }
+  .flug.active-israel.active .canada {
+    pointer-events: all;
+    -webkit-transform: translateY(32px);
+    -moz-transform: translateY(32px);
+    -ms-transform: translateY(32px);
+    -o-transform: translateY(32px);
+    transform: translateY(32px); }
+  .flug.active-israel.active .usa {
+    pointer-events: all;
+    -webkit-transform: translateY(64px);
+    -moz-transform: translateY(64px);
+    -ms-transform: translateY(64px);
+    -o-transform: translateY(64px);
+    transform: translateY(64px); }
+  .flug.active .bg {
+    opacity: 1; }

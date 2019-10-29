@@ -1,0 +1,26 @@
+{% if blog_posts %}
+  <div class="trending">
+    <div class="grid">
+      <div class="top">
+        <h2 class="title-italic-h3 yellow">Trending now</h2>
+      </div>
+      <div class="flex-container slider" id="blog-slider">
+        {% for post in blog_posts %}
+          <a class="item slider-item" href="{{ post.get_absolute_url }}">
+            <div class="top-side">
+              <img src="{{ post.preview.normal.url }}" alt>
+            </div>
+            <div class="bottom-side">
+              <h3 class="treinding-title">{{ post.header }}</h3>
+              <p class="description_small">{{ post.note }}</p>
+            </div>
+            <div class="read-more">Read more</div>
+          </a>
+        {% endfor %}
+      </div>
+      <div class="bottom">
+        <a class="btn medium-240 yellow moema" href="{% url 'support:blog' %}">View all Posts</a>
+      </div>
+    </div>
+  </div>
+{% endif %}

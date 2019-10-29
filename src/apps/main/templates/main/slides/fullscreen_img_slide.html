@@ -1,0 +1,33 @@
+<div class="slide {% if counter == 0 %}slide--current{% endif %}" data-index="{{ counter }}">
+
+  <img
+          src="{{ item.background.url }}"
+          class="slider-photo"
+          alt="{{ item.background_alt }}"
+          width="{{ item.background.width }}"
+          height="{{ item.background.height }}">
+
+  <div class="grid text-block">
+
+
+
+    <div class="inner-wrapper">
+      {% if item.title or item.description %}
+        <div class="text absolute">
+
+          {% if item.title %}
+            <h2 class="title title-h1">{{ item.title|linebreaksbr|safe }}</h2>
+          {% endif %}
+          {% if item.description %}
+            <div class="description">{{ item.description }}</div>
+          {% endif %}
+          {% if item.learn_more %}
+          <a class="btn medium-240 yellow moema" href="{{ item.product.get_absolute_url }}">Learn more</a>
+          {% endif %}
+        </div>
+      {% endif %}
+    </div>
+
+  </div>
+
+</div>

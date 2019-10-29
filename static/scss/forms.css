@@ -1,0 +1,365 @@
+@charset "UTF-8";
+/*
+  $list: a, b, d, e, f;
+  $new-list: insert-nth($list, 3, c);     // a, b, c, d, e, f
+*/
+/*
+  $list: a, b, r, a, c a, d a, b, r, a;
+  $new-list: replace($list, a, u);       // u, b, r, u, c a, d a, b, r, u;
+*/
+/*
+  $list: a, b, z, d, e, f;
+  $new-list: replace-nth($list,   3, c); // a, b, c, d, e, f
+  $new-list: replace-nth($list,  -2, c); // a, b, c, d, z, f
+*/
+/*
+  $list: a, b z, c, z, d, z, e, f;
+  $new-list: remove($list, z);       // a, b z, c, d, e, f;
+*/
+/*
+  $list: a, b, z, c, d, e, f;
+  $new-list: remove-nth($list,   3); // a, b, c, d, e, f
+  $new-list: remove-nth($list,  -2); // a, b, z, c, d, f
+*/
+/*
+  $list: a, b, c, d, e, f;
+  $new-list: slice($list, 3, 5);   // c, d, e
+  $new-list: slice($list, 4, 4);   // d
+*/
+/*
+  $list: a, b, c d e, f, g, h;
+  $new-list: reverse($list);       // h, g, f, c d e, b, a
+  $new-list: reverse($list, true); // h, g, f, e d c, b, a
+*/
+/*
+    Добавляет константу к каждому значению карты.
+
+    Пример:
+      $map: (
+        (1024px, 0): 100px,
+        (768px, 1024px): 80px,
+        (0, 768px): 60px,
+      )
+
+      > map_add($map, 10px)
+      (
+        (1024px, 0): 110px,
+        (768px, 1024px): 90px,
+        (0, 768px): 70px,
+      )
+ */
+/*
+    Получение ключа карты $map media-интервалов,
+    в который входит искомый интервал $media.
+    Если искомый интервал находится на границе
+    двух или более интервалов карты, генерируется ошибка.
+
+    Пример:
+      $map: (
+        (1024px, 0): 100px,
+        (768px, 1024px): 80px,
+        (0, 768px): 60px,
+      )
+
+      > media_map_key($map, (1200px, 0))
+      (1024px, 0)
+ */
+/*
+    Получение среза media-карты.
+
+    Пример:
+      $map: (
+        (1024px, 0): 100px,
+        (768px, 1024px): 80px,
+        (0, 768px): 60px,
+      )
+
+      > media_map_slice($map, (640px, 1200px))
+      (
+        (1024px, 1200px): 100px,
+        (768px, 1024px): 80px,
+        (640px, 768px): 60px,
+      )
+ */
+/*
+  Многоколоночная верстка через flexbox.
+
+  Пример:
+    .list {
+      @include flexbox;
+      @include flex-flow(row wrap);
+
+      .item {
+        @include flex-columns(2, 10px, 10px);
+      }
+    }
+*/
+/*
+  Пример:
+    input {
+      color: #808080;
+      ...
+      @include placeholder {
+        color: red;
+      }
+    }
+*/
+form {
+  max-width: 100%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box; }
+
+.field {
+  font-weight: 900;
+  width: 260px;
+  max-width: 100%;
+  color: #0032a0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  font-size: 18px;
+  font-size: 1.125rem;
+  line-height: 1; }
+  .field:nth-last-of-type(1) {
+    margin-bottom: 0; }
+  .field.required .label-holder label:after {
+    content: '*'; }
+  .field .label-holder {
+    font-weight: 900;
+    margin-bottom: 4px;
+    text-align: left;
+    font-size: 18px;
+    font-size: 1.125rem;
+    line-height: 1.66667; }
+  .field .control {
+    max-width: 100%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    font-family: 'museo_sans';
+    font-size: 16px;
+    font-size: 1rem;
+    line-height: 1.5; }
+    @media all and (max-width: 767px) {
+      .field .control {
+        font-size: 14px;
+        font-size: 0.875rem; } }
+    @media all and (max-width: 479px) {
+      .field .control {
+        width: 100%; } }
+    .field .control input,
+    .field .control select,
+    .field .control textarea,
+    .field .control .input {
+      font-weight: 700;
+      width: 100%;
+      padding: 8px 24px;
+      border: none;
+      border-radius: 4px;
+      background: rgba(218, 229, 255, 0.7);
+      -webkit-transition: background 0.3s;
+      -moz-transition: background 0.3s;
+      -ms-transition: background 0.3s;
+      -o-transition: background 0.3s;
+      transition: background 0.3s; }
+      .field .control input::-webkit-input-placeholder,
+      .field .control select::-webkit-input-placeholder,
+      .field .control textarea::-webkit-input-placeholder,
+      .field .control .input::-webkit-input-placeholder {
+        font-weight: 700;
+        opacity: 1;
+        color: #0032a0; }
+      .field .control input::-moz-placeholder,
+      .field .control select::-moz-placeholder,
+      .field .control textarea::-moz-placeholder,
+      .field .control .input::-moz-placeholder {
+        font-weight: 700;
+        opacity: 1;
+        color: #0032a0; }
+      .field .control input:-moz-placeholder,
+      .field .control select:-moz-placeholder,
+      .field .control textarea:-moz-placeholder,
+      .field .control .input:-moz-placeholder {
+        font-weight: 700;
+        opacity: 1;
+        color: #0032a0; }
+      .field .control input:-ms-input-placeholder,
+      .field .control select:-ms-input-placeholder,
+      .field .control textarea:-ms-input-placeholder,
+      .field .control .input:-ms-input-placeholder {
+        font-weight: 700;
+        opacity: 1;
+        color: #0032a0; }
+      .field .control input:focus,
+      .field .control select:focus,
+      .field .control textarea:focus,
+      .field .control .input:focus {
+        background: #d2e0ff; }
+    .field .control select {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none; }
+  .field.invalid input,
+  .field.invalid select,
+  .field.invalid textarea,
+  .field.invalid .input {
+    background: #ff7948 !important; }
+  .field .error {
+    margin-left: 10px;
+    color: #f00;
+    font-size: 12px;
+    font-size: 0.75rem; }
+
+/*
+    Кастомизация чекбоксов.
+    ОБЯЗАТЕЛЬНО наличие label после input.
+*/
+input[type=checkbox] {
+  position: absolute;
+  left: -9999px;
+  width: auto;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+  opacity: 0; }
+  input[type=checkbox] + label {
+    line-height: 21px;
+    position: relative;
+    display: inline-block;
+    height: 16px;
+    margin: 0;
+    padding-left: 29px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    font-size: 16px;
+    font-size: 1rem;
+    line-height: 1.5; }
+    @media all and (max-width: 767px) {
+      input[type=checkbox] + label {
+        font-size: 14px;
+        font-size: 0.875rem; } }
+    input[type=checkbox] + label:before {
+      position: absolute;
+      z-index: 1;
+      top: 0;
+      left: 0;
+      width: 19px;
+      height: 19px;
+      content: '';
+      background: #fff;
+      -webkit-border-radius: 4px;
+      -moz-border-radius: 4px;
+      border-radius: 4px; }
+    input[type=checkbox] + label span {
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      /* Chrome all / Safari all */
+      -moz-user-select: none;
+      /* Firefox all */
+      -ms-user-select: none;
+      /* IE 10+ */
+      /* No support for these yet, use at own risk */
+      -o-user-select: none;
+      user-select: none; }
+    input[type=checkbox] + label:after {
+      position: absolute;
+      z-index: 1;
+      top: 3px;
+      left: 0;
+      width: 19px;
+      height: 16px;
+      content: '';
+      background: url(/static/img/sprite.svg) no-repeat -22px -246px;
+      filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+      opacity: 0;
+      -webkit-transition: opacity 0.1s;
+      -moz-transition: opacity 0.1s;
+      -ms-transition: opacity 0.1s;
+      -o-transition: opacity 0.1s;
+      transition: opacity 0.1s; }
+  input[type=checkbox]:checked + label:after {
+    filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
+    opacity: 1; }
+  input[type=checkbox]:disabled + label:before {
+    background: #e6e6e6; }
+  input[type=checkbox]:disabled:checked + label:after {
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=50);
+    opacity: 0.5; }
+
+/*
+    Кастомизация радиоксов.
+    ОБЯЗАТЕЛЬНО наличие label после input.
+*/
+input[type=radio] {
+  position: absolute;
+  left: -9999px;
+  width: auto;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+  opacity: 0; }
+  input[type=radio] + label {
+    line-height: 18px;
+    position: relative;
+    display: inline-block;
+    margin: 0;
+    padding-left: 26px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    font-size: 16px;
+    font-size: 1rem;
+    line-height: 1.5; }
+    @media all and (max-width: 767px) {
+      input[type=radio] + label {
+        font-size: 14px;
+        font-size: 0.875rem; } }
+    input[type=radio] + label:before {
+      position: absolute;
+      z-index: 1;
+      top: 0;
+      left: 0;
+      width: 16px;
+      height: 16px;
+      content: '';
+      border: 1px solid #aaa;
+      background: #fff;
+      -webkit-border-radius: 50%;
+      -moz-border-radius: 50%;
+      border-radius: 50%; }
+    input[type=radio] + label span {
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      /* Chrome all / Safari all */
+      -moz-user-select: none;
+      /* Firefox all */
+      -ms-user-select: none;
+      /* IE 10+ */
+      /* No support for these yet, use at own risk */
+      -o-user-select: none;
+      user-select: none; }
+    input[type=radio] + label:after {
+      position: absolute;
+      z-index: 1;
+      top: 4px;
+      left: 4px;
+      width: 10px;
+      height: 10px;
+      content: '';
+      background: #000;
+      filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+      opacity: 0;
+      -webkit-border-radius: 50%;
+      -moz-border-radius: 50%;
+      border-radius: 50%;
+      -webkit-transition: opacity 0.2s;
+      -moz-transition: opacity 0.2s;
+      -ms-transition: opacity 0.2s;
+      -o-transition: opacity 0.2s;
+      transition: opacity 0.2s; }
+  input[type=radio]:checked + label:after {
+    filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
+    opacity: 1; }
+  input[type=radio]:disabled + label:before {
+    background: #e6e6e6; }
+  input[type=radio]:disabled:checked + label:after {
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=50);
+    opacity: 0.5; }

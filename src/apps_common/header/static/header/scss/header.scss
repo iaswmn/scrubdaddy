@@ -1,0 +1,326 @@
+@import 'mixins';
+
+$logo_width: 175px;
+$logo_height: 116px;
+$media1100: 1100px;
+
+#header-cell>header {
+  padding: 30px 0;
+  position: relative;
+
+  @include media_interval(0, $media768) {
+    padding: 10px 0;
+  }
+
+  .flex {
+    @include flexbox;
+    @include justify-content(flex-start);
+
+    @include media_interval($media1024, 0) {
+      @include align-items(baseline);
+    }
+
+    @include media_interval(0, $media1024) {
+      @include align-items(center);
+    }
+
+    @include media_interval(0, $media480) {
+      @include justify-content(space-between);
+    }
+  }
+
+  .btn-box {
+    margin-left: auto;
+
+    @include media_interval($media1024, 0) {
+      @include flexbox;
+    }
+
+    @include media_interval(0, $media1024) {
+      margin-right: 20px;
+      text-align: right;
+      width: 60%;
+    }
+
+    .flug {
+      @include media_interval(0, $media1024) {
+        display: none;
+      }
+    }
+  }
+
+  .logo-box {
+    width: 20%;
+
+    .logo {
+      display: inline-block;
+      width: $logo_width;
+      vertical-align: middle;
+      position: absolute;
+      top: 13px;
+      z-index: 99;
+
+
+      @include media_interval(0, $media768) {
+        width: 90px;
+      }
+
+      &:before {
+        content: '';
+        display: block;
+        padding-bottom: #{100 * $logo_height/$logo_width + "%"};
+        background: $sprite_url no-repeat 0 0;
+        background-size: rel-background-size($logo_width, $logo_height);
+      }
+    }
+
+    a.logo:hover {
+      @include opacity(0.75);
+    }
+  }
+
+  .menu-box {
+    width: 60%;
+    text-align: center;
+
+    @include media_interval($media1024, 1100px) {
+      padding-left: 20px;
+    }
+
+    @include media_interval(0, $media1024) {
+      width: auto;
+      @include order(3);
+    }
+
+    @include media_interval(0, $media480) {
+      padding-left: 0;
+    }
+  }
+
+  .open-get-in-touch-popup {
+    @include media_interval(0, $media1024) {
+      margin-right: 17px;
+    }
+  }
+}
+
+.flug {
+  $icon_size: 26px;
+  cursor: pointer;
+  margin-right: 20px;
+  margin-top: 6px;
+  width: $icon_size + 6px;
+  position: relative;
+
+  .bg {
+    position: absolute;
+    background: $white;
+    height: $icon_size + $icon_size + 12px;
+    width: $icon_size + 6px;
+    top: 0px;
+    left: 0px;
+    z-index: 0;
+    border-radius: 20px;
+    opacity: 0;
+    @include transition(opacity 0.3s);
+  }
+
+  .choosen {
+    z-index: 99;
+    position: absolute;
+    width: $icon_size + 6px;
+    height: $icon_size + 6px;
+
+    &.usa {
+      top: 0;
+      position: absolute;
+      width: $icon_size + 6px;
+      height: $icon_size + 6px;
+      z-index: 99;
+      @include transform(translateY(0));
+      @include transition(transform 0.3s);
+
+      &:before {
+        border: 3px solid #FFFFFF;
+        border-radius: 100%;
+        content: '';
+        position: absolute;
+        width: $icon_size + 6px;
+        height: $icon_size + 6px;
+        background: $sprite_url no-repeat;
+        background-size: rel-background-size($icon_size, $icon_size);
+        background-position: rel-background-position($icon_size, $icon_size, -1px, -168px);
+        box-shadow: 0 2px 0 0 #00276c;
+        @include box-sizing(border-box);
+      }
+    }
+
+    &.canada {
+      top: 0;
+      position: absolute;
+      height: $icon_size + 6px;
+      width: $icon_size + 6px;
+      z-index: 99;
+      @include transform(translateY(0));
+      @include transition(transform 0.3s);
+
+      &:before {
+        content: '';
+        border: 3px solid $white;
+        border-radius: 100%;
+        position: absolute;
+        width: $icon_size + 6px;
+        height: $icon_size + 6px;
+        background: $sprite_url no-repeat;
+        background-size: rel-background-size($icon_size, $icon_size);
+        background-position: rel-background-position($icon_size, $icon_size, -28px, -168px);
+        box-shadow: 0 2px 0 0 #00276c;
+        @include box-sizing(border-box);
+      }
+    }
+  }
+
+  .usa {
+    pointer-events: none;
+    top: 0;
+    position: absolute;
+    width: $icon_size + 6px;
+    height: $icon_size + 6px;
+    z-index: -2;
+    @include transform(translateY(0));
+    @include transition(transform 0.3s);
+
+    &:before {
+      border: 3px solid #FFFFFF;
+      border-radius: 100%;
+      content: '';
+      position: absolute;
+      width: $icon_size + 6px;
+      height: $icon_size + 6px;
+      background: $sprite_url no-repeat;
+      background-size: rel-background-size($icon_size, $icon_size);
+      background-position: rel-background-position($icon_size, $icon_size, -1px, -168px);
+      @include box-sizing(border-box);
+    }
+
+    &:after {
+      content: '';
+      position: absolute;
+      width: $icon_size;
+      height: $icon_size;
+      border-radius: 100%;
+      z-index: 6;
+      top: 3px;
+      left: 3px;
+      background: $bright-yellow;
+      opacity: 0;
+      @include transition(opacity 0.3s);
+    }
+
+    &:hover {
+      &::after {
+        opacity: 0.63;
+      }
+    }
+  }
+
+  .canada {
+    pointer-events: none;
+    top: 0;
+    position: absolute;
+    height: $icon_size + 6px;
+    width: $icon_size + 6px;
+    z-index: -2;
+    @include transform(translateY(0));
+    @include transition(transform 0.3s);
+
+    &:before {
+      content: '';
+      border: 3px solid $white;
+      border-radius: 100%;
+      position: absolute;
+      width: $icon_size + 6px;
+      height: $icon_size + 6px;
+      background: $sprite_url no-repeat;
+      background-size: rel-background-size($icon_size, $icon_size);
+      background-position: rel-background-position($icon_size, $icon_size, -28px, -168px);
+      @include box-sizing(border-box);
+    }
+
+    &:after {
+      content: '';
+      position: absolute;
+      width: $icon_size;
+      height: $icon_size;
+      top: 3px;
+      left: 3px;
+      border-radius: 100%;
+      z-index: 6;
+      background: $bright-yellow;
+      opacity: 0;
+      @include transition(opacity 0.3s);
+    }
+
+    &:hover {
+      &::after {
+        opacity: 0.63;
+      }
+    }
+  }
+
+  &.active-canada {
+    .canada {
+      z-index: 2;
+      top: 0;
+    }
+
+    .usa {
+      z-index: 0;
+    }
+
+    &.active {
+      .choosen {
+        z-index: -99;
+        pointer-events: none;
+      }
+
+      .usa {
+        pointer-events: all;
+        @include transform(translateY($icon_size + 6px));
+      }
+
+      .canada {
+        @include transform(translateY(0));
+      }
+    }
+  }
+
+  &.active-usa {
+    .usa {
+      z-index: 2;
+      top: 0;
+    }
+
+    .canada {
+      z-index: 0;
+    }
+
+    &.active {
+      .usa {
+        @include transform(translateY(0));
+      }
+
+      .canada {
+        pointer-events: all;
+        @include transform(translateY($icon_size + 6px));
+      }
+    }
+  }
+
+  &.active {
+    .bg {
+      opacity: 1;
+    }
+  }
+
+}

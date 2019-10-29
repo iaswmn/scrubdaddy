@@ -1,0 +1,118 @@
+{% extends 'std_page/index.html' %}
+
+{% load staticfiles %}
+{% load attachable_blocks %}
+{% load pipeline_plus %}
+{% load away %}
+{% load text %}
+
+{% block static_head %}
+  {{ block.super }}
+  {% stylesheet 'support' %}
+{% endblock static_head %}
+
+{% block static_js %}
+  {{ block.super }}
+  {% javascript 'support' %}
+{% endblock static_js %}
+
+
+{% block tabs %}
+  {% include 'support/_tabs.html' %}
+{% endblock  %}
+
+{% block page_data %}
+  <div class="support-all">
+    <div class="grid">
+      <div class="w880">
+        {% if questions %}
+          <div class="faq-all">
+            <div class="top line">
+              <div class="title-italic-h3">FAQs</div>
+              <a href="{% url 'support:faq' %}" class="btn-sup">Learn More</a>
+            </div>
+            <div class="bottom">
+              <ul class="list">
+                {% for question in questions %}
+                  <li {% if question.active %}class="item active" {% else %}class="item" {% endif %}
+                      data-category="{{ question.product.category }}">
+                    <div class="title-italic-h4 title">{{ question.title }}</div>
+                    <div class="hide__side">
+                      <div class="text-styles description">{% away question.text|typograf %}
+                        {% if question.image %}
+                          <img src="{{ question.image.normal.url }}" alt="">
+                        {% endif %}
+                      </div>
+                    </div>
+                    <a href="{% url 'support:faq' %}" class="page-link"></a>
+                  </li>
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+        {% endif %}
+        {% if blog_posts and country != 'IL' %}
+          <div class="blog-all">
+            <div class="top line">
+              <div class="title-italic-h3">Blog</div>
+              <a href="{% url 'support:blog' %}" class="btn-sup">Learn More</a>
+            </div>
+            <div class="bottom">
+              <div class="flex-container three-in-row">
+                {% for post in blog_posts %}
+                  <a href="{{ post.get_absolute_url }}" class="item-w280 post" typeof="BlogPosting">
+                    <img srcset="{{ post.preview.normal.srcset }}, {{ post.preview.mobile.srcset }}"
+                         src="{{ post.preview.normal.url }}"
+                         width="{{ post.preview.normal.target_width }}"
+                         height="{{ post.preview.normal.target_height }}"
+                         property="url" sizes="100vw">
+                    <div class="bottom-side">
+                      <h2 class="title title-h5" property="headline">
+                        {{ post.header }}
+                      </h2>
+                      <div class="description_small">
+                        {{ post.note|typograf|safe }}
+                      </div>
+                    </div>
+                    <div class="link">
+                      <div class="read-more">Read more</div>
+                    </div>
+                  </a>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        {% endif %}
+        {% if media_links and country != 'IL' %}
+          <div class="news-all">
+            <div class="top line">
+              <div class="title-italic-h3">News</div>
+              <a href="{% url 'support:media' %}" class="btn-sup">Learn More</a>
+            </div>
+            <div class="bottom">
+              <div class="flex-container three-in-row">
+                {% for post in media_links %}
+                  <a href="{{ post.get_absolute_url }}"
+                     class="item-w280 item {{ post.type }}"
+                     typeof="BlogPosting">
+                    <img srcset="{{ post.preview.normal.srcset }}, {{ post.preview.mobile.srcset }}"
+                         src="{{ post.preview.normal.url }}"
+                         width="{{ post.preview.normal.target_width }}"
+                         height="{{ post.preview.normal.target_height }}"
+                         property="url" sizes="100vw">
+                    <div class="bottom">
+                      <span class="icon"></span>
+                      <h2 class="title title-h5" property="headline">
+                        {{ post.title }}
+                      </h2>
+                    </div>
+                  </a>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+{% endblock page_data %}

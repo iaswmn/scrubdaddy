@@ -1,0 +1,85 @@
+@import 'mixins';
+
+header {
+  position: static;
+}
+
+#profile-avatar {
+  position: relative;
+  float: left;
+  overflow: hidden;
+  margin-right: 10px;
+
+  .actions {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 0 0 3px 0;
+    background-color: rgba(0, 0, 0, .7);
+    @include transform(translateY(100%));
+    @include transition(transform .2s);
+
+    a {
+      display: block;
+      text-align: center;
+      color: white;
+      @include font-size(16px);
+
+      &:first-child {
+        padding-top: 3px;
+      }
+
+      &:last-child {
+        padding-bottom: 3px;
+      }
+    }
+  }
+
+  .delete-avatar {
+    line-height: 0;
+    position: absolute;
+    top: -17px;
+    right: 0;
+    width: 17px;
+    height: 17px;
+    background: url(../img/delete_avatar.gif) no-repeat center center rgba(0, 0, 0, .8);
+    @include no_fontsize;
+  }
+
+  &:hover {
+    .actions {
+      @include transform(translateY(0));
+    }
+
+    .delete-avatar {
+      top: 0;
+    }
+  }
+}
+
+// Окно обрезки аватарки
+.popup-crop-avatar {
+  #popup-content {
+    max-width: 600px;
+    padding: 0;
+  }
+
+  img {
+    max-width: 600px;
+    height: auto;
+  }
+
+  .buttons {
+    margin: 5px;
+    @include clearfix;
+
+    .btn {
+      float: right;
+    }
+
+    .btn-cancel {
+      margin-right: 10px;
+    }
+  }
+}

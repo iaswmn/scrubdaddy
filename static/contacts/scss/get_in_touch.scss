@@ -1,0 +1,17 @@
+@import 'mixins';
+
+#ajax-popup-get-in-touch-form {
+  margin-top: 50px;
+
+  .time-fields {
+    display: flex;
+  }
+
+  .field-reach_time {
+    margin-right: 20px;
+  }
+
+  .button-block {
+    text-align: center;
+  }
+}

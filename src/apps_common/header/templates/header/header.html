@@ -1,0 +1,78 @@
+{% load placeholder %}
+{% load menu %}
+{% load social_links %}
+{% load text %}
+
+<div class="menu mobile-menu">
+  <div class="scrollable">
+    <div class="scrollable-content">
+      {% placeholder 'menu' menu_name='main' referer=request.path_info %}
+
+      <div class="flug" data-country="usa">
+        <div class="bg" data-close="flug"></div>
+        <div class="choosen"></div>
+        <div class="usa"></div>
+        <div class="canada"></div>
+        <div class='israel'></div>
+      </div>
+
+      <div class="bottom">
+        {% if phone_number and country != 'IL' %}
+            <div class="mobile-phone">
+                <a itemprop="telephone" href="tel:{{ phone_number.number|phone2numeric|phone }}">
+                    Toll free phone: {{ phone_number }} ({{ phone_number.phone_word|phone2numeric }})</a>
+            </div>>
+        {% endif %}
+        {% if country == 'IL' %}
+            <div class="mobile-phone">
+                <a itemprop="telephone" href="tel:972747017068">
+                    Toll free phone: +972 74-701-7068</a>
+            </div>>
+        {% endif %}
+        <div class="social__box">
+          {% social_links %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<header>
+  <div class="grid">
+
+    <div class="flex">
+
+      <div class="logo-box">
+        {% if is_main_page %}
+          <div class="logo"></div>
+        {% else %}
+          <a href="/" class="logo"></a>
+        {% endif %}
+      </div>
+
+      <div class="menu-box">
+        <div id="mobile-menu-button">
+          <div class="burger"></div>
+        </div>
+
+        <nav class="menu main-menu">
+          {% menu 'main' %}
+        </nav>
+      </div>
+      <div class="btn-box">
+        <!-- data-country !string: "usa" or "canada" by default usa, if string is not usa and canada-->
+        <div class="flug {{ country }}" data-country="{% if country == 'CA' %}canada{% elif country == 'IL' %}israel{% else %}usa{% endif %}">
+          <div class="bg" data-close="flug"></div>
+          <div class="choosen"></div>
+          <div class="usa"></div>
+          <div class="canada"></div>
+          <div class='israel'></div>
+        </div>
+
+        <a href="{% url 'get_in_touch:index' %}" class="btn small yellow moema">get in touch</a>
+
+      </div>
+    </div>
+
+  </div>
+</header>

@@ -1,0 +1,66 @@
+@import 'mixins';
+
+.advantages {
+  position: relative;
+  z-index: 1;
+  padding: 130px 0 70px 0;
+  text-align: center;
+
+  @include media_interval(0, $media1024) {
+    padding: 50px 0 0 0;
+  }
+
+  .advantages-title {
+    margin-bottom: 1em;
+  }
+
+  .flex-container {
+    @include flexbox;
+    @include flex-wrap(wrap);
+
+    .item {
+      width: calc(25% - 40px);
+      margin-right: 40px;
+
+      @include media_interval($media1024, 0) {
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+      @include media_interval($media768, $media1024) {
+        width: calc(33.33% - 30px);
+        margin-right: 40px;
+        margin-bottom: 40px;
+
+        &:nth-child(3n) {
+          margin-right: 0;
+        }
+      }
+      @include media_interval($media480, $media768) {
+        width: calc(50% - 20px);
+        margin-right: 40px;
+        margin-bottom: 40px;
+
+        &:nth-child(2n) {
+          margin-right: 0;
+        }
+      }
+      @include media_interval(0, $media480) {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 25px;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+
+      .description {
+        font-weight: 700;
+        margin: 9px auto 0;
+        color: $white;
+        @include font-size(18px, 25px);
+      }
+    }
+  }
+}
