@@ -63,7 +63,7 @@ def send(receivers, subject, message, from_email=None, attachments=None,
                 mimetype, _ = mimetypes.guess_type(filename)
                 basetype, subtype = mimetype.split('/')
                 readmode = 'r' if basetype == 'text' else 'rb'
-                with open(attachment, readmode) as f:
+                with open(attachment, readmode, encoding="utf8") as f:
                     content = f.read()
                 mail.attach(filename, content, mimetype)
             else:

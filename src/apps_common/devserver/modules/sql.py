@@ -44,7 +44,7 @@ def get_stack_calls():
                 if isinstance(node, Node):
                     loader = node.source[0]
                     offsets = node.source[1]
-                    with open(loader.name, newline='') as source:
+                    with open(loader.name, newline='', encoding="utf8") as source:
                         start = source.read(offsets[0])
                         line_num = start.count('\n') + 1
                         token = source.read(offsets[1] - offsets[0])

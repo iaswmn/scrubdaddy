@@ -87,7 +87,7 @@ class SASSCCompiler(SubProcessCompiler, metaclass=SASSCMetaclass):
         infile_modified = [os.stat(infile).st_mtime]
 
         # Read imports
-        with open(infile, 'r') as fp:
+        with open(infile, 'r', encoding="utf8") as fp:
             buffer = fp.read(1024)
 
         imports = re_import.findall(buffer)

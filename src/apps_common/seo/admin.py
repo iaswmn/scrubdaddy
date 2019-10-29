@@ -214,7 +214,7 @@ class DummyRobotsAdmin(ModelAdminMixin, admin.ModelAdmin):
 
         if os.path.isfile(self.robots_file):
             try:
-                with open(self.robots_file, 'r') as fp:
+                with open(self.robots_file, 'r', encoding="utf8") as fp:
                     content = fp.read()
             except (PermissionError, FileNotFoundError):
                 raise PermissionDenied

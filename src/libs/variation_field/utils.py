@@ -433,7 +433,7 @@ def variation_watermark(image, **wm_settings):
     if image.mode != 'RGBA':
         image = image.convert('RGBA')
 
-    with open(wm_settings['file'], 'rb') as fp:
+    with open(wm_settings['file'], 'rb', encoding="utf8") as fp:
         watermark = Image.open(fp)
         info = watermark.info
         if watermark.mode not in ('RGBA', 'LA') and not (watermark.mode == 'P' and 'transparency' in info):
@@ -506,7 +506,7 @@ def variation_mask(image, mask):
 
 def process_variation(source, variation, quality=None, croparea=None):
     """ Обработка картинки в соответствии с вариацией """
-    with open(source, 'rb') as fp:
+    with open(source, 'rb', encoding="utf8") as fp:
         image = Image.open(fp)
         image.load()
 

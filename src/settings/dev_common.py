@@ -14,9 +14,9 @@ DEBUG = True
 DATABASES.update({
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'project',
-        'USER': 'project',
-        'PASSWORD': 'password',
+        'NAME': 'guru99',
+        'USER': 'postgres',
+        'PASSWORD': 'Iaswmn0502',
         'HOST': 'localhost',
     }
 })

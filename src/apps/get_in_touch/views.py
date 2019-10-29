@@ -57,7 +57,7 @@ class IndexView(CachedViewMixin, TemplateView):
                     )
                     message_file.save()
 
-                    with open(filepath, 'rb') as fp:
+                    with open(filepath, 'rb', encoding="utf8") as fp:
                         message_file.file.save(name, ImageFile(fp))
 
                     os.unlink(filepath)
